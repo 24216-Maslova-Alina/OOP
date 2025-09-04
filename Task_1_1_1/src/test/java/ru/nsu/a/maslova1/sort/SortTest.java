@@ -1,8 +1,8 @@
-package ru.nsu.a.maslova1.Task_1_1_1;
+package ru.nsu.a.maslova1.sort;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
 class SortTest {
 
@@ -21,21 +21,21 @@ class SortTest {
     }
 
     @Test
-    void  sort_SortOneNumber(){
+    void  sort_SortOneNumber() {
         int[] array = new int[]{32};
         var result = Sort.sort(array);
         assertArrayEquals(new int[]{32}, result);
     }
 
     @Test
-    void sort_NegativeNumbers(){
+    void sort_NegativeNumbers() {
         int[] array = new int[]{-3, -2, -567, 12, 32, 0, -42};
         var result = Sort.sort(array);
         assertArrayEquals(new int[]{-567, -42, -3, -2, 0, 12, 32}, result);
     }
 
     @Test
-    void sort_SameNumbers(){
+    void sort_SameNumbers() {
         int[] array = new int[]{1, 1, 1, 1, 1};
         var result = Sort.sort(array);
         assertArrayEquals(new int[]{1, 1, 1, 1, 1}, result);
