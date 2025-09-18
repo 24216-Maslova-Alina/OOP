@@ -2,7 +2,6 @@ package ru.nsu.a.maslova1.blackjack;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -37,14 +36,13 @@ class BlackjackGameTest {
     @Test
     void testPlayerWins() {
         setUp();
-        Dealer.PlayerCards = List.of(
-                card(Card.Suits.CLABS, Card.Rank.QUEEN),
-                card(Card.Suits.DIAMONDS, Card.Rank.TEN)
-        );
-        Dealer.DealerCards = List.of(
-                card(Card.Suits.HERTS, Card.Rank.KING),
-                card(Card.Suits.SPADES, Card.Rank.TWO)
-        );
+        Dealer.PlayerCards = new ArrayList<>();
+        Dealer.PlayerCards.add(card(Card.Suits.CLABS, Card.Rank.QUEEN));
+        Dealer.PlayerCards.add(card(Card.Suits.DIAMONDS, Card.Rank.TEN));
+
+        Dealer.DealerCards = new ArrayList<>();
+        Dealer.DealerCards.add(card(Card.Suits.HERTS, Card.Rank.KING));
+        Dealer.DealerCards.add(card(Card.Suits.SPADES, Card.Rank.TWO));
 
         BlackjackGame.determineRoundWinner();
 
@@ -55,14 +53,13 @@ class BlackjackGameTest {
     @Test
     void testNobodyWins() {
         setUp();
-        Dealer.PlayerCards = List.of(
-                card(Card.Suits.CLABS, Card.Rank.ACE),
-                card(Card.Suits.DIAMONDS, Card.Rank.THREE)
-        );
-        Dealer.DealerCards = List.of(
-                card(Card.Suits.CLABS, Card.Rank.ACE),
-                card(Card.Suits.DIAMONDS, Card.Rank.THREE)
-        );
+        Dealer.PlayerCards = new ArrayList<>();
+        Dealer.PlayerCards.add(card(Card.Suits.CLABS, Card.Rank.ACE));
+        Dealer.PlayerCards.add(card(Card.Suits.DIAMONDS, Card.Rank.THREE));
+
+        Dealer.DealerCards = new ArrayList<>();
+        Dealer.DealerCards.add(card(Card.Suits.CLABS, Card.Rank.ACE));
+        Dealer.DealerCards.add(card(Card.Suits.DIAMONDS, Card.Rank.THREE));
 
         BlackjackGame.determineRoundWinner();
 
