@@ -32,8 +32,8 @@ public class Player {
                 Dealer.PlayerCards.add(newCard);
 
                 System.out.println("Вы открыли карту: \n" + newCard);
-                System.out.println("\tВаши карты: " + Dealer.PlayerCards + " => " +
-                        Dealer.calculatePoints(Dealer.PlayerCards));
+                System.out.println("\tВаши карты: " + Dealer.PlayerCards + " => "
+                        + Dealer.calculatePoints(Dealer.PlayerCards));
 
                 int points = Dealer.calculatePoints(Dealer.PlayerCards);
 

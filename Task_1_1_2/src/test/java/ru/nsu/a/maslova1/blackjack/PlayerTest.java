@@ -1,11 +1,13 @@
 package ru.nsu.a.maslova1.blackjack;
 
-import org.junit.jupiter.api.Test;
-
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 
 class PlayerTest {
     void setUp() {
@@ -23,9 +25,10 @@ class PlayerTest {
 
         int playerCards = Dealer.PlayerCards.size();
         int playerPoints = BlackjackGame.playerPoint;
-        int dealerPoint = BlackjackGame.dealerPoint;
 
         Player.playerMove();
+
+        int dealerPoint = BlackjackGame.dealerPoint;
 
         assertEquals(playerCards, Dealer.PlayerCards.size());
         assertEquals(playerPoints, BlackjackGame.playerPoint);

@@ -14,7 +14,7 @@ public class Deck {
     /**
      * Создание колоды.
      */
-    public static void deckCreate(){
+    public static void deckCreate() {
         cards = new ArrayList<>();
         for (Card.Suits suits : Card.Suits.values()) {
             for (Card.Rank rank : Card.Rank.values()) {
@@ -29,7 +29,7 @@ public class Deck {
      *
      * @return верхняя карта из колоды
      */
-    public static Card takeCard(){
+    public static Card takeCard() {
         return cards.remove(0);
     }
 
@@ -38,7 +38,7 @@ public class Deck {
      *
      * @return размер колоды
      */
-    public static int deckSize(){
+    public static int deckSize() {
         return cards.size();
     }
 
@@ -47,7 +47,7 @@ public class Deck {
      *
      * @return true если да, false если нет
      */
-    public static boolean isEmpty(){
+    public static boolean isEmpty() {
         return cards.isEmpty();
     }
 }

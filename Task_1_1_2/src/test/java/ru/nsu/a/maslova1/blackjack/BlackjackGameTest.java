@@ -1,15 +1,16 @@
 package ru.nsu.a.maslova1.blackjack;
 
-import org.junit.jupiter.api.Test;
-
+import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class BlackjackGameTest {
-    void setUp(){
-       BlackjackGame.dealerPoint = 0;
-       BlackjackGame.playerPoint = 0;
+    void setUp() {
+        BlackjackGame.dealerPoint = 0;
+        BlackjackGame.playerPoint = 0;
     }
 
     private Card card(Card.Suits suit, Card.Rank rank) {
@@ -19,14 +20,13 @@ class BlackjackGameTest {
     @Test
     void testDealerWins() {
         setUp();
-        Dealer.PlayerCards = List.of(
-                card(Card.Suits.CLABS, Card.Rank.TWO),
-                card(Card.Suits.DIAMONDS, Card.Rank.THREE)
-        );
-        Dealer.DealerCards = List.of(
-                card(Card.Suits.HERTS, Card.Rank.KING),
-                card(Card.Suits.HERTS, Card.Rank.FOUR)
-        );
+        Dealer.PlayerCards = new ArrayList<>();
+        Dealer.PlayerCards.add(card(Card.Suits.CLABS, Card.Rank.TWO));
+        Dealer.PlayerCards.add(card(Card.Suits.DIAMONDS, Card.Rank.THREE));
+
+        Dealer.DealerCards = new ArrayList<>();
+        Dealer.DealerCards.add(card(Card.Suits.HERTS, Card.Rank.KING));
+        Dealer.DealerCards.add(card(Card.Suits.HERTS, Card.Rank.FOUR));
 
         BlackjackGame.determineRoundWinner();
 

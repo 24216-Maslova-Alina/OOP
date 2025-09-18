@@ -92,7 +92,7 @@ public class Dealer {
      * @param array массив карт игрока или дилера
      * @return количество очков
      */
-    public static int calculatePoints(List<Card> array){
+    public static int calculatePoints(List<Card> array) {
         int count = 0;
         for (Card card : array) {
             if (card.rank() == Card.Rank.ACE && (count + card.getValue()) >= 21) {
