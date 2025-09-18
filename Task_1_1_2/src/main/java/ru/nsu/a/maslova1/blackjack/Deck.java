@@ -1,4 +1,4 @@
-package ru.nsu.a.maslova1.Task_1_1_2;
+package ru.nsu.a.maslova1.blackjack;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -16,8 +16,8 @@ public class Deck {
      */
     public static void deckCreate(){
         cards = new ArrayList<>();
-        for (Card.Suits suits: Card.Suits.values()) {
-            for (Card.Rank rank: Card.Rank.values()) {
+        for (Card.Suits suits : Card.Suits.values()) {
+            for (Card.Rank rank : Card.Rank.values()) {
                 cards.add(new Card(suits, rank));
             }
         }
@@ -26,14 +26,16 @@ public class Deck {
 
     /**
      * Взятие арты из начала колоды.
+     *
      * @return верхняя карта из колоды
      */
     public static Card takeCard(){
-        return cards.removeFirst();
+        return cards.remove(0);
     }
 
     /**
      * Подсчёт размера колоды.
+     *
      * @return размер колоды
      */
     public static int deckSize(){
@@ -41,7 +43,8 @@ public class Deck {
     }
 
     /**
-     * Проверка пустая колода или нет
+     * Проверка пустая колода или нет.
+     *
      * @return true если да, false если нет
      */
     public static boolean isEmpty(){

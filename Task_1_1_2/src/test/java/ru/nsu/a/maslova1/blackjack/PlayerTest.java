@@ -1,10 +1,9 @@
-package ru.nsu.a.maslova1.Task_1_1_2;
+package ru.nsu.a.maslova1.blackjack;
 
 import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 

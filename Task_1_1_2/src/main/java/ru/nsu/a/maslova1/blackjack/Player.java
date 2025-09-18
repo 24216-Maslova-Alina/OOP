@@ -1,4 +1,4 @@
-package ru.nsu.a.maslova1.Task_1_1_2;
+package ru.nsu.a.maslova1.blackjack;
 
 import java.util.Scanner;
 
@@ -7,6 +7,7 @@ import java.util.Scanner;
  * Обрабатывает взаимодействие с пользователем.
  */
 public class Player {
+
     /**
      * Управляет ходом игрока в раунде Блэкджека.
      * Предлагает игроку выбор: взять карту или остановиться.
@@ -23,7 +24,7 @@ public class Player {
             if (num == 1) {
                 Card newCard = Deck.takeCard();
 
-                if (Deck.isEmpty()){
+                if (Deck.isEmpty()) {
                     System.out.println("В колоде закончились карты. Создана новая колода.");
                     Deck.deckCreate();
                 }
@@ -51,12 +52,10 @@ public class Player {
                             BlackjackGame.dealerPoint, BlackjackGame.playerPoint);
                     return;
                 }
-            }
-            else if (num == 0) {
+            } else if (num == 0) {
                 System.out.print("Вы остановились.\n");
                 break;
-            }
-            else {
+            } else {
                 System.out.print("Неверный ввод. Введите 1 или 0.\n");
             }
         }

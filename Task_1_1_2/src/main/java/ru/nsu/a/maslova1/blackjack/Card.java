@@ -1,11 +1,13 @@
-package ru.nsu.a.maslova1.Task_1_1_2;
+package ru.nsu.a.maslova1.blackjack;
 
 /**
  * Класс, представляющий игральные карты.
+ *
  * @param suit масть карты
  * @param rank достоинство карты
  */
 public record Card(Suits suit, Rank rank) {
+
     /**
      * Перечисление мастей карт.
      */
@@ -19,6 +21,7 @@ public record Card(Suits suit, Rank rank) {
 
         /**
          * Название масти на русском.
+         *
          * @param russianName русское название масти с символом
          */
         Suits(String russianName) {
@@ -27,6 +30,7 @@ public record Card(Suits suit, Rank rank) {
 
         /**
          * Возвращает русское название.
+         *
          * @return русское название
          */
         public String getRussianName() {
@@ -57,6 +61,7 @@ public record Card(Suits suit, Rank rank) {
 
         /**
          * Перевод в читаемый вид.
+         *
          * @param russianName русское название
          * @param value балл
          */
@@ -67,6 +72,7 @@ public record Card(Suits suit, Rank rank) {
 
         /**
          * Возвращает русское название.
+         *
          * @return русское название
          */
         public String getRussianName() {
@@ -75,6 +81,7 @@ public record Card(Suits suit, Rank rank) {
 
         /**
          * Возвращает балл за карту.
+         *
          * @return баллы за карту
          */
         public int getValue() {
@@ -85,9 +92,9 @@ public record Card(Suits suit, Rank rank) {
     public int getValue() {
         return rank.getValue();
     }
+
     /**
-     * Возвращает строковое представление карты в формате:
-     * "Достоинство Масть(значение)".
+     * Возвращает строковое представление карты в формате: "Достоинство Масть(значение)".
      *
      * @return строковое представление карты
      */

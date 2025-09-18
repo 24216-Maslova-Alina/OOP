@@ -1,4 +1,4 @@
-package ru.nsu.a.maslova1.Task_1_1_2;
+package ru.nsu.a.maslova1.blackjack;
 
 import org.junit.jupiter.api.Test;
 

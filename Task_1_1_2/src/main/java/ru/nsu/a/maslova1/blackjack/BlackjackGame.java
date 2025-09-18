@@ -1,4 +1,4 @@
-package ru.nsu.a.maslova1.Task_1_1_2;
+package ru.nsu.a.maslova1.blackjack;
 
 /**
  * Основной класс игры.
@@ -12,6 +12,7 @@ public class BlackjackGame {
 
     /**
      * Метод, запускающий игру.
+     *
      * @param args аргументы командной строки (не используются).
      */
     public static void main(String[] args) {
@@ -31,6 +32,7 @@ public class BlackjackGame {
     /**
      * Начало нового раунда игры.
      * Раздает карты, проверяет блэкджек на раздаче.
+     *
      * @param count номер раунда
      */
     private static void startGame(int count) {
@@ -48,8 +50,8 @@ public class BlackjackGame {
         System.out.print("-------\n");
         Player.playerMove();
 
-        if (Dealer.calculatePoints(Dealer.PlayerCards) > 21 ||
-                Dealer.calculatePoints(Dealer.PlayerCards) == 21) {
+        if (Dealer.calculatePoints(Dealer.PlayerCards) > 21
+                || Dealer.calculatePoints(Dealer.PlayerCards) == 21) {
             return; // Раунд уже завершен в playerMove()
         }
 
@@ -77,18 +79,15 @@ public class BlackjackGame {
             playerPoint++;
             System.out.printf("У дилера перебор! Вы выиграли раунд! Счет: %d:%d\n\n",
                     dealerPoint, playerPoint);
-        }
-        else if (pointsD > pointsP) {
+        } else if (pointsD > pointsP) {
             dealerPoint++;
             System.out.printf("Дилер выиграл раунд! Счет: %d:%d\n\n",
                     dealerPoint, playerPoint);
-        }
-        else if (pointsP > pointsD) {
+        } else if (pointsP > pointsD) {
             playerPoint++;
             System.out.printf("Вы выиграли раунд! Счет: %d:%d\n\n",
                     dealerPoint, playerPoint);
-        }
-        else {
+        } else {
             System.out.println("Ничья в раунде!\n");
         }
     }
