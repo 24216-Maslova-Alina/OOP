@@ -1,10 +1,9 @@
 package ru.nsu.a.maslova1.blackjack;
 
-import java.util.ArrayList;
-import java.util.List;
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.util.ArrayList;
+import org.junit.jupiter.api.Test;
 
 class BlackjackGameTest {
     void setUp() {
@@ -66,4 +65,4 @@ class BlackjackGameTest {
         assertEquals(0, BlackjackGame.dealerPoint);
         assertEquals(0, BlackjackGame.playerPoint);
     }
-}
+    }
