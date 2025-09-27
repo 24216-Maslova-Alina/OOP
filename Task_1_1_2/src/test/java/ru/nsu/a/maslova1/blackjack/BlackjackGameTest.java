@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 
 class BlackjackGameTest {
     private BlackjackGame game;
+    private ConsoleOutput output;
 
     void setUp() {
         ConsoleOutput output = new ConsoleOutput();
@@ -78,6 +79,31 @@ class BlackjackGameTest {
 
         game.determineRoundWinner();
 
+        assertEquals(0, BlackjackGame.dealerPoint);
+        assertEquals(0, BlackjackGame.playerPoint);
+    }
+
+    @Test
+    void testPlayerBlackjackOnDeal() {
+        setUp();
+        // Блэкджек игрока при раздаче
+        Dealer.PlayerCards.add(new Card(Suit.CLUBS, Rank.ACE));
+        Dealer.PlayerCards.add(new Card(Suit.DIAMONDS, Rank.KING));
+
+        int points = new Dealer(output).calculatePoints(Dealer.PlayerCards);
+        assertEquals(21, points);
+    }
+
+    @Test
+    void testPlayerBustInPlayerMove() {
+        setUp();
+        Dealer.PlayerCards.add(new Card(Suit.CLUBS, Rank.KING));
+        Dealer.PlayerCards.add(new Card(Suit.DIAMONDS, Rank.QUEEN));
+        Dealer.PlayerCards.add(new Card(Suit.HERTS, Rank.THREE));
+
+        game.determineRoundWinner();
+
+        // Проверяем, что метод корректно обрабатывает перебор
         assertEquals(0, BlackjackGame.dealerPoint);
         assertEquals(0, BlackjackGame.playerPoint);
     }

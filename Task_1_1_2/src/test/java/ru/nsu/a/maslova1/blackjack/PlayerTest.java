@@ -53,4 +53,39 @@ class PlayerTest {
         assertEquals(playerCards + 1, Dealer.PlayerCards.size());
         assertTrue(dealer.calculatePoints(Dealer.PlayerCards) > 0);
     }
+
+    @Test
+    void testPlayerMoveBlackjack() {
+        setUp();
+        // Игрок получает блэкджек
+        String input = "0"; // Останавливаемся сразу
+        InputStream in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+
+        // Создаем руку с блэкджеком
+        Dealer.PlayerCards.clear();
+        Dealer.PlayerCards.add(new Card(Suit.HERTS, Rank.ACE));
+        Dealer.PlayerCards.add(new Card(Suit.SPADES, Rank.KING));
+
+        player.playerMove();
+
+        int playerPoints = dealer.calculatePoints(Dealer.PlayerCards);
+        assertEquals(21, playerPoints);
+    }
+
+    @Test
+    void testPlayerMoveInvalidInputThenValid() {
+        setUp();
+        // Неправильный ввод, затем правильный
+        String input = "5\n2\nabc\n0";
+        InputStream in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+
+        int initialPlayerCards = Dealer.PlayerCards.size();
+
+        player.playerMove();
+
+        // Проверяем, что количество карт не изменилось
+        assertEquals(initialPlayerCards, Dealer.PlayerCards.size());
+    }
 }
