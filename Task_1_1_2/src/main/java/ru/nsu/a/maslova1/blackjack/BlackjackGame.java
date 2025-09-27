@@ -15,7 +15,12 @@ public class BlackjackGame {
     private final ConsoleOutput output;
     private final Player player;
 
-    public BlackjackGame(ConsoleOutput output){
+    /**
+     * Конструктор для Blackjack.
+     *
+     * @param output вывод информации об игре
+     */
+    public BlackjackGame(ConsoleOutput output) {
         this.output = output;
 
         dealer = new Dealer(output);

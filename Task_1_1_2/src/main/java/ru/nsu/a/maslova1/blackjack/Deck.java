@@ -15,6 +15,7 @@ public class Deck {
     public Deck(ConsoleOutput output) {
         this.output = output;
     }
+
     /**
      * Создание колоды.
      */

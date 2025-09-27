@@ -1,8 +1,8 @@
 package ru.nsu.a.maslova1.blackjack;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.junit.jupiter.api.Test;
 
@@ -32,11 +32,11 @@ class CardTest {
     @Test
     void testToString() {
         Card card2 = new Card(Suit.DIAMONDS, Rank.QUEEN);
-        String expected2 = "Дама Бубны(♦)(10)"; // или "Королева Бубны(10)"
+        String expected2 = "Дама Бубны(♦)(10)";
         assertEquals(expected2, card2.toString());
 
         Card card3 = new Card(Suit.HERTS, Rank.ACE);
-        String expected3 = "Туз Червы(♥)(11)"; // или "Туз Червы(11)"
+        String expected3 = "Туз Червы(♥)(11)";
         assertEquals(expected3, card3.toString());
 
         Card card4 = new Card(Suit.SPADES, Rank.TWO);
@@ -73,7 +73,7 @@ class CardTest {
         Card clubs = new Card(Suit.CLUBS, Rank.ACE);
         Card diamonds = new Card(Suit.DIAMONDS, Rank.ACE);
         Card hearts = new Card(Suit.HERTS, Rank.ACE);
-        Card spades = new Card(Suit.SPADES, Rank.ACE);
+        final Card spades = new Card(Suit.SPADES, Rank.ACE);
 
         assertEquals(Rank.ACE, clubs.getRank());
         assertEquals(Rank.ACE, diamonds.getRank());

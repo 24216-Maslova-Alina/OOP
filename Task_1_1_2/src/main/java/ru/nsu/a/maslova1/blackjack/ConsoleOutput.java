@@ -6,6 +6,7 @@ import java.util.List;
  * Класс для управления всеми выводами в консоль.
  */
 public class ConsoleOutput {
+
     /**
      * Выводит приветственное сообщение в начале игры.
      */
@@ -107,6 +108,7 @@ public class ConsoleOutput {
         BlackjackGame.flagCloseCard = 1;
         showDistribution(Dealer.PlayerCards, Dealer.DealerCards, dealer);
     }
+
     /**
      * Выводит сообщение о переборе игрока.
      */
@@ -164,9 +166,11 @@ public class ConsoleOutput {
      */
     public void showFinalResult(int dealerPoints, int playerPoints) {
         if (playerPoints == 3) {
-            System.out.printf("Вы одержали победу со счетом %d:%d!\n\n", dealerPoints, playerPoints);
+            System.out.printf("Вы одержали победу со счетом %d:%d!\n\n",
+                    dealerPoints, playerPoints);
         } else {
-            System.out.printf("Вы потерпели поражение со счетом %d:%d\n", dealerPoints, playerPoints);
+            System.out.printf("Вы потерпели поражение со счетом %d:%d\n",
+                    dealerPoints, playerPoints);
         }
     }
 }

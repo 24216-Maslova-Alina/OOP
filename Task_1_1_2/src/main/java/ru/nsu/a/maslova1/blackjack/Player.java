@@ -11,12 +11,18 @@ public class Player {
     private final Deck deck;
     private final Dealer dealer;
 
-    public Player(ConsoleOutput output){
+    /**
+     * Конструктор для Player.
+     *
+     * @param output вывод информации об игре
+     */
+    public Player(ConsoleOutput output) {
         this.output = output;
 
         deck = new Deck(output);
         dealer = new Dealer(output);
     }
+
     /**
      * Управляет ходом игрока в раунде Блэкджека.
      * Предлагает игроку выбор: взять карту или остановиться.

@@ -13,7 +13,12 @@ public class Dealer {
     private final ConsoleOutput output;
     private final Deck deck;
 
-    public Dealer(ConsoleOutput output){
+    /**
+     * Конструктор для Dealer.
+     *
+     * @param output вывод информации об игре
+     */
+    public Dealer(ConsoleOutput output) {
         this.output = output;
 
         deck = new Deck(output);
@@ -31,7 +36,7 @@ public class Dealer {
         PlayerCards.add(deck.takeCard());
         DealerCards.add(deck.takeCard());
 
-        output.showDistribution(PlayerCards, DealerCards,this);
+        output.showDistribution(PlayerCards, DealerCards, this);
     }
 
     /**
