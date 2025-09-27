@@ -64,7 +64,7 @@ class PlayerTest {
 
         // Создаем руку с блэкджеком
         Dealer.PlayerCards.clear();
-        Dealer.PlayerCards.add(new Card(Suit.HERTS, Rank.ACE));
+        Dealer.PlayerCards.add(new Card(Suit.HEARTS, Rank.ACE));
         Dealer.PlayerCards.add(new Card(Suit.SPADES, Rank.KING));
 
         player.playerMove();

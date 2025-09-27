@@ -10,10 +10,10 @@ class CardTest {
 
     @Test
     void testCardConstructor() {
-        Card card = new Card(Suit.HERTS, Rank.ACE);
+        Card card = new Card(Suit.HEARTS, Rank.ACE);
 
         assertNotNull(card);
-        assertEquals(Suit.HERTS, card.getSuit());
+        assertEquals(Suit.HEARTS, card.getSuit());
         assertEquals(Rank.ACE, card.getRank());
     }
 
@@ -25,7 +25,7 @@ class CardTest {
         Card card2 = new Card(Suit.DIAMONDS, Rank.KING);
         assertEquals(Rank.KING, card2.getRank());
 
-        Card card3 = new Card(Suit.HERTS, Rank.ACE);
+        Card card3 = new Card(Suit.HEARTS, Rank.ACE);
         assertEquals(Rank.ACE, card3.getRank());
     }
 
@@ -35,7 +35,7 @@ class CardTest {
         String expected2 = "Дама Бубны(♦)(10)";
         assertEquals(expected2, card2.toString());
 
-        Card card3 = new Card(Suit.HERTS, Rank.ACE);
+        Card card3 = new Card(Suit.HEARTS, Rank.ACE);
         String expected3 = "Туз Червы(♥)(11)";
         assertEquals(expected3, card3.toString());
 
@@ -52,7 +52,7 @@ class CardTest {
         Card seven = new Card(Suit.DIAMONDS, Rank.SEVEN);
         assertEquals(7, seven.getValue());
 
-        Card ten = new Card(Suit.HERTS, Rank.TEN);
+        Card ten = new Card(Suit.HEARTS, Rank.TEN);
         assertEquals(10, ten.getValue());
 
         Card jack = new Card(Suit.SPADES, Rank.JACK);
@@ -64,7 +64,7 @@ class CardTest {
         Card king = new Card(Suit.DIAMONDS, Rank.KING);
         assertEquals(10, king.getValue());
 
-        Card ace = new Card(Suit.HERTS, Rank.ACE);
+        Card ace = new Card(Suit.HEARTS, Rank.ACE);
         assertEquals(11, ace.getValue());
     }
 
@@ -72,7 +72,7 @@ class CardTest {
     void testDifferentSuits() {
         Card clubs = new Card(Suit.CLUBS, Rank.ACE);
         Card diamonds = new Card(Suit.DIAMONDS, Rank.ACE);
-        Card hearts = new Card(Suit.HERTS, Rank.ACE);
+        Card hearts = new Card(Suit.HEARTS, Rank.ACE);
         final Card spades = new Card(Suit.SPADES, Rank.ACE);
 
         assertEquals(Rank.ACE, clubs.getRank());
@@ -87,7 +87,7 @@ class CardTest {
     @Test
     void testAllRanks() {
         for (Rank rank : Rank.values()) {
-            Card card = new Card(Suit.HERTS, rank);
+            Card card = new Card(Suit.HEARTS, rank);
             assertEquals(rank, card.getRank());
             assertEquals(rank.getValue(), card.getValue());
             assertNotNull(card.toString());

@@ -25,8 +25,8 @@ class BlackjackGameTest {
         Dealer.PlayerCards.add(new Card(Suit.CLUBS, Rank.QUEEN));
         Dealer.PlayerCards.add(new Card(Suit.DIAMONDS, Rank.EIGHT));
 
-        Dealer.DealerCards.add(new Card(Suit.HERTS, Rank.KING));
-        Dealer.DealerCards.add(new Card(Suit.HERTS, Rank.JACK));
+        Dealer.DealerCards.add(new Card(Suit.HEARTS, Rank.KING));
+        Dealer.DealerCards.add(new Card(Suit.HEARTS, Rank.JACK));
 
         game.determineRoundWinner();
 
@@ -41,8 +41,8 @@ class BlackjackGameTest {
         Dealer.PlayerCards.add(new Card(Suit.CLUBS, Rank.KING));
         Dealer.PlayerCards.add(new Card(Suit.DIAMONDS, Rank.EIGHT));
 
-        Dealer.DealerCards.add(new Card(Suit.HERTS, Rank.TEN));
-        Dealer.DealerCards.add(new Card(Suit.HERTS, Rank.SEVEN));
+        Dealer.DealerCards.add(new Card(Suit.HEARTS, Rank.TEN));
+        Dealer.DealerCards.add(new Card(Suit.HEARTS, Rank.SEVEN));
 
         game.determineRoundWinner();
 
@@ -57,8 +57,8 @@ class BlackjackGameTest {
         Dealer.PlayerCards.add(new Card(Suit.CLUBS, Rank.KING));
         Dealer.PlayerCards.add(new Card(Suit.DIAMONDS, Rank.SEVEN));
 
-        Dealer.DealerCards.add(new Card(Suit.HERTS, Rank.KING));
-        Dealer.DealerCards.add(new Card(Suit.HERTS, Rank.SEVEN));
+        Dealer.DealerCards.add(new Card(Suit.HEARTS, Rank.KING));
+        Dealer.DealerCards.add(new Card(Suit.HEARTS, Rank.SEVEN));
         Dealer.DealerCards.add(new Card(Suit.SPADES, Rank.FIVE));
 
         game.determineRoundWinner();
@@ -74,8 +74,8 @@ class BlackjackGameTest {
         Dealer.PlayerCards.add(new Card(Suit.CLUBS, Rank.KING));
         Dealer.PlayerCards.add(new Card(Suit.DIAMONDS, Rank.SEVEN));
 
-        Dealer.DealerCards.add(new Card(Suit.HERTS, Rank.KING));
-        Dealer.DealerCards.add(new Card(Suit.HERTS, Rank.SEVEN));
+        Dealer.DealerCards.add(new Card(Suit.HEARTS, Rank.KING));
+        Dealer.DealerCards.add(new Card(Suit.HEARTS, Rank.SEVEN));
 
         game.determineRoundWinner();
 
@@ -99,7 +99,7 @@ class BlackjackGameTest {
         setUp();
         Dealer.PlayerCards.add(new Card(Suit.CLUBS, Rank.KING));
         Dealer.PlayerCards.add(new Card(Suit.DIAMONDS, Rank.QUEEN));
-        Dealer.PlayerCards.add(new Card(Suit.HERTS, Rank.THREE));
+        Dealer.PlayerCards.add(new Card(Suit.HEARTS, Rank.THREE));
 
         game.determineRoundWinner();
 

@@ -6,7 +6,7 @@ package ru.nsu.a.maslova1.blackjack;
 public enum Suit {
     CLUBS("Трефы(♣)"),
     DIAMONDS("Бубны(♦)"),
-    HERTS("Червы(♥)"),
+    HEARTS("Червы(♥)"),
     SPADES("Пики(♠)");
 
     private final String russianName;

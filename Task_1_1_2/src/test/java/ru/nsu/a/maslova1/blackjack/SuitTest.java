@@ -10,7 +10,7 @@ class SuitTest {
     void getRussianName() {
         assertEquals("Трефы(♣)", Suit.CLUBS.getRussianName());
         assertEquals("Бубны(♦)", Suit.DIAMONDS.getRussianName());
-        assertEquals("Червы(♥)", Suit.HERTS.getRussianName());
+        assertEquals("Червы(♥)", Suit.HEARTS.getRussianName());
         assertEquals("Пики(♠)", Suit.SPADES.getRussianName());
     }
 
@@ -25,7 +25,7 @@ class SuitTest {
         // Test 1: Проверяем преобразование строк в значения enum
         assertEquals(Suit.CLUBS, Suit.valueOf("CLUBS"));
         assertEquals(Suit.DIAMONDS, Suit.valueOf("DIAMONDS"));
-        assertEquals(Suit.HERTS, Suit.valueOf("HERTS"));
+        assertEquals(Suit.HEARTS, Suit.valueOf("HERTS"));
         assertEquals(Suit.SPADES, Suit.valueOf("SPADES"));
     }
 
