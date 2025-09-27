@@ -9,24 +9,33 @@ public class BlackjackGame {
     static int roundCount = 1;
     public static int dealerPoint = 0;
     public static int playerPoint = 0;
+    public static int flagCloseCard;
+
+    private final Dealer dealer;
+    private final ConsoleOutput output;
+    private final Player player;
+
+    public BlackjackGame(ConsoleOutput output){
+        this.output = output;
+
+        dealer = new Dealer(output);
+        player = new Player(output);
+    }
 
     /**
-     * Метод, запускающий игру.
-     *
-     * @param args аргументы командной строки (не используются).
+     * Начало игры и создание колоды.
      */
-    public static void main(String[] args) {
-        System.out.println("Добро пожаловать в Блэкджек!");
-        System.out.println("Игра продолжается до трёх побед.");
+    public void start() {
+        output.showWelcomeMessage();
 
         Deck.deckCreate();
-        System.out.println("Колода создана и перемешана.\n");
+
+        output.showDeckCreated();
 
         while (dealerPoint < 3 && playerPoint < 3) {
             startGame(roundCount++);
         }
         endGame();
-
     }
 
     /**
@@ -35,28 +44,26 @@ public class BlackjackGame {
      *
      * @param count номер раунда
      */
-    private static void startGame(int count) {
-        System.out.printf("Раунд %d\n", count);
-        Dealer.distributionCard();
+    public void startGame(int count) {
+        flagCloseCard = 0;
+        output.showRoundHeader(count);
+        dealer.distributionCard();
 
-        if (Dealer.calculatePoints(Dealer.PlayerCards) == 21) {
-            System.out.print("Блэкджек на раздаче! Вы выиграли раунд! ");
-            playerPoint++;
-            System.out.printf("Счет: %d:%d.\n", dealerPoint, playerPoint);
+        if (dealer.calculatePoints(Dealer.PlayerCards) == 21) {
+            output.showPlayerBlackjack();
             return;
         }
 
-        System.out.print("Ваш ход\n");
-        System.out.print("-------\n");
-        Player.playerMove();
+        output.showPlayerTurn();
+        player.playerMove();
 
-        if (Dealer.calculatePoints(Dealer.PlayerCards) > 21
-                || Dealer.calculatePoints(Dealer.PlayerCards) == 21) {
+        if (dealer.calculatePoints(Dealer.PlayerCards) > 21
+                || dealer.calculatePoints(Dealer.PlayerCards) == 21) {
             return; // Раунд уже завершен в playerMove()
         }
 
-        if (Dealer.calculatePoints(Dealer.PlayerCards) <= 21) {
-            Dealer.dealerPlay();
+        if (dealer.calculatePoints(Dealer.PlayerCards) <= 21) {
+            dealer.dealerPlay();
             determineRoundWinner();
         }
 
@@ -66,42 +73,24 @@ public class BlackjackGame {
      * Определяет победителя раунда на основе очков игрока и дилера.
      * Выводит результаты раунда.
      */
-    public static void determineRoundWinner() {
-        int pointsP = Dealer.calculatePoints(Dealer.PlayerCards);
-        int pointsD = Dealer.calculatePoints(Dealer.DealerCards);
+    public void determineRoundWinner() {
+        int pointsP = dealer.calculatePoints(Dealer.PlayerCards);
+        int pointsD = dealer.calculatePoints(Dealer.DealerCards);
 
         if (pointsP > 21) {
             // Уже обработано в Player
             return;
         }
 
-        if (pointsD > 21) {
-            playerPoint++;
-            System.out.printf("У дилера перебор! Вы выиграли раунд! Счет: %d:%d\n\n",
-                    dealerPoint, playerPoint);
-        } else if (pointsD > pointsP) {
-            dealerPoint++;
-            System.out.printf("Дилер выиграл раунд! Счет: %d:%d\n\n",
-                    dealerPoint, playerPoint);
-        } else if (pointsP > pointsD) {
-            playerPoint++;
-            System.out.printf("Вы выиграли раунд! Счет: %d:%d\n\n",
-                    dealerPoint, playerPoint);
-        } else {
-            System.out.println("Ничья в раунде!\n");
-        }
+        output.showRoundResult(pointsP, pointsD);
     }
 
     /**
      * Определяет конечный результат игры.
      * Выводит финальный счёт и завершает работу программы.
      */
-    private static void endGame() {
-        if (playerPoint == 3) {
-            System.out.printf("Вы одержали победу со счетом %d:%d!\n\n", dealerPoint, playerPoint);
-        } else {
-            System.out.printf("Вы потерпели поражение со счетом %d:%d\n", dealerPoint, playerPoint);
-        }
+    private void endGame() {
+        output.showFinalResult(dealerPoint, playerPoint);
         System.exit(0);
     }
 }

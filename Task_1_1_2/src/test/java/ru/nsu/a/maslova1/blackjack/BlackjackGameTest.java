@@ -2,31 +2,32 @@ package ru.nsu.a.maslova1.blackjack;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.util.ArrayList;
 import org.junit.jupiter.api.Test;
 
 class BlackjackGameTest {
+    private BlackjackGame game;
+
     void setUp() {
+        ConsoleOutput output = new ConsoleOutput();
+        game = new BlackjackGame(output);
+        // Очищаем состояние перед каждым тестом
+        Dealer.PlayerCards.clear();
+        Dealer.DealerCards.clear();
         BlackjackGame.dealerPoint = 0;
         BlackjackGame.playerPoint = 0;
-    }
-
-    private Card card(Card.Suits suit, Card.Rank rank) {
-        return new Card(suit, rank);
     }
 
     @Test
     void testDealerWins() {
         setUp();
-        Dealer.PlayerCards = new ArrayList<>();
-        Dealer.PlayerCards.add(card(Card.Suits.CLABS, Card.Rank.TWO));
-        Dealer.PlayerCards.add(card(Card.Suits.DIAMONDS, Card.Rank.THREE));
+        // Дилер выигрывает: 20 > 18
+        Dealer.PlayerCards.add(new Card(Suit.CLUBS, Rank.QUEEN));
+        Dealer.PlayerCards.add(new Card(Suit.DIAMONDS, Rank.EIGHT));
 
-        Dealer.DealerCards = new ArrayList<>();
-        Dealer.DealerCards.add(card(Card.Suits.HERTS, Card.Rank.KING));
-        Dealer.DealerCards.add(card(Card.Suits.HERTS, Card.Rank.FOUR));
+        Dealer.DealerCards.add(new Card(Suit.HERTS, Rank.KING));
+        Dealer.DealerCards.add(new Card(Suit.HERTS, Rank.JACK));
 
-        BlackjackGame.determineRoundWinner();
+        game.determineRoundWinner();
 
         assertEquals(1, BlackjackGame.dealerPoint);
         assertEquals(0, BlackjackGame.playerPoint);
@@ -35,34 +36,49 @@ class BlackjackGameTest {
     @Test
     void testPlayerWins() {
         setUp();
-        Dealer.PlayerCards = new ArrayList<>();
-        Dealer.PlayerCards.add(card(Card.Suits.CLABS, Card.Rank.QUEEN));
-        Dealer.PlayerCards.add(card(Card.Suits.DIAMONDS, Card.Rank.TEN));
+        // Игрок выигрывает: 18 > 17
+        Dealer.PlayerCards.add(new Card(Suit.CLUBS, Rank.KING));
+        Dealer.PlayerCards.add(new Card(Suit.DIAMONDS, Rank.EIGHT));
 
-        Dealer.DealerCards = new ArrayList<>();
-        Dealer.DealerCards.add(card(Card.Suits.HERTS, Card.Rank.KING));
-        Dealer.DealerCards.add(card(Card.Suits.SPADES, Card.Rank.TWO));
+        Dealer.DealerCards.add(new Card(Suit.HERTS, Rank.TEN));
+        Dealer.DealerCards.add(new Card(Suit.HERTS, Rank.SEVEN));
 
-        BlackjackGame.determineRoundWinner();
+        game.determineRoundWinner();
 
         assertEquals(0, BlackjackGame.dealerPoint);
         assertEquals(1, BlackjackGame.playerPoint);
     }
 
     @Test
-    void testNobodyWins() {
+    void testDealerBust() {
         setUp();
-        Dealer.PlayerCards = new ArrayList<>();
-        Dealer.PlayerCards.add(card(Card.Suits.CLABS, Card.Rank.ACE));
-        Dealer.PlayerCards.add(card(Card.Suits.DIAMONDS, Card.Rank.THREE));
+        // Перебор у дилера
+        Dealer.PlayerCards.add(new Card(Suit.CLUBS, Rank.KING));
+        Dealer.PlayerCards.add(new Card(Suit.DIAMONDS, Rank.SEVEN));
 
-        Dealer.DealerCards = new ArrayList<>();
-        Dealer.DealerCards.add(card(Card.Suits.CLABS, Card.Rank.ACE));
-        Dealer.DealerCards.add(card(Card.Suits.DIAMONDS, Card.Rank.THREE));
+        Dealer.DealerCards.add(new Card(Suit.HERTS, Rank.KING));
+        Dealer.DealerCards.add(new Card(Suit.HERTS, Rank.SEVEN));
+        Dealer.DealerCards.add(new Card(Suit.SPADES, Rank.FIVE));
 
-        BlackjackGame.determineRoundWinner();
+        game.determineRoundWinner();
+
+        assertEquals(0, BlackjackGame.dealerPoint);
+        assertEquals(1, BlackjackGame.playerPoint);
+    }
+
+    @Test
+    void testTie() {
+        setUp();
+        // Ничья: 17 = 17
+        Dealer.PlayerCards.add(new Card(Suit.CLUBS, Rank.KING));
+        Dealer.PlayerCards.add(new Card(Suit.DIAMONDS, Rank.SEVEN));
+
+        Dealer.DealerCards.add(new Card(Suit.HERTS, Rank.KING));
+        Dealer.DealerCards.add(new Card(Suit.HERTS, Rank.SEVEN));
+
+        game.determineRoundWinner();
 
         assertEquals(0, BlackjackGame.dealerPoint);
         assertEquals(0, BlackjackGame.playerPoint);
     }
-    }
+}

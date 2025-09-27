@@ -7,56 +7,52 @@ import java.util.Scanner;
  * Обрабатывает взаимодействие с пользователем.
  */
 public class Player {
+    private final ConsoleOutput output;
+    private final Deck deck;
+    private final Dealer dealer;
 
+    public Player(ConsoleOutput output){
+        this.output = output;
+
+        deck = new Deck(output);
+        dealer = new Dealer(output);
+    }
     /**
      * Управляет ходом игрока в раунде Блэкджека.
      * Предлагает игроку выбор: взять карту или остановиться.
      * Обрабатывает ввод пользователя, добавляет карты в руку игрока,
      * проверяет условия перебора и блэкджека.
      */
-    public static void playerMove() {
+    public void playerMove() {
         Scanner in = new Scanner(System.in);
 
         while (true) {
-            System.out.print("Введите 1, чтобы взять карту, и 0, чтобы остановиться...\n");
-            int num = in.nextInt();
+            output.showPlayerOptions();
+            String num = in.next();
 
-            if (num == 1) {
-                Card newCard = Deck.takeCard();
-
-                if (Deck.isEmpty()) {
-                    System.out.println("В колоде закончились карты. Создана новая колода.");
-                    Deck.deckCreate();
-                }
+            if (num.equals("1")) {
+                Card newCard = deck.takeCard();
 
                 Dealer.PlayerCards.add(newCard);
 
                 System.out.println("Вы открыли карту: \n" + newCard);
-                System.out.println("\tВаши карты: " + Dealer.PlayerCards + " => "
-                        + Dealer.calculatePoints(Dealer.PlayerCards));
-
-                int points = Dealer.calculatePoints(Dealer.PlayerCards);
+                output.showDistribution(Dealer.PlayerCards, Dealer.DealerCards, dealer);
+                int points = dealer.calculatePoints(Dealer.PlayerCards);
 
                 if (points > 21) {
-                    System.out.print("Перебор! Вы проиграли раунд. ");
-                    BlackjackGame.dealerPoint += 1;
-                    System.out.printf("Счет: %d:%d\n\n",
-                            BlackjackGame.dealerPoint, BlackjackGame.playerPoint);
+                    output.showPlayerBust();
                     return;
                 }
 
                 if (points == 21) {
-                    System.out.print("Блэкджек! У вас ровно 21 очко! ");
-                    BlackjackGame.playerPoint += 1;
-                    System.out.printf("Счет: %d:%d\n\n",
-                            BlackjackGame.dealerPoint, BlackjackGame.playerPoint);
+                    output.showPlayerBlackjack();
                     return;
                 }
-            } else if (num == 0) {
-                System.out.print("Вы остановились.\n");
+            } else if (num.equals("0")) {
+                output.showPlayerStopped();
                 break;
             } else {
-                System.out.print("Неверный ввод. Введите 1 или 0.\n");
+                output.showInvalidInput();
             }
         }
     }

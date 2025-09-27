@@ -8,7 +8,13 @@ import java.io.InputStream;
 import org.junit.jupiter.api.Test;
 
 class PlayerTest {
+    private Player player;
+    private Dealer dealer;
+
     void setUp() {
+        ConsoleOutput output = new ConsoleOutput();
+        player = new Player(output);
+        dealer = new Dealer(output);
         Deck.deckCreate();
         BlackjackGame.dealerPoint = 0;
         BlackjackGame.playerPoint = 0;
@@ -24,7 +30,7 @@ class PlayerTest {
         int playerCards = Dealer.PlayerCards.size();
         int playerPoints = BlackjackGame.playerPoint;
 
-        Player.playerMove();
+        player.playerMove();
 
         int dealerPoint = BlackjackGame.dealerPoint;
 
@@ -42,9 +48,9 @@ class PlayerTest {
 
         int playerCards = Dealer.PlayerCards.size();
 
-        Player.playerMove();
+        player.playerMove();
 
         assertEquals(playerCards + 1, Dealer.PlayerCards.size());
-        assertTrue(Dealer.calculatePoints(Dealer.PlayerCards) > 0);
+        assertTrue(dealer.calculatePoints(Dealer.PlayerCards) > 0);
     }
 }

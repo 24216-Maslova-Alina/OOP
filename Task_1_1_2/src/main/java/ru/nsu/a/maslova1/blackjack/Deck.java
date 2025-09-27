@@ -5,31 +5,39 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * Класс для создание колоды и работы с ней.
+ * Класс для создания колоды и работы с ней.
  */
 public class Deck {
 
     private static List<Card> cards;
+    private final ConsoleOutput output;
 
+    public Deck(ConsoleOutput output) {
+        this.output = output;
+    }
     /**
      * Создание колоды.
      */
     public static void deckCreate() {
         cards = new ArrayList<>();
-        for (Card.Suits suits : Card.Suits.values()) {
-            for (Card.Rank rank : Card.Rank.values()) {
-                cards.add(new Card(suits, rank));
+        for (Suit suit : Suit.values()) {
+            for (Rank rank : Rank.values()) {
+                cards.add(new Card(suit, rank));
             }
         }
         Collections.shuffle(cards);
     }
 
     /**
-     * Взятие арты из начала колоды.
+     * Взятие карты из начала колоды.
      *
      * @return верхняя карта из колоды
      */
-    public static Card takeCard() {
+    public Card takeCard() {
+        if (Deck.isEmpty()) {
+            output.showNewDeckCreated();
+            Deck.deckCreate();
+        }
         return cards.remove(0);
     }
 
