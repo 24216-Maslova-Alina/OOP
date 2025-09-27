@@ -25,7 +25,7 @@ class SuitTest {
         // Test 1: Проверяем преобразование строк в значения enum
         assertEquals(Suit.CLUBS, Suit.valueOf("CLUBS"));
         assertEquals(Suit.DIAMONDS, Suit.valueOf("DIAMONDS"));
-        assertEquals(Suit.HEARTS, Suit.valueOf("HERTS"));
+        assertEquals(Suit.HEARTS, Suit.valueOf("HEARTS"));
         assertEquals(Suit.SPADES, Suit.valueOf("SPADES"));
     }
 
