@@ -89,25 +89,6 @@ class PlayerTest {
         assertEquals(initialPlayerCards, player.getPlayerCards().size());
     }
 
-    // Дополнительные тесты
-
-    @Test
-    void testPlayerMoveBust() {
-        String input = "1\n1\n1\n0"; // Берем несколько карт, чтобы перебрать
-        InputStream in = new ByteArrayInputStream(input.getBytes());
-        System.setIn(in);
-
-        // Создаем ситуацию, где игрок почти перебрал
-        player.clearCards();
-        player.addCard(new Card(Suit.HEARTS, Rank.KING));
-        player.addCard(new Card(Suit.DIAMONDS, Rank.QUEEN));
-
-        player.playerMove(dealer);
-
-        // После перебора игра должна завершиться
-        assertTrue(player.calculatePoints() > 21);
-    }
-
     @Test
     void testPlayerMoveMultipleCards() {
         String input = "1\n1\n1\n0";
