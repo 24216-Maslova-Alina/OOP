@@ -11,172 +11,174 @@ import org.junit.jupiter.api.Test;
 
 class DealerTest {
     private Dealer dealer;
+    private Player player;
     private ConsoleOutput output;
 
     @BeforeEach
     void setUp() {
         output = new ConsoleOutput();
         dealer = new Dealer(output);
+        player = new Player(output);
 
-        // Очищаем статические поля перед каждым тестом
-        Dealer.PlayerCards.clear();
-        Dealer.DealerCards.clear();
+        // Очищаем карты перед каждым тестом
+        player.clearCards();
+        dealer.clearCards();
         Deck.deckCreate(); // Пересоздаем колоду
     }
 
     @Test
     void testDistributionCard() {
         final int deckSize = Deck.deckSize();
-        dealer.distributionCard();
+        dealer.distributionCard(player);
 
-        assertEquals(2, Dealer.PlayerCards.size());
-        assertEquals(2, Dealer.DealerCards.size());
+        assertEquals(2, player.getPlayerCards().size());
+        assertEquals(2, dealer.getDealerCards().size());
         assertEquals(deckSize - 4, Deck.deckSize());
 
-        assertNotEquals(Dealer.DealerCards.get(0), Dealer.DealerCards.get(1));
-        assertNotEquals(Dealer.PlayerCards.get(0), Dealer.PlayerCards.get(1));
+        assertNotEquals(dealer.getDealerCards().get(0), dealer.getDealerCards().get(1));
+        assertNotEquals(player.getPlayerCards().get(0), player.getPlayerCards().get(1));
     }
 
     @Test
     void testDealerPlayTakesCardsWhenBelow17() {
         // Создаем ситуацию, когда у дилера мало очков
-        Dealer.DealerCards.clear();
-        Dealer.DealerCards.add(new Card(Suit.CLUBS, Rank.TWO));
-        Dealer.DealerCards.add(new Card(Suit.DIAMONDS, Rank.THREE));
+        dealer.clearCards();
+        dealer.addCardToDealer(new Card(Suit.CLUBS, Rank.TWO));
+        dealer.addCardToDealer(new Card(Suit.DIAMONDS, Rank.THREE));
 
-        int initialSize = Dealer.DealerCards.size();
-        dealer.dealerPlay();
+        int initialSize = dealer.getDealerCards().size();
+        dealer.dealerPlay(player);
 
-        assertTrue(Dealer.DealerCards.size() > initialSize);
-        int dealerPoints = dealer.calculatePoints(Dealer.DealerCards);
+        assertTrue(dealer.getDealerCards().size() > initialSize);
+        int dealerPoints = dealer.calculatePoints();
         assertTrue(dealerPoints >= 17);
     }
 
     @Test
     void testDealerPlayStandsAt17() {
         // Создаем ситуацию, когда у дилера ровно 17 очков
-        Dealer.DealerCards.clear();
-        Dealer.DealerCards.add(new Card(Suit.CLUBS, Rank.TEN));
-        Dealer.DealerCards.add(new Card(Suit.DIAMONDS, Rank.SEVEN));
+        dealer.clearCards();
+        dealer.addCardToDealer(new Card(Suit.CLUBS, Rank.TEN));
+        dealer.addCardToDealer(new Card(Suit.DIAMONDS, Rank.SEVEN));
 
-        int initialSize = Dealer.DealerCards.size();
-        dealer.dealerPlay();
+        int initialSize = dealer.getDealerCards().size();
+        dealer.dealerPlay(player);
 
-        assertEquals(initialSize, Dealer.DealerCards.size());
-        assertEquals(17, dealer.calculatePoints(Dealer.DealerCards));
+        assertEquals(initialSize, dealer.getDealerCards().size());
+        assertEquals(17, dealer.calculatePoints());
     }
 
     @Test
     void testDealerPlayStandsAbove17() {
         // Создаем ситуацию, когда у дилера больше 17 очков
-        Dealer.DealerCards.clear();
-        Dealer.DealerCards.add(new Card(Suit.CLUBS, Rank.TEN));
-        Dealer.DealerCards.add(new Card(Suit.DIAMONDS, Rank.EIGHT));
+        dealer.clearCards();
+        dealer.addCardToDealer(new Card(Suit.CLUBS, Rank.TEN));
+        dealer.addCardToDealer(new Card(Suit.DIAMONDS, Rank.EIGHT));
 
-        int initialSize = Dealer.DealerCards.size();
-        dealer.dealerPlay();
+        int initialSize = dealer.getDealerCards().size();
+        dealer.dealerPlay(player);
 
-        assertEquals(initialSize, Dealer.DealerCards.size());
-        assertEquals(18, dealer.calculatePoints(Dealer.DealerCards));
+        assertEquals(initialSize, dealer.getDealerCards().size());
+        assertEquals(18, dealer.calculatePoints());
     }
 
     @Test
     void testCalculatePointsWithRegularCards() {
-        List<Card> cards = new ArrayList<>();
-        cards.add(new Card(Suit.CLUBS, Rank.TEN));
-        cards.add(new Card(Suit.DIAMONDS, Rank.SEVEN));
-        assertEquals(17, dealer.calculatePoints(cards));
+        dealer.clearCards();
+        dealer.addCardToDealer(new Card(Suit.CLUBS, Rank.TEN));
+        dealer.addCardToDealer(new Card(Suit.DIAMONDS, Rank.SEVEN));
+        assertEquals(17, dealer.calculatePoints());
     }
 
     @Test
     void testCalculatePointsWithAceAs1() {
-        List<Card> cards = new ArrayList<>();
-        cards.add(new Card(Suit.CLUBS, Rank.TEN));
-        cards.add(new Card(Suit.DIAMONDS, Rank.FIVE));
-        cards.add(new Card(Suit.HEARTS, Rank.ACE));
-        assertEquals(16, dealer.calculatePoints(cards));
+        dealer.clearCards();
+        dealer.addCardToDealer(new Card(Suit.CLUBS, Rank.TEN));
+        dealer.addCardToDealer(new Card(Suit.DIAMONDS, Rank.FIVE));
+        dealer.addCardToDealer(new Card(Suit.HEARTS, Rank.ACE));
+        assertEquals(16, dealer.calculatePoints());
     }
 
     @Test
     void testCalculatePointsWithAceAs11() {
-        List<Card> cards = new ArrayList<>();
-        cards.add(new Card(Suit.HEARTS, Rank.ACE));
-        cards.add(new Card(Suit.SPADES, Rank.SEVEN));
-        assertEquals(18, dealer.calculatePoints(cards));
+        dealer.clearCards();
+        dealer.addCardToDealer(new Card(Suit.HEARTS, Rank.ACE));
+        dealer.addCardToDealer(new Card(Suit.SPADES, Rank.SEVEN));
+        assertEquals(18, dealer.calculatePoints());
     }
 
     @Test
     void testCalculatePointsWithFaceCards() {
-        List<Card> cards = new ArrayList<>();
-        cards.add(new Card(Suit.CLUBS, Rank.KING));
-        cards.add(new Card(Suit.DIAMONDS, Rank.QUEEN));
-        assertEquals(20, dealer.calculatePoints(cards));
+        dealer.clearCards();
+        dealer.addCardToDealer(new Card(Suit.CLUBS, Rank.KING));
+        dealer.addCardToDealer(new Card(Suit.DIAMONDS, Rank.QUEEN));
+        assertEquals(20, dealer.calculatePoints());
     }
 
     @Test
     void testCalculatePointsWithMultipleAces() {
-        List<Card> cards = new ArrayList<>();
-        cards.add(new Card(Suit.HEARTS, Rank.ACE));
-        cards.add(new Card(Suit.SPADES, Rank.ACE));
-        cards.add(new Card(Suit.CLUBS, Rank.NINE));
+        dealer.clearCards();
+        dealer.addCardToDealer(new Card(Suit.HEARTS, Rank.ACE));
+        dealer.addCardToDealer(new Card(Suit.SPADES, Rank.ACE));
+        dealer.addCardToDealer(new Card(Suit.CLUBS, Rank.NINE));
 
         // Два туза: один как 11, другой как 1 = 11 + 1 + 9 = 21
-        assertEquals(21, dealer.calculatePoints(cards));
+        assertEquals(21, dealer.calculatePoints());
     }
 
     @Test
     void testCalculatePointsEmptyList() {
-        List<Card> cards = new ArrayList<>();
-        assertEquals(0, dealer.calculatePoints(cards));
+        dealer.clearCards();
+        assertEquals(0, dealer.calculatePoints());
     }
 
     @Test
     void testCalculatePointsSingleAce() {
-        List<Card> cards = new ArrayList<>();
-        cards.add(new Card(Suit.HEARTS, Rank.ACE));
-        assertEquals(11, dealer.calculatePoints(cards));
+        dealer.clearCards();
+        dealer.addCardToDealer(new Card(Suit.HEARTS, Rank.ACE));
+        assertEquals(11, dealer.calculatePoints());
     }
 
     @Test
     void testDistributionCardResetsPreviousGame() {
         // Первая раздача
-        dealer.distributionCard();
-        List<Card> firstPlayerCards = new ArrayList<>(Dealer.PlayerCards);
-        List<Card> firstDealerCards = new ArrayList<>(Dealer.DealerCards);
+        dealer.distributionCard(player);
+        List<Card> firstPlayerCards = new ArrayList<>(player.getPlayerCards());
+        List<Card> firstDealerCards = new ArrayList<>(dealer.getDealerCards());
 
         // Вторая раздача
-        dealer.distributionCard();
+        dealer.distributionCard(player);
 
         // Проверяем, что карты новые (не те же самые объекты)
-        assertNotEquals(firstPlayerCards, Dealer.PlayerCards);
-        assertNotEquals(firstDealerCards, Dealer.DealerCards);
+        assertNotEquals(firstPlayerCards, player.getPlayerCards());
+        assertNotEquals(firstDealerCards, dealer.getDealerCards());
     }
 
     @Test
     void testDealerPlayWithBlackjack() {
         // Создаем ситуацию блэкджека у дилера
-        Dealer.DealerCards.clear();
-        Dealer.DealerCards.add(new Card(Suit.HEARTS, Rank.ACE));
-        Dealer.DealerCards.add(new Card(Suit.CLUBS, Rank.TEN));
+        dealer.clearCards();
+        dealer.addCardToDealer(new Card(Suit.HEARTS, Rank.ACE));
+        dealer.addCardToDealer(new Card(Suit.CLUBS, Rank.TEN));
 
-        int initialSize = Dealer.DealerCards.size();
-        dealer.dealerPlay();
+        int initialSize = dealer.getDealerCards().size();
+        dealer.dealerPlay(player);
 
         // Дилер не должен брать карты при блэкджеке
-        assertEquals(initialSize, Dealer.DealerCards.size());
-        assertEquals(21, dealer.calculatePoints(Dealer.DealerCards));
+        assertEquals(initialSize, dealer.getDealerCards().size());
+        assertEquals(21, dealer.calculatePoints());
     }
 
     @Test
     void testDealerPlayWithBust() {
         // Создаем ситуацию, когда дилер может перебрать
-        Dealer.DealerCards.clear();
-        Dealer.DealerCards.add(new Card(Suit.CLUBS, Rank.TEN));
-        Dealer.DealerCards.add(new Card(Suit.DIAMONDS, Rank.SIX)); // 16 очков
+        dealer.clearCards();
+        dealer.addCardToDealer(new Card(Suit.CLUBS, Rank.TEN));
+        dealer.addCardToDealer(new Card(Suit.DIAMONDS, Rank.SIX)); // 16 очков
 
-        dealer.dealerPlay();
+        dealer.dealerPlay(player);
 
-        int dealerPoints = dealer.calculatePoints(Dealer.DealerCards);
+        int dealerPoints = dealer.calculatePoints();
         // Дилер может перебрать, но должен остановиться на >= 17
         assertTrue(dealerPoints >= 17);
     }

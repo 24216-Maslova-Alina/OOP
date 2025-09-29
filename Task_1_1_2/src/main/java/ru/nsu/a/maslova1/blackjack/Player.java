@@ -1,5 +1,7 @@
 package ru.nsu.a.maslova1.blackjack;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -9,7 +11,7 @@ import java.util.Scanner;
 public class Player {
     private final ConsoleOutput output;
     private final Deck deck;
-    private final Dealer dealer;
+    private List<Card> playerCards = new ArrayList<>();
 
     /**
      * Конструктор для Player.
@@ -18,9 +20,7 @@ public class Player {
      */
     public Player(ConsoleOutput output) {
         this.output = output;
-
-        deck = new Deck(output);
-        dealer = new Dealer(output);
+        this.deck = new Deck(output);
     }
 
     /**
@@ -29,7 +29,7 @@ public class Player {
      * Обрабатывает ввод пользователя, добавляет карты в руку игрока,
      * проверяет условия перебора и блэкджека.
      */
-    public void playerMove() {
+    public void playerMove(Dealer dealer) {
         Scanner in = new Scanner(System.in);
 
         while (true) {
@@ -38,12 +38,12 @@ public class Player {
 
             if (num.equals("1")) {
                 Card newCard = deck.takeCard();
-
-                Dealer.PlayerCards.add(newCard);
+                playerCards.add(newCard);
 
                 System.out.println("Вы открыли карту: \n" + newCard);
-                output.showDistribution(Dealer.PlayerCards, Dealer.DealerCards, dealer);
-                int points = dealer.calculatePoints(Dealer.PlayerCards);
+                output.showDistribution(playerCards, dealer.getDealerCards(), dealer, this);
+
+                int points = calculatePoints();
 
                 if (points > 21) {
                     output.showPlayerBust();
@@ -61,5 +61,41 @@ public class Player {
                 output.showInvalidInput();
             }
         }
+    }
+
+    /**
+     * Добавляет карту игроку при раздаче.
+     */
+    public void addCard(Card card) {
+        playerCards.add(card);
+    }
+
+    /**
+     * Очищает карты игрока для нового раунда.
+     */
+    public void clearCards() {
+        playerCards.clear();
+    }
+
+    /**
+     * Подсчёт количества очков игрока.
+     */
+    public int calculatePoints() {
+        int count = 0;
+        for (Card card : playerCards) {
+            if (card.getRank() == Rank.ACE && (count + card.getValue()) >= 21) {
+                count += 1;
+            } else {
+                count += card.getValue();
+            }
+        }
+        return count;
+    }
+
+    /**
+     * Возвращает копию карт игрока.
+     */
+    public List<Card> getPlayerCards() {
+        return new ArrayList<>(playerCards);
     }
 }

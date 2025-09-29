@@ -2,31 +2,34 @@ package ru.nsu.a.maslova1.blackjack;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class BlackjackGameTest {
     private BlackjackGame game;
     private ConsoleOutput output;
 
+    @BeforeEach
     void setUp() {
-        ConsoleOutput output = new ConsoleOutput();
+        output = new ConsoleOutput();
         game = new BlackjackGame(output);
+
         // Очищаем состояние перед каждым тестом
-        Dealer.PlayerCards.clear();
-        Dealer.DealerCards.clear();
         BlackjackGame.dealerPoint = 0;
         BlackjackGame.playerPoint = 0;
     }
 
     @Test
     void testDealerWins() {
-        setUp();
         // Дилер выигрывает: 20 > 18
-        Dealer.PlayerCards.add(new Card(Suit.CLUBS, Rank.QUEEN));
-        Dealer.PlayerCards.add(new Card(Suit.DIAMONDS, Rank.EIGHT));
+        game.getPlayer().clearCards(); // Очищаем карты
+        game.getDealer().clearCards(); // Очищаем карты
 
-        Dealer.DealerCards.add(new Card(Suit.HEARTS, Rank.KING));
-        Dealer.DealerCards.add(new Card(Suit.HEARTS, Rank.JACK));
+        game.getPlayer().addCard(new Card(Suit.CLUBS, Rank.QUEEN));
+        game.getPlayer().addCard(new Card(Suit.DIAMONDS, Rank.EIGHT));
+
+        game.getDealer().addCardToDealer(new Card(Suit.HEARTS, Rank.KING));
+        game.getDealer().addCardToDealer(new Card(Suit.HEARTS, Rank.JACK));
 
         game.determineRoundWinner();
 
@@ -36,13 +39,15 @@ class BlackjackGameTest {
 
     @Test
     void testPlayerWins() {
-        setUp();
         // Игрок выигрывает: 18 > 17
-        Dealer.PlayerCards.add(new Card(Suit.CLUBS, Rank.KING));
-        Dealer.PlayerCards.add(new Card(Suit.DIAMONDS, Rank.EIGHT));
+        game.getPlayer().clearCards();
+        game.getDealer().clearCards();
 
-        Dealer.DealerCards.add(new Card(Suit.HEARTS, Rank.TEN));
-        Dealer.DealerCards.add(new Card(Suit.HEARTS, Rank.SEVEN));
+        game.getPlayer().addCard(new Card(Suit.CLUBS, Rank.KING));
+        game.getPlayer().addCard(new Card(Suit.DIAMONDS, Rank.EIGHT));
+
+        game.getDealer().addCardToDealer(new Card(Suit.HEARTS, Rank.TEN));
+        game.getDealer().addCardToDealer(new Card(Suit.HEARTS, Rank.SEVEN));
 
         game.determineRoundWinner();
 
@@ -52,14 +57,16 @@ class BlackjackGameTest {
 
     @Test
     void testDealerBust() {
-        setUp();
         // Перебор у дилера
-        Dealer.PlayerCards.add(new Card(Suit.CLUBS, Rank.KING));
-        Dealer.PlayerCards.add(new Card(Suit.DIAMONDS, Rank.SEVEN));
+        game.getPlayer().clearCards();
+        game.getDealer().clearCards();
 
-        Dealer.DealerCards.add(new Card(Suit.HEARTS, Rank.KING));
-        Dealer.DealerCards.add(new Card(Suit.HEARTS, Rank.SEVEN));
-        Dealer.DealerCards.add(new Card(Suit.SPADES, Rank.FIVE));
+        game.getPlayer().addCard(new Card(Suit.CLUBS, Rank.KING));
+        game.getPlayer().addCard(new Card(Suit.DIAMONDS, Rank.SEVEN));
+
+        game.getDealer().addCardToDealer(new Card(Suit.HEARTS, Rank.KING));
+        game.getDealer().addCardToDealer(new Card(Suit.HEARTS, Rank.SEVEN));
+        game.getDealer().addCardToDealer(new Card(Suit.SPADES, Rank.FIVE));
 
         game.determineRoundWinner();
 
@@ -69,13 +76,15 @@ class BlackjackGameTest {
 
     @Test
     void testTie() {
-        setUp();
         // Ничья: 17 = 17
-        Dealer.PlayerCards.add(new Card(Suit.CLUBS, Rank.KING));
-        Dealer.PlayerCards.add(new Card(Suit.DIAMONDS, Rank.SEVEN));
+        game.getPlayer().clearCards();
+        game.getDealer().clearCards();
 
-        Dealer.DealerCards.add(new Card(Suit.HEARTS, Rank.KING));
-        Dealer.DealerCards.add(new Card(Suit.HEARTS, Rank.SEVEN));
+        game.getPlayer().addCard(new Card(Suit.CLUBS, Rank.KING));
+        game.getPlayer().addCard(new Card(Suit.DIAMONDS, Rank.SEVEN));
+
+        game.getDealer().addCardToDealer(new Card(Suit.HEARTS, Rank.KING));
+        game.getDealer().addCardToDealer(new Card(Suit.HEARTS, Rank.SEVEN));
 
         game.determineRoundWinner();
 
@@ -85,21 +94,24 @@ class BlackjackGameTest {
 
     @Test
     void testPlayerBlackjackOnDeal() {
-        setUp();
         // Блэкджек игрока при раздаче
-        Dealer.PlayerCards.add(new Card(Suit.CLUBS, Rank.ACE));
-        Dealer.PlayerCards.add(new Card(Suit.DIAMONDS, Rank.KING));
+        game.getPlayer().clearCards();
 
-        int points = new Dealer(output).calculatePoints(Dealer.PlayerCards);
+        game.getPlayer().addCard(new Card(Suit.CLUBS, Rank.ACE));
+        game.getPlayer().addCard(new Card(Suit.DIAMONDS, Rank.KING));
+
+        int points = game.getPlayer().calculatePoints();
         assertEquals(21, points);
     }
 
     @Test
     void testPlayerBustInPlayerMove() {
-        setUp();
-        Dealer.PlayerCards.add(new Card(Suit.CLUBS, Rank.KING));
-        Dealer.PlayerCards.add(new Card(Suit.DIAMONDS, Rank.QUEEN));
-        Dealer.PlayerCards.add(new Card(Suit.HEARTS, Rank.THREE));
+        game.getPlayer().clearCards();
+        game.getDealer().clearCards();
+
+        game.getPlayer().addCard(new Card(Suit.CLUBS, Rank.KING));
+        game.getPlayer().addCard(new Card(Suit.DIAMONDS, Rank.QUEEN));
+        game.getPlayer().addCard(new Card(Suit.HEARTS, Rank.THREE));
 
         game.determineRoundWinner();
 

@@ -37,7 +37,7 @@ public class ConsoleOutput {
      * @param playerCards карты игрока
      * @param dealerCards карты дилера
      */
-    public void showDistribution(List<Card> playerCards, List<Card> dealerCards, Dealer dealer) {
+    public void showDistribution(List<Card> playerCards, List<Card> dealerCards, Dealer dealer, Player player) {
         System.out.print("\tВаши карты: [");
         for (int i = 0; i < playerCards.size(); i++) {
             System.out.print(playerCards.get(i));
@@ -45,7 +45,7 @@ public class ConsoleOutput {
                 System.out.print(", ");
             }
         }
-        System.out.printf("] => %d\n", dealer.calculatePoints(playerCards));
+        System.out.printf("] => %d\n", player.calculatePoints());
 
         System.out.print("\tКарты дилера: [");
         if (dealerCards.size() == 2 && BlackjackGame.flagCloseCard == 0) {
@@ -57,7 +57,7 @@ public class ConsoleOutput {
                     System.out.print(", ");
                 }
             }
-            System.out.printf("] => %d\n", dealer.calculatePoints(dealerCards));
+            System.out.printf("] => %d\n", dealer.calculatePoints());
         }
     }
 
@@ -103,10 +103,11 @@ public class ConsoleOutput {
      *
      * @param hiddenCard закрытая карта
      */
-    public void showDealerRevealCard(Card hiddenCard, Dealer dealer) {
+    public void showDealerRevealCard(Card hiddenCard, Dealer dealer, Player player) {
         System.out.println("Дилер открывает закрытую карту: " + hiddenCard);
         BlackjackGame.flagCloseCard = 1;
-        showDistribution(Dealer.PlayerCards, Dealer.DealerCards, dealer);
+        // Нужно передать карты игрока и дилера
+        showDistribution(player.getPlayerCards(), dealer.getDealerCards(), dealer, player);
     }
 
     /**

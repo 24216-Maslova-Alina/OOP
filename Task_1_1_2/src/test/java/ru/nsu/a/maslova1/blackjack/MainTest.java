@@ -22,7 +22,7 @@ class MainTest {
     @BeforeEach
     void setUp() {
         // Подменяем System.in, чтобы избежать NoSuchElementException
-        String simulatedInput = "0\n"; 
+        String simulatedInput = "0\n";
         System.setIn(new ByteArrayInputStream(simulatedInput.getBytes()));
 
         // Перенаправляем вывод чтобы не засорять консоль

@@ -27,14 +27,14 @@ class PlayerTest {
         InputStream in = new ByteArrayInputStream(input.getBytes());
         System.setIn(in);
 
-        int playerCards = Dealer.PlayerCards.size();
+        int playerCards = player.getPlayerCards().size();
         int playerPoints = BlackjackGame.playerPoint;
 
-        player.playerMove();
+        player.playerMove(dealer);
 
         int dealerPoint = BlackjackGame.dealerPoint;
 
-        assertEquals(playerCards, Dealer.PlayerCards.size());
+        assertEquals(playerCards, player.getPlayerCards().size());
         assertEquals(playerPoints, BlackjackGame.playerPoint);
         assertEquals(dealerPoint, BlackjackGame.dealerPoint);
     }
@@ -46,12 +46,12 @@ class PlayerTest {
         InputStream in = new ByteArrayInputStream(input.getBytes());
         System.setIn(in);
 
-        int playerCards = Dealer.PlayerCards.size();
+        int playerCards = player.getPlayerCards().size();
 
-        player.playerMove();
+        player.playerMove(dealer);
 
-        assertEquals(playerCards + 1, Dealer.PlayerCards.size());
-        assertTrue(dealer.calculatePoints(Dealer.PlayerCards) > 0);
+        assertEquals(playerCards + 1, player.getPlayerCards().size());
+        assertTrue(player.calculatePoints() > 0);
     }
 
     @Test
@@ -63,13 +63,13 @@ class PlayerTest {
         System.setIn(in);
 
         // Создаем руку с блэкджеком
-        Dealer.PlayerCards.clear();
-        Dealer.PlayerCards.add(new Card(Suit.HEARTS, Rank.ACE));
-        Dealer.PlayerCards.add(new Card(Suit.SPADES, Rank.KING));
+        player.clearCards();
+        player.addCard(new Card(Suit.HEARTS, Rank.ACE));
+        player.addCard(new Card(Suit.SPADES, Rank.KING));
 
-        player.playerMove();
+        player.playerMove(dealer);
 
-        int playerPoints = dealer.calculatePoints(Dealer.PlayerCards);
+        int playerPoints = player.calculatePoints();
         assertEquals(21, playerPoints);
     }
 
@@ -81,11 +81,11 @@ class PlayerTest {
         InputStream in = new ByteArrayInputStream(input.getBytes());
         System.setIn(in);
 
-        int initialPlayerCards = Dealer.PlayerCards.size();
+        int initialPlayerCards = player.getPlayerCards().size();
 
-        player.playerMove();
+        player.playerMove(dealer);
 
         // Проверяем, что количество карт не изменилось
-        assertEquals(initialPlayerCards, Dealer.PlayerCards.size());
+        assertEquals(initialPlayerCards, player.getPlayerCards().size());
     }
 }

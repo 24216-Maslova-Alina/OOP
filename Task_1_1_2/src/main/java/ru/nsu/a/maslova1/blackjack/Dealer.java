@@ -7,9 +7,7 @@ import java.util.List;
  * Класс, реализующий основную логику действий дилера.
  */
 public class Dealer {
-    public static List<Card> PlayerCards = new ArrayList<>();
-    public static List<Card> DealerCards = new ArrayList<>();
-
+    private List<Card> dealerCards = new ArrayList<>();
     private final ConsoleOutput output;
     private final Deck deck;
 
@@ -20,60 +18,75 @@ public class Dealer {
      */
     public Dealer(ConsoleOutput output) {
         this.output = output;
-
-        deck = new Deck(output);
+        this.deck = new Deck(output);
     }
 
     /**
      * Создание колоды и раздача карт.
      */
-    public void distributionCard() {
-        PlayerCards = new ArrayList<>();
-        DealerCards = new ArrayList<>();
+    public void distributionCard(Player player) {
+        dealerCards.clear();
+        player.clearCards();
 
-        PlayerCards.add(deck.takeCard());
-        DealerCards.add(deck.takeCard());
-        PlayerCards.add(deck.takeCard());
-        DealerCards.add(deck.takeCard());
+        player.addCard(deck.takeCard());
+        dealerCards.add(deck.takeCard());
+        player.addCard(deck.takeCard());
+        dealerCards.add(deck.takeCard());
 
-        output.showDistribution(PlayerCards, DealerCards, this);
+        output.showDistribution(player.getPlayerCards(), dealerCards, this, player);
     }
 
     /**
      * Действия дилера при разных ситуациях.
      */
-    public void dealerPlay() {
+    public void dealerPlay(Player player) {
         output.showDealerTurn();
-        if (DealerCards.size() == 2) {
-            output.showDealerRevealCard(DealerCards.get(1), this);
+        if (dealerCards.size() == 2) {
+            output.showDealerRevealCard(dealerCards.get(1), this, player);
         }
-        while (calculatePoints(DealerCards) < 17) {
+        while (calculatePoints() < 17) {
             Card newCard = deck.takeCard();
-
-
-            DealerCards.add(newCard);
+            dealerCards.add(newCard);
             System.out.println("Дилер берет новую карту карту - " + newCard);
-
-            output.showDistribution(PlayerCards, DealerCards, this);
+            output.showDistribution(player.getPlayerCards(), dealerCards, this, player);
         }
     }
 
     /**
-     * Подсчёт количества очков.
-     *
-     * @param array массив карт игрока или дилера
-     * @return количество очков
+     * Подсчёт количества очков дилера.
      */
-    public int calculatePoints(List<Card> array) {
+    public int calculatePoints() {
         int count = 0;
-        for (Card card : array) {
-            if (card.getRank() == Rank.ACE && (count + card.getValue()) >= 21) {
-                count += 1;
-            } else {
-                count += card.getValue();
+        for (Card card : dealerCards) {
+            if (card.getValue() != 0) { // Пропускаем закрытую карту (если она имеет значение 0)
+                if (card.getRank() == Rank.ACE && (count + card.getValue()) >= 21) {
+                    count += 1;
+                } else {
+                    count += card.getValue();
+                }
             }
         }
         return count;
     }
 
+    /**
+     * Возвращает копию карт дилера.
+     */
+    public List<Card> getDealerCards() {
+        return new ArrayList<>(dealerCards);
+    }
+
+    /**
+     * Очищает карты дилера для нового раунда.
+     */
+    public void clearCards() {
+        dealerCards.clear();
+    }
+
+    /**
+     * Добавляет карту дилеру (для тестов).
+     */
+    public void addCardToDealer(Card card) {
+        this.dealerCards.add(card);
+    }
 }

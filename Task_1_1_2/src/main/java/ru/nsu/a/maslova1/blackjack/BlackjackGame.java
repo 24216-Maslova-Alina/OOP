@@ -52,26 +52,24 @@ public class BlackjackGame {
     public void startGame(int count) {
         flagCloseCard = 0;
         output.showRoundHeader(count);
-        dealer.distributionCard();
+        dealer.distributionCard(player);
 
-        if (dealer.calculatePoints(Dealer.PlayerCards) == 21) {
+        if (player.calculatePoints() == 21) {
             output.showPlayerBlackjack();
             return;
         }
 
         output.showPlayerTurn();
-        player.playerMove();
+        player.playerMove(dealer);
 
-        if (dealer.calculatePoints(Dealer.PlayerCards) > 21
-                || dealer.calculatePoints(Dealer.PlayerCards) == 21) {
+        if (player.calculatePoints() > 21 || player.calculatePoints() == 21) {
             return; // Раунд уже завершен в playerMove()
         }
 
-        if (dealer.calculatePoints(Dealer.PlayerCards) <= 21) {
-            dealer.dealerPlay();
+        if (player.calculatePoints() <= 21) {
+            dealer.dealerPlay(player);
             determineRoundWinner();
         }
-
     }
 
     /**
@@ -79,8 +77,8 @@ public class BlackjackGame {
      * Выводит результаты раунда.
      */
     public void determineRoundWinner() {
-        int pointsP = dealer.calculatePoints(Dealer.PlayerCards);
-        int pointsD = dealer.calculatePoints(Dealer.DealerCards);
+        int pointsP = player.calculatePoints();
+        int pointsD = dealer.calculatePoints();
 
         if (pointsP > 21) {
             // Уже обработано в Player
@@ -97,5 +95,19 @@ public class BlackjackGame {
     private void endGame() {
         output.showFinalResult(dealerPoint, playerPoint);
         System.exit(0);
+    }
+
+    /**
+     * Геттер для дилера (для тестов)
+     */
+    public Dealer getDealer() {
+        return dealer;
+    }
+
+    /**
+     * Геттер для игрока (для тестов)
+     */
+    public Player getPlayer() {
+        return player;
     }
 }
