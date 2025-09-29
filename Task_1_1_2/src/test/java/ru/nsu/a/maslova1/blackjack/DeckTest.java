@@ -18,37 +18,34 @@ class DeckTest {
     @Test
     void testDeckCreate() {
         setUp();
-        Deck.deckCreate();
 
-        assertEquals(52, Deck.deckSize());
+        assertEquals(52, deck.deckSize());
     }
 
     @Test
     void testTakeCard() {
         setUp();
-        Deck.deckCreate();
-        int deckSize = Deck.deckSize();
+        int deckSize = deck.deckSize();
 
         deck.takeCard();
-        assertEquals(deckSize - 1, Deck.deckSize());
+        assertEquals(deckSize - 1, deck.deckSize());
     }
 
     @Test
     void deckSize() {
         setUp();
-        Deck.deckCreate();
-        assertEquals(52, Deck.deckSize());
+        assertEquals(52, deck.deckSize());
     }
 
     @Test
     void testIsEmpty() {
         setUp();
-        assertFalse(Deck.isEmpty());
+        assertFalse(deck.isEmpty());
 
-        while (!Deck.isEmpty()) {
+        while (!deck.isEmpty()) {
             deck.takeCard();
         }
 
-        assertTrue(Deck.isEmpty());
+        assertTrue(deck.isEmpty());
     }
 }

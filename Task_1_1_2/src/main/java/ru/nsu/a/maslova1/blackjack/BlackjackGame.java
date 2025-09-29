@@ -13,6 +13,7 @@ public class BlackjackGame {
 
     private final Dealer dealer;
     private final ConsoleOutput output;
+    private final Deck deck;
     private final Player player;
 
     /**
@@ -22,9 +23,9 @@ public class BlackjackGame {
      */
     public BlackjackGame(ConsoleOutput output) {
         this.output = output;
-
-        dealer = new Dealer(output);
-        player = new Player(output);
+        deck = new Deck(output);
+        dealer = new Dealer(output, deck);
+        player = new Player(output, deck);
     }
 
     /**
@@ -32,8 +33,6 @@ public class BlackjackGame {
      */
     public void start() {
         output.showWelcomeMessage();
-
-        Deck.deckCreate();
 
         output.showDeckCreated();
 
@@ -94,7 +93,6 @@ public class BlackjackGame {
      */
     private void endGame() {
         output.showFinalResult(dealerPoint, playerPoint);
-        System.exit(0);
     }
 
     /**

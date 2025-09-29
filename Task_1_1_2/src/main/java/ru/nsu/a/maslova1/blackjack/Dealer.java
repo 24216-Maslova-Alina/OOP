@@ -16,9 +16,9 @@ public class Dealer {
      *
      * @param output вывод информации об игре
      */
-    public Dealer(ConsoleOutput output) {
+    public Dealer(ConsoleOutput output, Deck deck) {
         this.output = output;
-        this.deck = new Deck(output);
+        this.deck = deck;
     }
 
     /**

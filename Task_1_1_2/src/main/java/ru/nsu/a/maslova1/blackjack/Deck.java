@@ -9,17 +9,18 @@ import java.util.List;
  */
 public class Deck {
 
-    private static List<Card> cards;
+    private List<Card> cards;
     private final ConsoleOutput output;
 
     public Deck(ConsoleOutput output) {
         this.output = output;
+        this.deckCreate();
     }
 
     /**
      * Создание колоды.
      */
-    public static void deckCreate() {
+    private void deckCreate() {
         cards = new ArrayList<>();
         for (Suit suit : Suit.values()) {
             for (Rank rank : Rank.values()) {
@@ -35,9 +36,9 @@ public class Deck {
      * @return верхняя карта из колоды
      */
     public Card takeCard() {
-        if (Deck.isEmpty()) {
+        if (this.isEmpty()) {
             output.showNewDeckCreated();
-            Deck.deckCreate();
+            this.deckCreate();
         }
         return cards.remove(0);
     }
@@ -47,7 +48,7 @@ public class Deck {
      *
      * @return размер колоды
      */
-    public static int deckSize() {
+    public int deckSize() {
         return cards.size();
     }
 
@@ -56,7 +57,7 @@ public class Deck {
      *
      * @return true если да, false если нет
      */
-    public static boolean isEmpty() {
+    public boolean isEmpty() {
         return cards.isEmpty();
     }
 }

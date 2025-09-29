@@ -11,14 +11,15 @@ import org.junit.jupiter.api.Test;
 class PlayerTest {
     private Player player;
     private Dealer dealer;
+    private Deck deck;
     private ConsoleOutput output;
 
     @BeforeEach
     void setUp() {
         output = new ConsoleOutput();
-        player = new Player(output);
-        dealer = new Dealer(output);
-        Deck.deckCreate();
+        deck = new Deck(output);
+        player = new Player(output, deck);
+        dealer = new Dealer(output, deck);
         BlackjackGame.dealerPoint = 0;
         BlackjackGame.playerPoint = 0;
     }

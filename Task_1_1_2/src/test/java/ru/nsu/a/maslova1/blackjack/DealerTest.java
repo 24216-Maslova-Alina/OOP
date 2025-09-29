@@ -12,28 +12,29 @@ import org.junit.jupiter.api.Test;
 class DealerTest {
     private Dealer dealer;
     private Player player;
+    private Deck deck;
     private ConsoleOutput output;
 
     @BeforeEach
     void setUp() {
         output = new ConsoleOutput();
-        dealer = new Dealer(output);
-        player = new Player(output);
+        deck = new Deck(output);
+        dealer = new Dealer(output, deck);
+        player = new Player(output, deck);
 
         // Очищаем карты перед каждым тестом
         player.clearCards();
         dealer.clearCards();
-        Deck.deckCreate(); // Пересоздаем колоду
     }
 
     @Test
     void testDistributionCard() {
-        final int deckSize = Deck.deckSize();
+        final int deckSize = deck.deckSize();
         dealer.distributionCard(player);
 
         assertEquals(2, player.getPlayerCards().size());
         assertEquals(2, dealer.getDealerCards().size());
-        assertEquals(deckSize - 4, Deck.deckSize());
+        assertEquals(deckSize - 4, deck.deckSize());
 
         assertNotEquals(dealer.getDealerCards().get(0), dealer.getDealerCards().get(1));
         assertNotEquals(player.getPlayerCards().get(0), player.getPlayerCards().get(1));

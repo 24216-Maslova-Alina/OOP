@@ -18,9 +18,9 @@ public class Player {
      *
      * @param output вывод информации об игре
      */
-    public Player(ConsoleOutput output) {
+    public Player(ConsoleOutput output, Deck deck) {
         this.output = output;
-        this.deck = new Deck(output);
+        this.deck = deck;
     }
 
     /**
