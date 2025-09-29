@@ -108,7 +108,27 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#playerMove()" class="member-name-link">playerMove</a>()</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#addCard(ru.nsu.a.maslova1.blackjack.Card)" class="member-name-link">addCard</a><wbr>(<a href="Card.html" title="class in ru.nsu.a.maslova1.blackjack">Card</a>&nbsp;card)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Добавляет карту игроку при раздаче.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#calculatePoints()" class="member-name-link">calculatePoints</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Подсчёт количества очков игрока.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#clearCards()" class="member-name-link">clearCards</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Очищает карты игрока для нового раунда.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="Card.html" title="class in ru.nsu.a.maslova1.blackjack">Card</a>&gt;</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getPlayerCards()" class="member-name-link">getPlayerCards</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Возвращает копию карт игрока.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#playerMove(ru.nsu.a.maslova1.blackjack.Dealer)" class="member-name-link">playerMove</a><wbr>(<a href="Dealer.html" title="class in ru.nsu.a.maslova1.blackjack">Dealer</a>&nbsp;dealer)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Управляет ходом игрока в раунде Блэкджека.</div>
 </div>
@@ -149,13 +169,41 @@ loadScripts(document, 'script');</script>
 <h2>Method Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="playerMove()">
+<section class="detail" id="playerMove(ru.nsu.a.maslova1.blackjack.Dealer)">
 <h3>playerMove</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">playerMove</span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">playerMove</span><wbr><span class="parameters">(<a href="Dealer.html" title="class in ru.nsu.a.maslova1.blackjack">Dealer</a>&nbsp;dealer)</span></div>
 <div class="block">Управляет ходом игрока в раунде Блэкджека.
  Предлагает игроку выбор: взять карту или остановиться.
  Обрабатывает ввод пользователя, добавляет карты в руку игрока,
  проверяет условия перебора и блэкджека.</div>
+</section>
+</li>
+<li>
+<section class="detail" id="addCard(ru.nsu.a.maslova1.blackjack.Card)">
+<h3>addCard</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">addCard</span><wbr><span class="parameters">(<a href="Card.html" title="class in ru.nsu.a.maslova1.blackjack">Card</a>&nbsp;card)</span></div>
+<div class="block">Добавляет карту игроку при раздаче.</div>
+</section>
+</li>
+<li>
+<section class="detail" id="clearCards()">
+<h3>clearCards</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">clearCards</span>()</div>
+<div class="block">Очищает карты игрока для нового раунда.</div>
+</section>
+</li>
+<li>
+<section class="detail" id="calculatePoints()">
+<h3>calculatePoints</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">calculatePoints</span>()</div>
+<div class="block">Подсчёт количества очков игрока.</div>
+</section>
+</li>
+<li>
+<section class="detail" id="getPlayerCards()">
+<h3>getPlayerCards</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="Card.html" title="class in ru.nsu.a.maslova1.blackjack">Card</a>&gt;</span>&nbsp;<span class="element-name">getPlayerCards</span>()</div>
+<div class="block">Возвращает копию карт игрока.</div>
 </section>
 </li>
 </ul>

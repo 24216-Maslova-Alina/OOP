@@ -53,6 +53,14 @@ loadScripts(document, 'script');</script>
 <dl class="index">
 <dt><a href="ru/nsu/a/maslova1/blackjack/Rank.html#ACE" class="member-name-link">ACE</a> - Enum constant in enum class ru.nsu.a.maslova1.blackjack.<a href="ru/nsu/a/maslova1/blackjack/Rank.html" title="enum class in ru.nsu.a.maslova1.blackjack">Rank</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="ru/nsu/a/maslova1/blackjack/Player.html#addCard(ru.nsu.a.maslova1.blackjack.Card)" class="member-name-link">addCard(Card)</a> - Method in class ru.nsu.a.maslova1.blackjack.<a href="ru/nsu/a/maslova1/blackjack/Player.html" title="class in ru.nsu.a.maslova1.blackjack">Player</a></dt>
+<dd>
+<div class="block">Добавляет карту игроку при раздаче.</div>
+</dd>
+<dt><a href="ru/nsu/a/maslova1/blackjack/Dealer.html#addCardToDealer(ru.nsu.a.maslova1.blackjack.Card)" class="member-name-link">addCardToDealer(Card)</a> - Method in class ru.nsu.a.maslova1.blackjack.<a href="ru/nsu/a/maslova1/blackjack/Dealer.html" title="class in ru.nsu.a.maslova1.blackjack">Dealer</a></dt>
+<dd>
+<div class="block">Добавляет карту дилеру (для тестов).</div>
+</dd>
 </dl>
 <h2 class="title" id="I:B">B</h2>
 <dl class="index">
@@ -67,9 +75,13 @@ loadScripts(document, 'script');</script>
 </dl>
 <h2 class="title" id="I:C">C</h2>
 <dl class="index">
-<dt><a href="ru/nsu/a/maslova1/blackjack/Dealer.html#calculatePoints(java.util.List)" class="member-name-link">calculatePoints(List&lt;Card&gt;)</a> - Method in class ru.nsu.a.maslova1.blackjack.<a href="ru/nsu/a/maslova1/blackjack/Dealer.html" title="class in ru.nsu.a.maslova1.blackjack">Dealer</a></dt>
+<dt><a href="ru/nsu/a/maslova1/blackjack/Dealer.html#calculatePoints()" class="member-name-link">calculatePoints()</a> - Method in class ru.nsu.a.maslova1.blackjack.<a href="ru/nsu/a/maslova1/blackjack/Dealer.html" title="class in ru.nsu.a.maslova1.blackjack">Dealer</a></dt>
 <dd>
-<div class="block">Подсчёт количества очков.</div>
+<div class="block">Подсчёт количества очков дилера.</div>
+</dd>
+<dt><a href="ru/nsu/a/maslova1/blackjack/Player.html#calculatePoints()" class="member-name-link">calculatePoints()</a> - Method in class ru.nsu.a.maslova1.blackjack.<a href="ru/nsu/a/maslova1/blackjack/Player.html" title="class in ru.nsu.a.maslova1.blackjack">Player</a></dt>
+<dd>
+<div class="block">Подсчёт количества очков игрока.</div>
 </dd>
 <dt><a href="ru/nsu/a/maslova1/blackjack/Card.html" class="type-name-link" title="class in ru.nsu.a.maslova1.blackjack">Card</a> - Class in <a href="ru/nsu/a/maslova1/blackjack/package-summary.html">ru.nsu.a.maslova1.blackjack</a></dt>
 <dd>
@@ -77,6 +89,14 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="ru/nsu/a/maslova1/blackjack/Card.html#%3Cinit%3E(ru.nsu.a.maslova1.blackjack.Suit,ru.nsu.a.maslova1.blackjack.Rank)" class="member-name-link">Card(Suit, Rank)</a> - Constructor for class ru.nsu.a.maslova1.blackjack.<a href="ru/nsu/a/maslova1/blackjack/Card.html" title="class in ru.nsu.a.maslova1.blackjack">Card</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="ru/nsu/a/maslova1/blackjack/Dealer.html#clearCards()" class="member-name-link">clearCards()</a> - Method in class ru.nsu.a.maslova1.blackjack.<a href="ru/nsu/a/maslova1/blackjack/Dealer.html" title="class in ru.nsu.a.maslova1.blackjack">Dealer</a></dt>
+<dd>
+<div class="block">Очищает карты дилера для нового раунда.</div>
+</dd>
+<dt><a href="ru/nsu/a/maslova1/blackjack/Player.html#clearCards()" class="member-name-link">clearCards()</a> - Method in class ru.nsu.a.maslova1.blackjack.<a href="ru/nsu/a/maslova1/blackjack/Player.html" title="class in ru.nsu.a.maslova1.blackjack">Player</a></dt>
+<dd>
+<div class="block">Очищает карты игрока для нового раунда.</div>
+</dd>
 <dt><a href="ru/nsu/a/maslova1/blackjack/Suit.html#CLUBS" class="member-name-link">CLUBS</a> - Enum constant in enum class ru.nsu.a.maslova1.blackjack.<a href="ru/nsu/a/maslova1/blackjack/Suit.html" title="enum class in ru.nsu.a.maslova1.blackjack">Suit</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="ru/nsu/a/maslova1/blackjack/ConsoleOutput.html" class="type-name-link" title="class in ru.nsu.a.maslova1.blackjack">ConsoleOutput</a> - Class in <a href="ru/nsu/a/maslova1/blackjack/package-summary.html">ru.nsu.a.maslova1.blackjack</a></dt>
@@ -96,9 +116,7 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Конструктор для Dealer.</div>
 </dd>
-<dt><a href="ru/nsu/a/maslova1/blackjack/Dealer.html#DealerCards" class="member-name-link">DealerCards</a> - Static variable in class ru.nsu.a.maslova1.blackjack.<a href="ru/nsu/a/maslova1/blackjack/Dealer.html" title="class in ru.nsu.a.maslova1.blackjack">Dealer</a></dt>
-<dd>&nbsp;</dd>
-<dt><a href="ru/nsu/a/maslova1/blackjack/Dealer.html#dealerPlay()" class="member-name-link">dealerPlay()</a> - Method in class ru.nsu.a.maslova1.blackjack.<a href="ru/nsu/a/maslova1/blackjack/Dealer.html" title="class in ru.nsu.a.maslova1.blackjack">Dealer</a></dt>
+<dt><a href="ru/nsu/a/maslova1/blackjack/Dealer.html#dealerPlay(ru.nsu.a.maslova1.blackjack.Player)" class="member-name-link">dealerPlay(Player)</a> - Method in class ru.nsu.a.maslova1.blackjack.<a href="ru/nsu/a/maslova1/blackjack/Dealer.html" title="class in ru.nsu.a.maslova1.blackjack">Dealer</a></dt>
 <dd>
 <div class="block">Действия дилера при разных ситуациях.</div>
 </dd>
@@ -124,7 +142,7 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="ru/nsu/a/maslova1/blackjack/Suit.html#DIAMONDS" class="member-name-link">DIAMONDS</a> - Enum constant in enum class ru.nsu.a.maslova1.blackjack.<a href="ru/nsu/a/maslova1/blackjack/Suit.html" title="enum class in ru.nsu.a.maslova1.blackjack">Suit</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="ru/nsu/a/maslova1/blackjack/Dealer.html#distributionCard()" class="member-name-link">distributionCard()</a> - Method in class ru.nsu.a.maslova1.blackjack.<a href="ru/nsu/a/maslova1/blackjack/Dealer.html" title="class in ru.nsu.a.maslova1.blackjack">Dealer</a></dt>
+<dt><a href="ru/nsu/a/maslova1/blackjack/Dealer.html#distributionCard(ru.nsu.a.maslova1.blackjack.Player)" class="member-name-link">distributionCard(Player)</a> - Method in class ru.nsu.a.maslova1.blackjack.<a href="ru/nsu/a/maslova1/blackjack/Dealer.html" title="class in ru.nsu.a.maslova1.blackjack">Dealer</a></dt>
 <dd>
 <div class="block">Создание колоды и раздача карт.</div>
 </dd>
@@ -145,6 +163,22 @@ loadScripts(document, 'script');</script>
 </dl>
 <h2 class="title" id="I:G">G</h2>
 <dl class="index">
+<dt><a href="ru/nsu/a/maslova1/blackjack/BlackjackGame.html#getDealer()" class="member-name-link">getDealer()</a> - Method in class ru.nsu.a.maslova1.blackjack.<a href="ru/nsu/a/maslova1/blackjack/BlackjackGame.html" title="class in ru.nsu.a.maslova1.blackjack">BlackjackGame</a></dt>
+<dd>
+<div class="block">Геттер для дилера (для тестов)</div>
+</dd>
+<dt><a href="ru/nsu/a/maslova1/blackjack/Dealer.html#getDealerCards()" class="member-name-link">getDealerCards()</a> - Method in class ru.nsu.a.maslova1.blackjack.<a href="ru/nsu/a/maslova1/blackjack/Dealer.html" title="class in ru.nsu.a.maslova1.blackjack">Dealer</a></dt>
+<dd>
+<div class="block">Возвращает копию карт дилера.</div>
+</dd>
+<dt><a href="ru/nsu/a/maslova1/blackjack/BlackjackGame.html#getPlayer()" class="member-name-link">getPlayer()</a> - Method in class ru.nsu.a.maslova1.blackjack.<a href="ru/nsu/a/maslova1/blackjack/BlackjackGame.html" title="class in ru.nsu.a.maslova1.blackjack">BlackjackGame</a></dt>
+<dd>
+<div class="block">Геттер для игрока (для тестов)</div>
+</dd>
+<dt><a href="ru/nsu/a/maslova1/blackjack/Player.html#getPlayerCards()" class="member-name-link">getPlayerCards()</a> - Method in class ru.nsu.a.maslova1.blackjack.<a href="ru/nsu/a/maslova1/blackjack/Player.html" title="class in ru.nsu.a.maslova1.blackjack">Player</a></dt>
+<dd>
+<div class="block">Возвращает копию карт игрока.</div>
+</dd>
 <dt><a href="ru/nsu/a/maslova1/blackjack/Card.html#getRank()" class="member-name-link">getRank()</a> - Method in class ru.nsu.a.maslova1.blackjack.<a href="ru/nsu/a/maslova1/blackjack/Card.html" title="class in ru.nsu.a.maslova1.blackjack">Card</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="ru/nsu/a/maslova1/blackjack/Rank.html#getRussianName()" class="member-name-link">getRussianName()</a> - Method in enum class ru.nsu.a.maslova1.blackjack.<a href="ru/nsu/a/maslova1/blackjack/Rank.html" title="enum class in ru.nsu.a.maslova1.blackjack">Rank</a></dt>
@@ -214,9 +248,7 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Конструктор для Player.</div>
 </dd>
-<dt><a href="ru/nsu/a/maslova1/blackjack/Dealer.html#PlayerCards" class="member-name-link">PlayerCards</a> - Static variable in class ru.nsu.a.maslova1.blackjack.<a href="ru/nsu/a/maslova1/blackjack/Dealer.html" title="class in ru.nsu.a.maslova1.blackjack">Dealer</a></dt>
-<dd>&nbsp;</dd>
-<dt><a href="ru/nsu/a/maslova1/blackjack/Player.html#playerMove()" class="member-name-link">playerMove()</a> - Method in class ru.nsu.a.maslova1.blackjack.<a href="ru/nsu/a/maslova1/blackjack/Player.html" title="class in ru.nsu.a.maslova1.blackjack">Player</a></dt>
+<dt><a href="ru/nsu/a/maslova1/blackjack/Player.html#playerMove(ru.nsu.a.maslova1.blackjack.Dealer)" class="member-name-link">playerMove(Dealer)</a> - Method in class ru.nsu.a.maslova1.blackjack.<a href="ru/nsu/a/maslova1/blackjack/Player.html" title="class in ru.nsu.a.maslova1.blackjack">Player</a></dt>
 <dd>
 <div class="block">Управляет ходом игрока в раунде Блэкджека.</div>
 </dd>
@@ -241,7 +273,7 @@ loadScripts(document, 'script');</script>
 <dl class="index">
 <dt><a href="ru/nsu/a/maslova1/blackjack/Rank.html#SEVEN" class="member-name-link">SEVEN</a> - Enum constant in enum class ru.nsu.a.maslova1.blackjack.<a href="ru/nsu/a/maslova1/blackjack/Rank.html" title="enum class in ru.nsu.a.maslova1.blackjack">Rank</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="ru/nsu/a/maslova1/blackjack/ConsoleOutput.html#showDealerRevealCard(ru.nsu.a.maslova1.blackjack.Card,ru.nsu.a.maslova1.blackjack.Dealer)" class="member-name-link">showDealerRevealCard(Card, Dealer)</a> - Method in class ru.nsu.a.maslova1.blackjack.<a href="ru/nsu/a/maslova1/blackjack/ConsoleOutput.html" title="class in ru.nsu.a.maslova1.blackjack">ConsoleOutput</a></dt>
+<dt><a href="ru/nsu/a/maslova1/blackjack/ConsoleOutput.html#showDealerRevealCard(ru.nsu.a.maslova1.blackjack.Card,ru.nsu.a.maslova1.blackjack.Dealer,ru.nsu.a.maslova1.blackjack.Player)" class="member-name-link">showDealerRevealCard(Card, Dealer, Player)</a> - Method in class ru.nsu.a.maslova1.blackjack.<a href="ru/nsu/a/maslova1/blackjack/ConsoleOutput.html" title="class in ru.nsu.a.maslova1.blackjack">ConsoleOutput</a></dt>
 <dd>
 <div class="block">Выводит открытие закрытой карты дилера.</div>
 </dd>
@@ -253,7 +285,7 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Выводит сообщение о создании колоды.</div>
 </dd>
-<dt><a href="ru/nsu/a/maslova1/blackjack/ConsoleOutput.html#showDistribution(java.util.List,java.util.List,ru.nsu.a.maslova1.blackjack.Dealer)" class="member-name-link">showDistribution(List&lt;Card&gt;, List&lt;Card&gt;, Dealer)</a> - Method in class ru.nsu.a.maslova1.blackjack.<a href="ru/nsu/a/maslova1/blackjack/ConsoleOutput.html" title="class in ru.nsu.a.maslova1.blackjack">ConsoleOutput</a></dt>
+<dt><a href="ru/nsu/a/maslova1/blackjack/ConsoleOutput.html#showDistribution(java.util.List,java.util.List,ru.nsu.a.maslova1.blackjack.Dealer,ru.nsu.a.maslova1.blackjack.Player)" class="member-name-link">showDistribution(List&lt;Card&gt;, List&lt;Card&gt;, Dealer, Player)</a> - Method in class ru.nsu.a.maslova1.blackjack.<a href="ru/nsu/a/maslova1/blackjack/ConsoleOutput.html" title="class in ru.nsu.a.maslova1.blackjack">ConsoleOutput</a></dt>
 <dd>
 <div class="block">Выводит информацию о раздаче карт.</div>
 </dd>

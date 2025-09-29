@@ -105,8 +105,9 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#showDealerRevealCard(ru.nsu.a.maslova1.blackjack.Card,ru.nsu.a.maslova1.blackjack.Dealer)" class="member-name-link">showDealerRevealCard</a><wbr>(<a href="Card.html" title="class in ru.nsu.a.maslova1.blackjack">Card</a>&nbsp;hiddenCard,
- <a href="Dealer.html" title="class in ru.nsu.a.maslova1.blackjack">Dealer</a>&nbsp;dealer)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#showDealerRevealCard(ru.nsu.a.maslova1.blackjack.Card,ru.nsu.a.maslova1.blackjack.Dealer,ru.nsu.a.maslova1.blackjack.Player)" class="member-name-link">showDealerRevealCard</a><wbr>(<a href="Card.html" title="class in ru.nsu.a.maslova1.blackjack">Card</a>&nbsp;hiddenCard,
+ <a href="Dealer.html" title="class in ru.nsu.a.maslova1.blackjack">Dealer</a>&nbsp;dealer,
+ <a href="Player.html" title="class in ru.nsu.a.maslova1.blackjack">Player</a>&nbsp;player)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Выводит открытие закрытой карты дилера.</div>
 </div>
@@ -121,9 +122,10 @@ loadScripts(document, 'script');</script>
 <div class="block">Выводит сообщение о создании колоды.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#showDistribution(java.util.List,java.util.List,ru.nsu.a.maslova1.blackjack.Dealer)" class="member-name-link">showDistribution</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="Card.html" title="class in ru.nsu.a.maslova1.blackjack">Card</a>&gt;&nbsp;playerCards,
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#showDistribution(java.util.List,java.util.List,ru.nsu.a.maslova1.blackjack.Dealer,ru.nsu.a.maslova1.blackjack.Player)" class="member-name-link">showDistribution</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="Card.html" title="class in ru.nsu.a.maslova1.blackjack">Card</a>&gt;&nbsp;playerCards,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="Card.html" title="class in ru.nsu.a.maslova1.blackjack">Card</a>&gt;&nbsp;dealerCards,
- <a href="Dealer.html" title="class in ru.nsu.a.maslova1.blackjack">Dealer</a>&nbsp;dealer)</code></div>
+ <a href="Dealer.html" title="class in ru.nsu.a.maslova1.blackjack">Dealer</a>&nbsp;dealer,
+ <a href="Player.html" title="class in ru.nsu.a.maslova1.blackjack">Player</a>&nbsp;player)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Выводит информацию о раздаче карт.</div>
 </div>
@@ -241,11 +243,12 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
-<section class="detail" id="showDistribution(java.util.List,java.util.List,ru.nsu.a.maslova1.blackjack.Dealer)">
+<section class="detail" id="showDistribution(java.util.List,java.util.List,ru.nsu.a.maslova1.blackjack.Dealer,ru.nsu.a.maslova1.blackjack.Player)">
 <h3>showDistribution</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">showDistribution</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="Card.html" title="class in ru.nsu.a.maslova1.blackjack">Card</a>&gt;&nbsp;playerCards,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="Card.html" title="class in ru.nsu.a.maslova1.blackjack">Card</a>&gt;&nbsp;dealerCards,
- <a href="Dealer.html" title="class in ru.nsu.a.maslova1.blackjack">Dealer</a>&nbsp;dealer)</span></div>
+ <a href="Dealer.html" title="class in ru.nsu.a.maslova1.blackjack">Dealer</a>&nbsp;dealer,
+ <a href="Player.html" title="class in ru.nsu.a.maslova1.blackjack">Player</a>&nbsp;player)</span></div>
 <div class="block">Выводит информацию о раздаче карт.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
@@ -290,10 +293,11 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
-<section class="detail" id="showDealerRevealCard(ru.nsu.a.maslova1.blackjack.Card,ru.nsu.a.maslova1.blackjack.Dealer)">
+<section class="detail" id="showDealerRevealCard(ru.nsu.a.maslova1.blackjack.Card,ru.nsu.a.maslova1.blackjack.Dealer,ru.nsu.a.maslova1.blackjack.Player)">
 <h3>showDealerRevealCard</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">showDealerRevealCard</span><wbr><span class="parameters">(<a href="Card.html" title="class in ru.nsu.a.maslova1.blackjack">Card</a>&nbsp;hiddenCard,
- <a href="Dealer.html" title="class in ru.nsu.a.maslova1.blackjack">Dealer</a>&nbsp;dealer)</span></div>
+ <a href="Dealer.html" title="class in ru.nsu.a.maslova1.blackjack">Dealer</a>&nbsp;dealer,
+ <a href="Player.html" title="class in ru.nsu.a.maslova1.blackjack">Player</a>&nbsp;player)</span></div>
 <div class="block">Выводит открытие закрытой карты дилера.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
