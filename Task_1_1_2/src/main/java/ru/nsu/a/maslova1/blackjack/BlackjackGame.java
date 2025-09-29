@@ -98,14 +98,14 @@ public class BlackjackGame {
     }
 
     /**
-     * Геттер для дилера (для тестов)
+     * Геттер для дилера (для тестов).
      */
     public Dealer getDealer() {
         return dealer;
     }
 
     /**
-     * Геттер для игрока (для тестов)
+     * Геттер для игрока (для тестов).
      */
     public Player getPlayer() {
         return player;

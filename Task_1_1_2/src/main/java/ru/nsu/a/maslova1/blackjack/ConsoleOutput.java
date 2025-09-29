@@ -37,7 +37,8 @@ public class ConsoleOutput {
      * @param playerCards карты игрока
      * @param dealerCards карты дилера
      */
-    public void showDistribution(List<Card> playerCards, List<Card> dealerCards, Dealer dealer, Player player) {
+    public void showDistribution(List<Card> playerCards, List<Card> dealerCards,
+                                 Dealer dealer, Player player) {
         System.out.print("\tВаши карты: [");
         for (int i = 0; i < playerCards.size(); i++) {
             System.out.print(playerCards.get(i));

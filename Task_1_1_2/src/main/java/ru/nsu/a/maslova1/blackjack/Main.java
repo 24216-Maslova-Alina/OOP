@@ -6,6 +6,7 @@ package ru.nsu.a.maslova1.blackjack;
 public class Main {
     /**
      * Запускает игру.
+     *
      * @param args не вводятся
      */
     public static void main(String[] args) {
