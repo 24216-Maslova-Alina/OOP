@@ -10,7 +10,7 @@ public class Add extends Expression {
     /**
      * Создает операцию сложения двух выражений.
      */
-    public Add(Expression left, Expression right) {
+    public Add (Expression left, Expression right) {
         this.left = left;
         this.right = right;
     }
@@ -19,7 +19,7 @@ public class Add extends Expression {
      * Выводит выражение в формате (левый_операнд + правый_операнд).
      */
     @Override
-    public void print() {
+    public void print () {
         System.out.print("(");
         left.print();
         System.out.print("+");
@@ -32,7 +32,7 @@ public class Add extends Expression {
      * Производная суммы равна сумме производных.
      */
     @Override
-    public Expression derivative(String var) {
+    public Expression derivative (String var) {
         return new Add(left.derivative(var), right.derivative(var));
     }
 
@@ -41,7 +41,7 @@ public class Add extends Expression {
      * Возвращает сумму значений левого и правого выражений.
      */
     @Override
-    public int eval(String var) {
+    public int eval (String var) {
         return left.eval(var) + right.eval(var);
     }
 }

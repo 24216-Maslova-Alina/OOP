@@ -8,15 +8,15 @@ public abstract class Expression {
     /**
      * Выводит выражение в текстовом виде.
      */
-    public abstract void print();
+    public abstract void print ();
 
     /**
      * Вычисляет производную выражения по переменной.
      */
-    public abstract Expression derivative(String var);
+    public abstract Expression derivative (String var);
 
     /**
      * Вычисляет значение выражения для заданных переменных.
      */
-    public abstract int eval(String var);
+    public abstract int eval (String var);
 }

@@ -41,8 +41,8 @@ public class Variable extends Expression {
     @Override
     public int eval(String var) {
         String[] allVar = var.split(";");
-        for(String Var : allVar) {
-            String[] parts = Var.split("=");
+        for (String vars : allVar) {
+            String[] parts = vars.split("=");
             if (parts.length == 2) {
                 String varName = parts[0].trim();
                 String valueStr = parts[1].trim();

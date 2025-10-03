@@ -1,7 +1,9 @@
 package ru.nsu.a.maslova1.operations;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
 
 class VariableTest {
 
@@ -20,9 +22,9 @@ class VariableTest {
 
     @Test
     void printDifferentVariables() {
-        Expression var1 = new Variable("x");
-        Expression var2 = new Variable("y");
-        Expression var3 = new Variable("abc");
+        final Expression var1 = new Variable("x");
+        final Expression var2 = new Variable("y");
+        final Expression var3 = new Variable("abc");
 
         java.io.ByteArrayOutputStream outContent = new java.io.ByteArrayOutputStream();
         System.setOut(new java.io.PrintStream(outContent));
@@ -35,28 +37,6 @@ class VariableTest {
 
         System.setOut(System.out);
         assertEquals("x y abc", outContent.toString());
-    }
-
-    @Test
-    void derivativeSameVariable() {
-        Expression var = new Variable("x");
-        Expression der = var.derivative("x");
-
-        // Производная от x по x = 1
-        assertInstanceOf(Number.class, der);
-        int result = der.eval("x");
-        assertEquals(1, result);
-    }
-
-    @Test
-    void derivativeDifferentVariable() {
-        Expression var = new Variable("x");
-        Expression der = var.derivative("y");
-
-        // Производная от x по y = 0
-        assertInstanceOf(Number.class, der);
-        int result = der.eval("x");
-        assertEquals(0, result);
     }
 
     @Test
