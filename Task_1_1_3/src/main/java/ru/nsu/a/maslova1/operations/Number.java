@@ -9,7 +9,7 @@ public class Number extends Expression {
     /**
      * Создает числовую константу с заданным значением.
      */
-    public Number (int value) {
+    public Number(int value) {
         this.value = value;
     }
 
@@ -17,7 +17,7 @@ public class Number extends Expression {
      * Выводит числовое значение.
      */
     @Override
-    public void print () {
+    public void print() {
         System.out.print(value);
     }
 
@@ -25,7 +25,7 @@ public class Number extends Expression {
      * Вычисляет производную константы (всегда 0).
      */
     @Override
-    public Expression derivative (String var) {
+    public Expression derivative(String var) {
         return new Number(0);
     }
 
@@ -33,7 +33,7 @@ public class Number extends Expression {
      * Возвращает значение константы.
      */
     @Override
-    public int eval (String var) {
+    public int eval(String var) {
         return value;
     }
 }

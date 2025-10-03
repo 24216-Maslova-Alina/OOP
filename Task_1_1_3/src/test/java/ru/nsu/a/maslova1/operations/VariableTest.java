@@ -42,9 +42,9 @@ class VariableTest {
     @Test
     void derivativeMultipleCases() {
         // Проверяем различные комбинации переменных
-        Expression varX = new Variable("x");
-        Expression varY = new Variable("y");
-        Expression varZ = new Variable("z");
+        final Expression varX = new Variable("x");
+        final Expression varY = new Variable("y");
+        final Expression varZ = new Variable("z");
 
         // Производная x по x = 1
         assertEquals(1, varX.derivative("x").eval("x"));

@@ -10,7 +10,7 @@ public class Mul extends Expression {
     /**
      * Создает операцию умножения двух выражений.
      */
-    public Mul (Expression left, Expression right) {
+    public Mul(Expression left, Expression right) {
         this.left = left;
         this.right = right;
     }
@@ -19,7 +19,7 @@ public class Mul extends Expression {
      * Выводит выражение в формате (левый_операнд * правый_операнд).
      */
     @Override
-    public void print () {
+    public void print() {
         System.out.print("(");
         left.print();
         System.out.print("*");
@@ -32,7 +32,7 @@ public class Mul extends Expression {
      * Формула: l'r + lr'
      */
     @Override
-    public Expression derivative (String var) {
+    public Expression derivative(String var) {
         return new Add(new Mul(left.derivative(var), right), new Mul(left, right.derivative(var)));
     }
 
@@ -41,7 +41,7 @@ public class Mul extends Expression {
      * Возвращает произведение значений левого и правого выражений.
      */
     @Override
-    public int eval (String var) {
+    public int eval(String var) {
         return left.eval(var) * right.eval(var);
     }
 }
