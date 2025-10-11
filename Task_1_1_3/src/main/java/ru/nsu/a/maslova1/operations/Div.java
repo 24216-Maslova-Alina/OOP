@@ -46,6 +46,10 @@ public class Div extends Expression {
      */
     @Override
     public int eval(String var) {
-        return left.eval(var) / right.eval(var);
+        int rightValue = right.eval(var);
+        if (rightValue == 0) {
+            throw new RuntimeException("Деление на ноль");
+        }
+        return left.eval(var) / rightValue;
     }
 }

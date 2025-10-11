@@ -27,7 +27,7 @@ public class Variable extends Expression {
      */
     @Override
     public Expression derivative(String var) {
-        if (variable.equals(var))  {
+        if (variable.equals(var)) {
             return new Number(1);
         } else {
             return new Number(0);
@@ -36,22 +36,45 @@ public class Variable extends Expression {
 
     /**
      * Вычисляет значение переменной из строки присваивания.
-     * Формат: "имя=значение" или несколько через точку с запятой.
+     * Формат: "x=5; y=10" (пробелы игнорируются)
      */
     @Override
     public int eval(String var) {
-        String[] allVar = var.split(";");
-        for (String vars : allVar) {
-            String[] parts = vars.split("=");
-            if (parts.length == 2) {
-                String varName = parts[0].trim();
-                String valueStr = parts[1].trim();
+        if (var == null || var.trim().isEmpty()) {
+            throw new RuntimeException("Переменная '" + variable + "' не определена");
+        }
 
-                if (varName.equals(this.variable)) {
+        // Удаляем все пробелы для упрощения парсинга
+        String cleaned = var.replaceAll("\\s+", "");
+        String[] assignments = cleaned.split(";");
+
+        for (String assignment : assignments) {
+            if (assignment.isEmpty()) continue; // Пропускаем пустые присваивания
+
+            String[] parts = assignment.split("=");
+            if (parts.length != 2) {
+                throw new RuntimeException("Некорректный формат присваивания: " + assignment);
+            }
+
+            String varName = parts[0];
+            String valueStr = parts[1];
+
+            if (varName.isEmpty()) {
+                throw new RuntimeException("Пустое имя переменной в присваивании: " + assignment);
+            }
+
+            if (valueStr.isEmpty()) {
+                throw new RuntimeException("Пустое значение переменной в присваивании: " + assignment);
+            }
+
+            if (varName.equals(this.variable)) {
+                try {
                     return Integer.parseInt(valueStr);
+                } catch (NumberFormatException e) {
+                    throw new RuntimeException("Некорректное значение для переменной '" + variable + "': " + valueStr);
                 }
             }
         }
-        return 0;
+        throw new RuntimeException("Переменная '" + variable + "' не определена в строке: " + var);
     }
 }
