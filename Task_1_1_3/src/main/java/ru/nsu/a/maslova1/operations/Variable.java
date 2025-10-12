@@ -38,43 +38,57 @@ public class Variable extends Expression {
      * Вычисляет значение переменной из строки присваивания.
      * Формат: "x=5; y=10" (пробелы игнорируются)
      */
+    /**
+     * Вычисляет значение переменной из строки присваивания.
+     * Формат: "x=5; y=10" (пробелы игнорируются)
+     */
     @Override
     public int eval(String var) {
         if (var == null || var.trim().isEmpty()) {
-            throw new RuntimeException("Переменная '" + variable + "' не определена");
+            throw new IllegalArgumentException("Переменная '" + variable
+                    + "' не определена");
         }
 
-        // Удаляем все пробелы для упрощения парсинга
+        // Убираем все пробелы
         String cleaned = var.replaceAll("\\s+", "");
         String[] assignments = cleaned.split(";");
 
         for (String assignment : assignments) {
-            if (assignment.isEmpty()) continue; // Пропускаем пустые присваивания
+            if (assignment.isEmpty()) continue; // Пропускаем пустые присваивания (;;)
 
             String[] parts = assignment.split("=");
             if (parts.length != 2) {
-                throw new RuntimeException("Некорректный формат присваивания: " + assignment);
+                // Если есть запятая или другие нестандартные разделители - бросаем ошибку
+                if (assignment.contains(",")) {
+                    throw new IllegalArgumentException("Некорректный формат присваивания: используйте ';' как разделитель");
+                }
+                throw new IllegalArgumentException("Некорректный формат присваивания: "
+                        + assignment);
             }
 
             String varName = parts[0];
             String valueStr = parts[1];
 
             if (varName.isEmpty()) {
-                throw new RuntimeException("Пустое имя переменной в присваивании: " + assignment);
+                throw new IllegalArgumentException("Пустое имя переменной в присваивании: "
+                        + assignment);
             }
 
             if (valueStr.isEmpty()) {
-                throw new RuntimeException("Пустое значение переменной в присваивании: " + assignment);
+                throw new IllegalArgumentException("Пустое значение переменной в присваивании: "
+                        + assignment);
             }
 
             if (varName.equals(this.variable)) {
                 try {
                     return Integer.parseInt(valueStr);
                 } catch (NumberFormatException e) {
-                    throw new RuntimeException("Некорректное значение для переменной '" + variable + "': " + valueStr);
+                    throw new NumberFormatException("Некорректное значение для переменной '"
+                            + variable + "': " + valueStr);
                 }
             }
         }
-        throw new RuntimeException("Переменная '" + variable + "' не определена в строке: " + var);
+        throw new IllegalArgumentException("Переменная '" + variable
+                + "' не определена в строке: " + var);
     }
 }

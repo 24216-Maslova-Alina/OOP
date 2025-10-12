@@ -5,6 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
 class MulTest {
 
     @Test
@@ -12,7 +15,7 @@ class MulTest {
         Expression expr = new Mul(new Number(3), new Number(4));
         Expression der = expr.derivative("x");
 
-        // Производная от константа*константа = 0
+        // Производная от константа * константа = 0
         int result = der.eval("x");
         assertEquals(0, result); // (0*4 + 3*0) = 0 + 0 = 0
     }
@@ -68,8 +71,8 @@ class MulTest {
     void printMulWithVariablesTest() {
         Expression expr = new Mul(new Variable("x"), new Variable("y"));
 
-        java.io.ByteArrayOutputStream outContent = new java.io.ByteArrayOutputStream();
-        System.setOut(new java.io.PrintStream(outContent));
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
 
         expr.print();
 
@@ -81,8 +84,8 @@ class MulTest {
     void printMulWithMixedTest() {
         Expression expr = new Mul(new Number(5), new Variable("z"));
 
-        java.io.ByteArrayOutputStream outContent = new java.io.ByteArrayOutputStream();
-        System.setOut(new java.io.PrintStream(outContent));
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
 
         expr.print();
 
@@ -98,8 +101,8 @@ class MulTest {
                 new Mul(new Number(4), new Number(5))
         );
 
-        java.io.ByteArrayOutputStream outContent = new java.io.ByteArrayOutputStream();
-        System.setOut(new java.io.PrintStream(outContent));
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
 
         expr.print();
 
@@ -115,8 +118,8 @@ class MulTest {
                 new Number(2)
         );
 
-        java.io.ByteArrayOutputStream outContent = new java.io.ByteArrayOutputStream();
-        System.setOut(new java.io.PrintStream(outContent));
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
 
         expr.print();
 

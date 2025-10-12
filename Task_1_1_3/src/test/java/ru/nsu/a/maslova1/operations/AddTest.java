@@ -4,6 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
 class AddTest {
 
     @Test
@@ -56,8 +59,8 @@ class AddTest {
     void printAddTest() {
         Expression expr = new Add(new Number(2), new Number(3));
 
-        java.io.ByteArrayOutputStream outContent = new java.io.ByteArrayOutputStream();
-        System.setOut(new java.io.PrintStream(outContent));
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
 
         expr.print();
 
@@ -69,8 +72,8 @@ class AddTest {
     void printAddWithVariablesTest() {
         Expression expr = new Add(new Variable("x"), new Variable("y"));
 
-        java.io.ByteArrayOutputStream outContent = new java.io.ByteArrayOutputStream();
-        System.setOut(new java.io.PrintStream(outContent));
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
 
         expr.print();
 
@@ -82,8 +85,8 @@ class AddTest {
     void printAddWithMixedTest() {
         Expression expr = new Add(new Number(5), new Variable("z"));
 
-        java.io.ByteArrayOutputStream outContent = new java.io.ByteArrayOutputStream();
-        System.setOut(new java.io.PrintStream(outContent));
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
 
         expr.print();
 

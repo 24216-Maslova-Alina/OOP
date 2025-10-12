@@ -16,15 +16,14 @@ public class Parser {
      *
      * @param expression строка с математическим выражением
      * @return корневой узел дерева выражений
-     * @throws RuntimeException если выражение содержит синтаксические ошибки
-     *                          или лишние символы в конце
-     */
+    */
     public Expression parse(String expression) {
         this.input = expression.replaceAll("\\s+", "");
         this.pos = 0;
         Expression result = parseExpression();
         if (pos != input.length()) {
-            throw new RuntimeException("Лишние символы в конце: " + input.substring(pos));
+            throw new IllegalArgumentException("Лишние символы в конце: "
+                    + input.substring(pos));
         }
         return result;
     }
@@ -34,11 +33,10 @@ public class Parser {
      * Определяет тип выражения: скобочное, числовое или переменная.
      *
      * @return разобранное выражение
-     * @throws RuntimeException если достигнут конец строки или встречен неизвестный символ
      */
     private Expression parseExpression() {
         if (pos >= input.length()) {
-            throw new RuntimeException("Неожиданный конец выражения");
+            throw new IllegalArgumentException("Неожиданный конец выражения");
         }
 
         char c = input.charAt(pos);
@@ -49,17 +47,16 @@ public class Parser {
         } else if (Character.isLetter(c) || c == '_') {
             return parseVariable();
         } else {
-            throw new RuntimeException("Неизвестный символ: " + c);
+            throw new IllegalArgumentException("Неизвестный символ: " + c);
         }
     }
 
     /**
      * Разбирает скобочное выражение вида (операнд оператор операнд).
      * Также обрабатывает унарный минус вида (-выражение).
+     * Если внутри скобок только одно выражение, возвращает его без обертки.
      *
      * @return выражение, соответствующее операции в скобках
-     * @throws RuntimeException если отсутствует закрывающая скобка
-     *                          или встречен неизвестный оператор
      */
     private Expression parseParenthesized() {
         consume('(');
@@ -73,8 +70,15 @@ public class Parser {
         }
 
         Expression left = parseExpression();
+
+        // Если после первого выражения сразу закрывающая скобка - возвращаем выражение без обертки
+        if (pos < input.length() && input.charAt(pos) == ')') {
+            consume(')');
+            return left;
+        }
+
         if (pos >= input.length()) {
-            throw new RuntimeException("Ожидался оператор");
+            throw new IllegalArgumentException("Ожидался оператор");
         }
         char op = input.charAt(pos);
         pos++; // пропускаем оператор
@@ -86,7 +90,8 @@ public class Parser {
             case '-' -> new Sub(left, right);
             case '*' -> new Mul(left, right);
             case '/' -> new Div(left, right);
-            default -> throw new RuntimeException("Неизвестный оператор: " + op);
+            default -> throw new IllegalArgumentException("Неизвестный оператор: "
+                    + op);
         };
     }
 
@@ -95,7 +100,6 @@ public class Parser {
      * Поддерживает отрицательные числа (знак минус перед числом).
      *
      * @return выражение Number с числовым значением
-     * @throws NumberFormatException если число не может быть распарсено
      */
     private Expression parseNumber() {
         int start = pos;
@@ -135,12 +139,10 @@ public class Parser {
      * Проверяет, что текущий символ соответствует ожидаемому, и перемещает позицию.
      *
      * @param expected ожидаемый символ
-     * @throws RuntimeException если текущий символ не соответствует ожидаемому
-     *                          или достигнут конец строки
      */
     private void consume(char expected) {
         if (pos >= input.length() || input.charAt(pos) != expected) {
-            throw new RuntimeException("Ожидался символ '" + expected + "'");
+            throw new IllegalArgumentException("Ожидался символ '" + expected + "'");
         }
         pos++;
     }

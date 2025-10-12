@@ -4,6 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
 class DivTest {
 
     @Test
@@ -48,8 +51,8 @@ class DivTest {
     void printDivTest() {
         Expression expr = new Div(new Number(8), new Number(2));
 
-        java.io.ByteArrayOutputStream outContent = new java.io.ByteArrayOutputStream();
-        System.setOut(new java.io.PrintStream(outContent));
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
 
         expr.print();
 
@@ -61,8 +64,8 @@ class DivTest {
     void printDivWithVariablesTest() {
         Expression expr = new Div(new Variable("x"), new Variable("y"));
 
-        java.io.ByteArrayOutputStream outContent = new java.io.ByteArrayOutputStream();
-        System.setOut(new java.io.PrintStream(outContent));
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
 
         expr.print();
 
@@ -74,8 +77,8 @@ class DivTest {
     void printDivWithMixedTest() {
         Expression expr = new Div(new Number(10), new Variable("z"));
 
-        java.io.ByteArrayOutputStream outContent = new java.io.ByteArrayOutputStream();
-        System.setOut(new java.io.PrintStream(outContent));
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
 
         expr.print();
 
@@ -103,8 +106,8 @@ class DivTest {
                 new Div(new Number(4), new Number(2))
         );
 
-        java.io.ByteArrayOutputStream outContent = new java.io.ByteArrayOutputStream();
-        System.setOut(new java.io.PrintStream(outContent));
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
 
         expr.print();
 
