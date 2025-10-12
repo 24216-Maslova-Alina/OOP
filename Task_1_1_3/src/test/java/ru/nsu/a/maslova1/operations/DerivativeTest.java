@@ -44,10 +44,10 @@ class DerivativeTest {
         // f(1) = (1 + 3)³ = 64
         // f'(1) = 3*(1 + 3)² * (2*1 + 3) = 3*16*5 = 240
         try {
-            int fValue = f.eval("x=1");
+            int value = f.eval("x=1");
             int derivativeValue = derivative.eval("x=1");
 
-            assertEquals(64, fValue);
+            assertEquals(64, value);
             // Производная в точке x=1 должна быть 240
             assertEquals(240, derivativeValue);
         } catch (Exception e) {

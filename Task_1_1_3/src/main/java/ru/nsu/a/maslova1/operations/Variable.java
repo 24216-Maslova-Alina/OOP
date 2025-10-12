@@ -38,10 +38,6 @@ public class Variable extends Expression {
      * Вычисляет значение переменной из строки присваивания.
      * Формат: "x=5; y=10" (пробелы игнорируются)
      */
-    /**
-     * Вычисляет значение переменной из строки присваивания.
-     * Формат: "x=5; y=10" (пробелы игнорируются)
-     */
     @Override
     public int eval(String var) {
         if (var == null || var.trim().isEmpty()) {
@@ -54,13 +50,16 @@ public class Variable extends Expression {
         String[] assignments = cleaned.split(";");
 
         for (String assignment : assignments) {
-            if (assignment.isEmpty()) continue; // Пропускаем пустые присваивания (;;)
+            if (assignment.isEmpty()) {
+                continue; // Пропускаем пустые присваивания (;;)
+            }
 
             String[] parts = assignment.split("=");
             if (parts.length != 2) {
                 // Если есть запятая или другие нестандартные разделители - бросаем ошибку
                 if (assignment.contains(",")) {
-                    throw new IllegalArgumentException("Некорректный формат присваивания: используйте ';' как разделитель");
+                    throw new IllegalArgumentException("Некорректный формат присваивания: используйте "
+                            + "';' как разделитель");
                 }
                 throw new IllegalArgumentException("Некорректный формат присваивания: "
                         + assignment);

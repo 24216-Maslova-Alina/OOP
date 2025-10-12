@@ -42,7 +42,8 @@ public class Parser {
         char c = input.charAt(pos);
         if (c == '(') {
             return parseParenthesized();
-        } else if (Character.isDigit(c) || (c == '-' && pos + 1 < input.length() && Character.isDigit(input.charAt(pos + 1)))) {
+        } else if (Character.isDigit(c) || (c == '-' && pos + 1 < input.length()
+                && Character.isDigit(input.charAt(pos + 1)))) {
             return parseNumber();
         } else if (Character.isLetter(c) || c == '_') {
             return parseVariable();
@@ -127,8 +128,8 @@ public class Parser {
      */
     private Expression parseVariable() {
         int start = pos;
-        while (pos < input.length() &&
-                (Character.isLetterOrDigit(input.charAt(pos)) || input.charAt(pos) == '_')) {
+        while (pos < input.length()
+                && (Character.isLetterOrDigit(input.charAt(pos)) || input.charAt(pos) == '_')) {
             pos++;
         }
         String name = input.substring(start, pos);

@@ -31,7 +31,8 @@ public class Main {
         derivative.print();
         System.out.println();
 
-        System.out.println("Введите значения переменных в формате: x=5; y=10 (или оставьте пустым):");
+        System.out.println("Введите значения переменных в формате:"
+                + " x=5; y=10 (или оставьте пустым):");
         String variables = scanner.nextLine();
 
         try {
