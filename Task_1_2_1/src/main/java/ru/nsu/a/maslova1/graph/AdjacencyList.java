@@ -1,6 +1,12 @@
 package ru.nsu.a.maslova1.graph;
 
-import java.util.*;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * Реализация графа с использованием списка смежности.
@@ -33,7 +39,7 @@ public class AdjacencyList implements Graph {
     @Override
     public void removeVertex(int vertex) {
         adjList.remove(vertex);
-        for (List<Integer> v: adjList.values()) {
+        for(List<Integer> v : adjList.values()) {
             v.removeIf(neighbor -> (neighbor == vertex));
         }
     }
@@ -46,7 +52,7 @@ public class AdjacencyList implements Graph {
      */
     @Override
     public void addEdge(int from, int to) {
-        if (!adjList.containsKey(from) | !adjList.containsKey(to)) {
+        if (!adjList.containsKey(from) || !adjList.containsKey(to)) {
             throw new IllegalArgumentException("Not all vertices must exist in the graph");
         }
 
@@ -62,7 +68,7 @@ public class AdjacencyList implements Graph {
      */
     @Override
     public void removeEdge(int from, int to) {
-        if (!adjList.containsKey(from) | !adjList.containsKey(to)) {
+        if (!adjList.containsKey(from) || !adjList.containsKey(to)) {
             throw new IllegalArgumentException("Not all vertices must exist in the graph");
         }
 
@@ -86,7 +92,7 @@ public class AdjacencyList implements Graph {
     @Override
     public void outputGraph() {
         System.out.println("Список смежности:");
-        for (Map.Entry<Integer, List<Integer>> graph : adjList.entrySet()){
+        for(Map.Entry<Integer, List<Integer>> graph : adjList.entrySet()){
             System.out.println(graph.getKey() + ": " + graph.getValue());
         }
     }

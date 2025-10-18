@@ -1,9 +1,9 @@
 package ru.nsu.a.maslova1.graph;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Scanner;
@@ -26,15 +26,15 @@ public class Main {
             scanner = new Scanner(new File("test.txt"));
 
             Graph[] graphs = {
-                    new AdjacencyList(),
-                    new AdjacencyMatrix(),
-                    new IncidenceMatrix()
+                new AdjacencyList(),
+                new AdjacencyMatrix(),
+                new IncidenceMatrix()
             };
 
             String[] graphNames = {
-                    "СПИСОК СМЕЖНОСТИ",
-                    "МАТРИЦА СМЕЖНОСТИ",
-                    "МАТРИЦА ИНЦИДЕНТНОСТИ"
+                "СПИСОК СМЕЖНОСТИ",
+                "МАТРИЦА СМЕЖНОСТИ",
+                "МАТРИЦА ИНЦИДЕНТНОСТИ"
             };
 
             Set<Integer> vertices = new HashSet<>();
@@ -42,7 +42,9 @@ public class Main {
 
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine().trim();
-                if (line.isEmpty()) continue;
+                if (line.isEmpty()) {
+                    continue;
+                }
                 lines.add(line);
 
                 String[] parts = line.split(" ");
@@ -53,7 +55,7 @@ public class Main {
             }
             scanner.close();
 
-            for (int i = 0; i < graphs.length; i++) {
+            for(int i = 0; i < graphs.length; i++) {
                 Graph graph = graphs[i];
                 String graphName = graphNames[i];
 
@@ -61,11 +63,11 @@ public class Main {
                 System.out.println("РЕАЛИЗАЦИЯ: " + graphName);
                 System.out.println("=".repeat(50));
 
-                for (int vertex : vertices) {
+                for(int vertex : vertices) {
                     graph.addVertex(vertex);
                 }
 
-                for (String line : lines) {
+                for(String line : lines) {
                     String[] parts = line.split(" ");
                     if (parts.length == 2) {
                         try {
@@ -83,7 +85,7 @@ public class Main {
 
                 // Сравнение с другими графами
                 System.out.println("\nСравнение с другими реализациями:");
-                for (int j = 0; j < i; j++) {
+                for(int j = 0; j < i; j++) {
                     boolean areEqual = graph.equals(graphs[j]);
                     System.out.println(graphName + " == " + graphNames[j] + ": " + areEqual);
                 }
@@ -96,10 +98,9 @@ public class Main {
                     System.out.println("Топологическая сортировка невозможна: " + e.getMessage());
                 }
 
-// Или с DFS
                 try {
-                    List<Integer> topologicalOrderDFS = TopologicalSort.topologicalSort(graph);
-                    System.out.println("Топологический порядок (DFS): " + topologicalOrderDFS);
+                    List<Integer> topologicalOrderdfs = TopologicalSort.topologicalSort(graph);
+                    System.out.println("Топологический порядок (DFS): " + topologicalOrderdfs);
                 } catch (IllegalArgumentException e) {
                     System.out.println("Топологическая сортировка невозможна: " + e.getMessage());
                 }
@@ -110,7 +111,7 @@ public class Main {
                 List<Integer> sortedVertices = new ArrayList<>(vertices);
                 Collections.sort(sortedVertices);
 
-                for (int vertex : sortedVertices) {
+                for(int vertex : sortedVertices) {
                     List<Integer> neighbors = graph.getNeighbors(vertex);
                     System.out.println("Вершина " + vertex + ": " + neighbors);
                 }

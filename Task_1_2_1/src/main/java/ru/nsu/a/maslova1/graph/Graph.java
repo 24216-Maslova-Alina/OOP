@@ -67,7 +67,9 @@ public interface Graph {
      * @return true если графы идентичны, false в противном случае
      */
     default boolean equals(Graph otherGraph) {
-        if (otherGraph == null) return false;
+        if (otherGraph == null) {
+            return false;
+        }
 
         Set<Integer> thisVertices = this.getAllVertices();
         Set<Integer> otherVertices = otherGraph.getAllVertices();
@@ -76,47 +78,16 @@ public interface Graph {
             return false;
         }
 
-        for (int vertex : thisVertices) {
+        for(int vertex : thisVertices) {
             List<Integer> thisNeighbors = this.getNeighbors(vertex);
             List<Integer> otherNeighbors = otherGraph.getNeighbors(vertex);
 
-            if (!new HashSet<>(thisNeighbors).containsAll(otherNeighbors) ||
-                    !new HashSet<>(otherNeighbors).containsAll(thisNeighbors)) {
+            if (!new HashSet<>(thisNeighbors).containsAll(otherNeighbors)
+                    || !new HashSet<>(otherNeighbors).containsAll(thisNeighbors)) {
                 return false;
             }
         }
 
         return true;
-    }
-
-    /**
-     * Возвращает тип реализации графа.
-     *
-     * @return название типа графа
-     */
-    default String getGraphType() {
-        return this.getClass().getSimpleName();
-    }
-
-    /**
-     * Возвращает количество вершин в графе.
-     *
-     * @return количество вершин
-     */
-    default int getVertexCount() {
-        return getAllVertices().size();
-    }
-
-    /**
-     * Возвращает количество ребер в графе.
-     *
-     * @return количество ребер
-     */
-    default int getEdgeCount() {
-        int edgeCount = 0;
-        for (int vertex : getAllVertices()) {
-            edgeCount += getNeighbors(vertex).size();
-        }
-        return edgeCount / 2; // Для ненаправленного графа
     }
 }
