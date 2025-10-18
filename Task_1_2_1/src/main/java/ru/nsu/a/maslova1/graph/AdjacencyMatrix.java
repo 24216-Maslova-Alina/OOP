@@ -11,6 +11,12 @@ import java.util.Set;
  * указывает на наличие ребра между вершинами i и j.
  */
 public class AdjacencyMatrix implements Graph {
+
+    public AdjacencyMatrix() {
+        this.vertexSet = new HashSet<>();
+        this.vertexCount = 0;
+    }
+
     private int[][] matrix;
     private int vertexCount;
     private Set<Integer> vertexSet = new HashSet<>();
@@ -147,12 +153,29 @@ public class AdjacencyMatrix implements Graph {
     /**
      * Выводит граф в заданном формате.
      * Реализация метода зависит от конкретных требований к выводу.
-     *
-     * @param graph матрица представления графа для вывода
      */
     @Override
-    public void outputGragh(int[][] graph) {
+    public void outputGraph() {
+        System.out.println("Матрица смежности:");
+        System.out.print("   ");
+        for (int v : vertexSet) {
+            System.out.print(v + " ");
+        }
+        System.out.println();
 
+        for(int i = 0; i < vertexCount; i++) {
+            int vertex = getVertexByIndex(i);
+            System.out.print(vertex + ": ");
+            for (int j = 0; j < vertexCount; j++) {
+                System.out.print(matrix[i][j] + " ");
+            }
+            System.out.println();
+        }
+    }
+
+    @Override
+    public Set<Integer> getAllVertices() {
+        return  new HashSet<>(vertexSet);
     }
 
     /**

@@ -12,6 +12,13 @@ import java.util.Set;
  * 0 - не инцидентна, 1 - инцидентна, 2 - петля (вершина соединена сама с собой).
  */
 public class IncidenceMatrix implements Graph {
+
+    public IncidenceMatrix() {
+        this.vertexSet = new HashSet<>();
+        this.vertexCount = 0;
+        this.edgeCount = 0;
+    }
+
     private int[][] matrix;
     private int vertexCount;
     private int edgeCount;
@@ -84,7 +91,6 @@ public class IncidenceMatrix implements Graph {
      *
      * @param from идентификатор исходной вершины
      * @param to идентификатор конечной вершины
-     * @throws IllegalArgumentException если одна или обе вершины не существуют в графе
      */
     @Override
     public void addEdge(int from, int to) {
@@ -119,7 +125,6 @@ public class IncidenceMatrix implements Graph {
      *
      * @param from идентификатор исходной вершины
      * @param to идентификатор конечной вершины
-     * @throws IllegalArgumentException если одна или обе вершины не существуют в графе
      */
     @Override
     public void removeEdge(int from, int to) {
@@ -196,13 +201,31 @@ public class IncidenceMatrix implements Graph {
     /**
      * Выводит граф в заданном формате.
      * Реализация метода зависит от конкретных требований к выводу.
-     *
-     * @param graph матрица представления графа для вывода
      */
-    @Override
-    public void outputGragh(int[][] graph) {
+    public void outputGraph() {
+        System.out.println("Матрица смежности:");
+        System.out.print("   ");
 
+        for (int v : vertexSet) {
+            System.out.print(v + " ");
+        }
+        System.out.println();
+
+        for(int i = 0; i < vertexCount; i++) {
+            int vertex = getVertexByIndex(i);
+            System.out.print(vertex + ": ");
+            for (int j = 0; j < vertexCount; j++) {
+                System.out.print(matrix[i][j] + " ");
+            }
+            System.out.println();
+        }
     }
+
+    @Override
+    public Set<Integer> getAllVertices() {
+        return new HashSet<>(vertexSet);
+    }
+
 
     /**
      * Возвращает индекс вершины в матрице инцидентности по ее идентификатору.
@@ -226,7 +249,6 @@ public class IncidenceMatrix implements Graph {
      *
      * @param index индекс вершины в матрице инцидентности
      * @return идентификатор вершины
-     * @throws IllegalArgumentException если индекс выходит за пределы допустимого диапазона
      */
     private int getVertexByIndex(int index) {
         int current = 0;
