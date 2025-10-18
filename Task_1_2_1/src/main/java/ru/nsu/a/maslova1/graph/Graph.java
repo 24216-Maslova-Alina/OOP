@@ -78,7 +78,7 @@ public interface Graph {
             return false;
         }
 
-        for(int vertex : thisVertices) {
+        for (int vertex : thisVertices) {
             List<Integer> thisNeighbors = this.getNeighbors(vertex);
             List<Integer> otherNeighbors = otherGraph.getNeighbors(vertex);
 

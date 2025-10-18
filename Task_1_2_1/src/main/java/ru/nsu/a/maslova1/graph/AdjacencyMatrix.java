@@ -38,7 +38,7 @@ public class AdjacencyMatrix implements Graph {
         int[][] newMatrix = new int[vertexCount + 1][vertexCount + 1];
 
         if (matrix != null) {
-            for(int i = 0; i < vertexCount; i++) {
+            for  (int i = 0; i < vertexCount; i++) {
                 System.arraycopy(matrix[i], 0, newMatrix[i], 0, vertexCount);
             }
         }
@@ -64,11 +64,11 @@ public class AdjacencyMatrix implements Graph {
         int vertexIndex = getVertexIndex(vertex);
         int[][] newMatrix = new int[vertexCount - 1][vertexCount - 1];
 
-        for(int i = 0, newI = 0; i < vertexCount; i++) {
+        for (int i = 0, newI = 0; i < vertexCount; i++) {
             if (i == vertexIndex) {
                 continue;
             }
-            for(int j = 0, newJ = 0; j < vertexCount; j++) {
+            for (int j = 0, newJ = 0; j < vertexCount; j++) {
                 if (j == vertexIndex) {
                     continue;
                 }
@@ -141,7 +141,7 @@ public class AdjacencyMatrix implements Graph {
         List<Integer> neighbors = new ArrayList<>();
         int vertexIndex = getVertexIndex(vertex);
 
-        for(int i = 0; i < vertexCount; i++) {
+        for (int i = 0; i < vertexCount; i++) {
             if (matrix[vertexIndex][i] == 1) {
                 int neighbor = getVertexByIndex(i);
                 neighbors.add(neighbor);
@@ -158,15 +158,15 @@ public class AdjacencyMatrix implements Graph {
     public void outputGraph() {
         System.out.println("Матрица смежности:");
         System.out.print("   ");
-        for(int v : vertexSet) {
+        for (int v : vertexSet) {
             System.out.print(v + " ");
         }
         System.out.println();
 
-        for(int i = 0; i < vertexCount; i++) {
+        for (int i = 0; i < vertexCount; i++) {
             int vertex = getVertexByIndex(i);
             System.out.print(vertex + ": ");
-            for(int j = 0; j < vertexCount; j++) {
+            for( int j = 0; j < vertexCount; j++) {
                 System.out.print(matrix[i][j] + " ");
             }
             System.out.println();
@@ -186,7 +186,7 @@ public class AdjacencyMatrix implements Graph {
      */
     private int getVertexByIndex(int index) {
         int current = 0;
-        for(int v : vertexSet) {
+        for (int v : vertexSet) {
             if (current == index) {
                 return v;
             }
@@ -203,7 +203,7 @@ public class AdjacencyMatrix implements Graph {
      */
     private int getVertexIndex(int vertex) {
         int index = 0;
-        for(int v : vertexSet) {
+        for (int v : vertexSet) {
             if (v == vertex) {
                 return index;
             }

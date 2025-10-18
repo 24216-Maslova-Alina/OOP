@@ -26,7 +26,7 @@ public class TopologicalSort {
 
         calculateInDegree(graph, inDegree);
 
-        for(Map.Entry<Integer, Integer> entry : inDegree.entrySet()) {
+        for (Map.Entry<Integer, Integer> entry : inDegree.entrySet()) {
             if (entry.getValue() == 0) {
                 queue.offer(entry.getKey());
             }
@@ -36,7 +36,7 @@ public class TopologicalSort {
             int current = queue.poll();
             result.add(current);
 
-            for(int neighbor : graph.getNeighbors(current)) {
+            for (int neighbor : graph.getNeighbors(current)) {
                 inDegree.put(neighbor, inDegree.get(neighbor) - 1);
                 if (inDegree.get(neighbor) == 0) {
                     queue.offer(neighbor);
@@ -59,12 +59,12 @@ public class TopologicalSort {
      * @param inDegree карта для хранения полустепеней захода
      */
     private static void calculateInDegree(Graph graph, Map<Integer, Integer> inDegree) {
-        for(int vertex : graph.getAllVertices()) {
+        for (int vertex : graph.getAllVertices()) {
             inDegree.put(vertex, 0);
         }
 
-        for(int vertex : graph.getAllVertices()) {
-            for(int neighbor : graph.getNeighbors(vertex)) {
+        for (int vertex : graph.getAllVertices()) {
+            for (int neighbor : graph.getNeighbors(vertex)) {
                 inDegree.put(neighbor, inDegree.get(neighbor) + 1);
             }
         }

@@ -92,7 +92,7 @@ public class AdjacencyList implements Graph {
     @Override
     public void outputGraph() {
         System.out.println("Список смежности:");
-        for(Map.Entry<Integer, List<Integer>> graph : adjList.entrySet()){
+        for (Map.Entry<Integer, List<Integer>> graph : adjList.entrySet()){
             System.out.println(graph.getKey() + ": " + graph.getValue());
         }
     }

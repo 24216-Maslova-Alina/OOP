@@ -55,7 +55,7 @@ public class Main {
             }
             scanner.close();
 
-            for(int i = 0; i < graphs.length; i++) {
+            for (int i = 0; i < graphs.length; i++) {
                 Graph graph = graphs[i];
                 String graphName = graphNames[i];
 
@@ -63,11 +63,11 @@ public class Main {
                 System.out.println("РЕАЛИЗАЦИЯ: " + graphName);
                 System.out.println("=".repeat(50));
 
-                for(int vertex : vertices) {
+                for (int vertex : vertices) {
                     graph.addVertex(vertex);
                 }
 
-                for(String line : lines) {
+                for (String line : lines) {
                     String[] parts = line.split(" ");
                     if (parts.length == 2) {
                         try {
@@ -85,7 +85,7 @@ public class Main {
 
                 // Сравнение с другими графами
                 System.out.println("\nСравнение с другими реализациями:");
-                for(int j = 0; j < i; j++) {
+                for (int j = 0; j < i; j++) {
                     boolean areEqual = graph.equals(graphs[j]);
                     System.out.println(graphName + " == " + graphNames[j] + ": " + areEqual);
                 }
@@ -111,7 +111,7 @@ public class Main {
                 List<Integer> sortedVertices = new ArrayList<>(vertices);
                 Collections.sort(sortedVertices);
 
-                for(int vertex : sortedVertices) {
+                for (int vertex : sortedVertices) {
                     List<Integer> neighbors = graph.getNeighbors(vertex);
                     System.out.println("Вершина " + vertex + ": " + neighbors);
                 }
