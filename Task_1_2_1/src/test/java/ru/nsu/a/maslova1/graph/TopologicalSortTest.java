@@ -1,8 +1,11 @@
 package ru.nsu.a.maslova1.graph;
 
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.util.List;
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 class TopologicalSortTest {
 
@@ -114,9 +117,9 @@ class TopologicalSortTest {
     void testTopologicalSortWithDifferentGraphImplementations() {
         // Проверяем, что алгоритм работает с разными реализациями графа
         Graph[] graphs = {
-                new AdjacencyList(),
-                new AdjacencyMatrix(),
-                new IncidenceMatrix()
+            new AdjacencyList(),
+            new AdjacencyMatrix(),
+            new IncidenceMatrix()
         };
 
         for (Graph graph : graphs) {

@@ -96,8 +96,8 @@ public class IncidenceMatrix implements Graph {
     @Override
     public void addEdge(int from, int to) {
         if (!vertexSet.contains(from) || !vertexSet.contains(to)) {
-            throw new IllegalArgumentException("Not all vertices must " +
-                    "exist in the graph");
+            throw new IllegalArgumentException("Not all vertices must "
+                    + "exist in the graph");
         }
 
         int[][] newMatrix = new int[vertexCount][edgeCount + 1];
@@ -152,7 +152,8 @@ public class IncidenceMatrix implements Graph {
             if (isEdge) {
                 int[][] newMatrix = new int[vertexCount][edgeCount - 1];
 
-                for (int i = 0; i < vertexCount; i++) {
+                for(int i = 0; i < vertexCount; i++) {
+
                     for(int j = 0, newJ = 0; j < edgeCount; j++) {
                         if (j != edgeIndex) {
                             newMatrix[i][newJ] = matrix[i][j];
@@ -215,9 +216,10 @@ public class IncidenceMatrix implements Graph {
         }
         System.out.println();
 
-        for (int i = 0; i < vertexCount; i++) {
+        for(int i = 0; i < vertexCount; i++) {
             int vertex = getVertexByIndex(i);
             System.out.print(vertex + ": ");
+
             for(int j = 0; j < edgeCount; j++) {
                 System.out.print(matrix[i][j] + "  ");
             }
@@ -227,6 +229,7 @@ public class IncidenceMatrix implements Graph {
 
     /**
      * Возвращает множество всех вершин графа.
+     *
      * @return все вершины графа
      */
     @Override
@@ -236,6 +239,7 @@ public class IncidenceMatrix implements Graph {
 
     /**
      * Возвращает множество исходящих соседей.
+     *
      * @param vertex вершина
      * @return исходящие соседи
      */
@@ -248,10 +252,11 @@ public class IncidenceMatrix implements Graph {
         int vertexIndex = getVertexIndex(vertex);
 
         List<Integer> neighborsOut = new ArrayList<>();
-        for (int j = 0; j < edgeCount; j++) {
+        for(int j = 0; j < edgeCount; j++) {
             if (matrix[vertexIndex][j] == 1 || matrix[vertexIndex][j] == 2) {
-                for (int i = 0; i < vertexCount; i++) {
-                    if (matrix[vertexIndex][j] == 1 && i != vertexIndex && matrix[i][j] == -1 ) {
+
+                for(int i = 0; i < vertexCount; i++) {
+                    if (matrix[vertexIndex][j] == 1 && i != vertexIndex && matrix[i][j] == -1) {
                         int neighbor = getVertexByIndex(i);
                         neighborsOut.add(neighbor);
                     }
@@ -307,7 +312,9 @@ public class IncidenceMatrix implements Graph {
      */
     private void removeExcessEdge() {
         for (int edgeIndex = edgeCount - 1; edgeIndex >= 0; edgeIndex--) {
-            int startCount = 0, endCount = 0;
+            int startCount = 0;
+            int endCount = 0;
+
             for (int i = 0; i < vertexCount; i++) {
                 if (matrix[i][edgeIndex] == 2) {
                     startCount++;

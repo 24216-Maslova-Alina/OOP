@@ -62,6 +62,7 @@ public interface Graph {
 
     /**
      * Возвращает множество исходящих соседей.
+     *
      * @param vertex вершина
      * @return исходящие соседи
      */

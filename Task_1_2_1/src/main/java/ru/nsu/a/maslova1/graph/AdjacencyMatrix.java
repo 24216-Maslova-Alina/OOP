@@ -185,6 +185,7 @@ public class AdjacencyMatrix implements Graph {
 
     /**
      * Возвращает множество всех вершин графа.
+     *
      * @return все вершины графа
      */
     @Override
@@ -194,6 +195,7 @@ public class AdjacencyMatrix implements Graph {
 
     /**
      * Возвращает множество исходящих соседей.
+     *
      * @param vertex вершина
      * @return исходящие соседи
      */

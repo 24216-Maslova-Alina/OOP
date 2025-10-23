@@ -1,18 +1,22 @@
 package ru.nsu.a.maslova1.graph;
 
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-class GraphEqualsTest {
+import org.junit.jupiter.api.Test;
+
+class GraphTest {
 
     @Test
     void testEqualsSameGraph() {
         Graph graph1 = new AdjacencyList();
-        Graph graph2 = new AdjacencyList();
 
         graph1.addVertex(1);
         graph1.addVertex(2);
         graph1.addEdge(1, 2);
+
+        Graph graph2 = new AdjacencyList();
 
         graph2.addVertex(1);
         graph2.addVertex(2);
@@ -25,7 +29,6 @@ class GraphEqualsTest {
     @Test
     void testEqualsDifferentGraphStructures() {
         Graph graph1 = new AdjacencyList();
-        Graph graph2 = new AdjacencyList();
 
         // Граф 1: 1 -> 2 -> 3
         graph1.addVertex(1);
@@ -33,6 +36,8 @@ class GraphEqualsTest {
         graph1.addVertex(3);
         graph1.addEdge(1, 2);
         graph1.addEdge(2, 3);
+
+        Graph graph2 = new AdjacencyList();
 
         // Граф 2: 1 -> 3, 2 -> 3
         graph2.addVertex(1);
@@ -48,11 +53,12 @@ class GraphEqualsTest {
     @Test
     void testEqualsDifferentVertices() {
         Graph graph1 = new AdjacencyList();
-        Graph graph2 = new AdjacencyList();
 
         graph1.addVertex(1);
         graph1.addVertex(2);
         graph1.addEdge(1, 2);
+
+        Graph graph2 = new AdjacencyList();
 
         graph2.addVertex(1);
         graph2.addVertex(3); // Разные вершины
@@ -65,12 +71,13 @@ class GraphEqualsTest {
     @Test
     void testEqualsDifferentEdgeDirections() {
         Graph graph1 = new AdjacencyList();
-        Graph graph2 = new AdjacencyList();
 
         // Граф 1: 1 -> 2
         graph1.addVertex(1);
         graph1.addVertex(2);
         graph1.addEdge(1, 2);
+
+        Graph graph2 = new AdjacencyList();
 
         // Граф 2: 2 -> 1
         graph2.addVertex(1);
@@ -84,11 +91,12 @@ class GraphEqualsTest {
     @Test
     void testEqualsWithSelfLoops() {
         Graph graph1 = new AdjacencyList();
-        Graph graph2 = new AdjacencyList();
 
         // Граф 1: с петлей
         graph1.addVertex(1);
         graph1.addEdge(1, 1);
+
+        Graph graph2 = new AdjacencyList();
 
         // Граф 2: без петли
         graph2.addVertex(1);
@@ -117,13 +125,14 @@ class GraphEqualsTest {
     @Test
     void testEqualsSameGraphDifferentImplementations() {
         Graph listGraph = new AdjacencyList();
-        Graph matrixGraph = new AdjacencyMatrix();
 
         listGraph.addVertex(1);
         listGraph.addVertex(2);
         listGraph.addVertex(3);
         listGraph.addEdge(1, 2);
         listGraph.addEdge(2, 3);
+
+        Graph matrixGraph = new AdjacencyMatrix();
 
         matrixGraph.addVertex(1);
         matrixGraph.addVertex(2);
@@ -138,7 +147,6 @@ class GraphEqualsTest {
     @Test
     void testEqualsMultipleEdgesSameVertex() {
         Graph graph1 = new AdjacencyList();
-        Graph graph2 = new AdjacencyList();
 
         // Граф 1: 1 -> 2, 1 -> 3
         graph1.addVertex(1);
@@ -146,6 +154,8 @@ class GraphEqualsTest {
         graph1.addVertex(3);
         graph1.addEdge(1, 2);
         graph1.addEdge(1, 3);
+
+        Graph graph2 = new AdjacencyList();
 
         // Граф 2: 1 -> 3, 1 -> 2 (тот же набор рёбер)
         graph2.addVertex(1);
@@ -161,11 +171,12 @@ class GraphEqualsTest {
     @Test
     void testEqualsIsolatedVertices() {
         Graph graph1 = new AdjacencyList();
-        Graph graph2 = new AdjacencyList();
 
         graph1.addVertex(1);
         graph1.addVertex(2);
         graph1.addVertex(3);
+
+        Graph graph2 = new AdjacencyList();
 
         graph2.addVertex(1);
         graph2.addVertex(2);
@@ -188,11 +199,12 @@ class GraphEqualsTest {
     @Test
     void testEqualsSymmetry() {
         Graph graph1 = new AdjacencyList();
-        Graph graph2 = new AdjacencyList();
 
         graph1.addVertex(1);
         graph1.addVertex(2);
         graph1.addEdge(1, 2);
+
+        Graph graph2 = new AdjacencyList();
 
         graph2.addVertex(1);
         graph2.addVertex(2);

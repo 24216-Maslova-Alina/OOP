@@ -107,6 +107,7 @@ public class AdjacencyList implements Graph {
 
     /**
      * Возвращает множество исходящих соседей.
+     *
      * @param vertex вершина
      * @return исходящие соседи
      */
