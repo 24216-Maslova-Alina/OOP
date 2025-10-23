@@ -36,7 +36,7 @@ public class TopologicalSort {
             int current = queue.poll();
             result.add(current);
 
-            for (int neighbor : graph.getNeighbors(current)) {
+            for (int neighbor : graph.getOutgoingNeighbors(current)) {
                 inDegree.put(neighbor, inDegree.get(neighbor) - 1);
                 if (inDegree.get(neighbor) == 0) {
                     queue.offer(neighbor);
@@ -45,8 +45,8 @@ public class TopologicalSort {
         }
 
         if (result.size() != inDegree.size()) {
-            throw new IllegalArgumentException("Граф содержит цикл! " +
-                    "Топологическая сортировка невозможна.");
+            throw new IllegalArgumentException("Граф содержит цикл! "
+                    + "Топологическая сортировка невозможна.");
         }
 
         return result;
@@ -64,7 +64,7 @@ public class TopologicalSort {
         }
 
         for (int vertex : graph.getAllVertices()) {
-            for (int neighbor : graph.getNeighbors(vertex)) {
+            for (int neighbor : graph.getOutgoingNeighbors(vertex)) {
                 inDegree.put(neighbor, inDegree.get(neighbor) + 1);
             }
         }

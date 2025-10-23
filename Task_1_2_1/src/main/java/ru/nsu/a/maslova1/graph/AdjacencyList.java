@@ -12,13 +12,13 @@ import java.util.Set;
  * Реализация графа с использованием списка смежности.
  */
 public class AdjacencyList implements Graph {
-    private final Map<Integer, List<Integer>> adjList;
+    private final Map<Integer, List<Integer>> adjMap;
 
     /**
      * Конструктор по умолчанию.
      */
     public AdjacencyList() {
-        this.adjList = new HashMap<>();
+        this.adjMap = new HashMap<>();
     }
 
     /**
@@ -28,7 +28,7 @@ public class AdjacencyList implements Graph {
      */
     @Override
     public void addVertex(int vertex) {
-        adjList.putIfAbsent(vertex, new ArrayList<>());
+        adjMap.putIfAbsent(vertex, new ArrayList<>());
     }
 
     /**
@@ -38,8 +38,8 @@ public class AdjacencyList implements Graph {
      */
     @Override
     public void removeVertex(int vertex) {
-        adjList.remove(vertex);
-        for(List<Integer> v : adjList.values()) {
+        adjMap.remove(vertex);
+        for (List<Integer> v : adjMap.values()) {
             v.removeIf(neighbor -> (neighbor == vertex));
         }
     }
@@ -48,32 +48,30 @@ public class AdjacencyList implements Graph {
      * Добавляет ребро между вершинами.
      *
      * @param from идентификатор исходной вершины
-     * @param to идентификатор конечной вершины
+     * @param to   идентификатор конечной вершины
      */
     @Override
     public void addEdge(int from, int to) {
-        if (!adjList.containsKey(from) || !adjList.containsKey(to)) {
+        if (!adjMap.containsKey(from) || !adjMap.containsKey(to)) {
             throw new IllegalArgumentException("Not all vertices must exist in the graph");
         }
 
-        adjList.get(from).add(to);
-        adjList.get(to).add(from);
+        adjMap.get(from).add(to);
     }
 
     /**
      * Удаляет ребро между вершинами.
      *
      * @param from идентификатор исходной вершины
-     * @param to идентификатор конечной вершины
+     * @param to   идентификатор конечной вершины
      */
     @Override
     public void removeEdge(int from, int to) {
-        if (!adjList.containsKey(from) || !adjList.containsKey(to)) {
+        if (!adjMap.containsKey(from) || !adjMap.containsKey(to)) {
             throw new IllegalArgumentException("Not all vertices must exist in the graph");
         }
 
-        adjList.get(from).remove(to);
-        adjList.get(to).remove(from);
+        adjMap.get(from).remove(Integer.valueOf(to));
     }
 
     /**
@@ -83,7 +81,7 @@ public class AdjacencyList implements Graph {
      */
     @Override
     public List<Integer> getNeighbors(int vertex) {
-        return adjList.getOrDefault(vertex, new ArrayList<>());
+        return adjMap.getOrDefault(vertex, new ArrayList<>());
     }
 
     /**
@@ -92,13 +90,28 @@ public class AdjacencyList implements Graph {
     @Override
     public void outputGraph() {
         System.out.println("Список смежности:");
-        for (Map.Entry<Integer, List<Integer>> graph : adjList.entrySet()){
+        for (Map.Entry<Integer, List<Integer>> graph : adjMap.entrySet()) {
             System.out.println(graph.getKey() + ": " + graph.getValue());
         }
     }
 
+    /**
+     * Возвращает множество всех вершин графа.
+     *
+     * @return все вершины графа
+     */
     @Override
     public Set<Integer> getAllVertices() {
-        return new HashSet<>(adjList.keySet());
+        return new HashSet<>(adjMap.keySet());
+    }
+
+    /**
+     * Возвращает множество исходящих соседей.
+     * @param vertex вершина
+     * @return исходящие соседи
+     */
+    @Override
+    public List<Integer> getOutgoingNeighbors(int vertex) {
+        return adjMap.getOrDefault(vertex, new ArrayList<>());
     }
 }

@@ -11,15 +11,19 @@ import java.util.Set;
  * указывает на наличие ребра между вершинами i и j.
  */
 public class AdjacencyMatrix implements Graph {
+    private int[][] matrix;
+    private int vertexCount;
+    private final Set<Integer> vertexSet;
 
+    /**
+     * Конструктор.
+     */
     public AdjacencyMatrix() {
         this.vertexSet = new HashSet<>();
         this.vertexCount = 0;
     }
 
-    private int[][] matrix;
-    private int vertexCount;
-    private Set<Integer> vertexSet = new HashSet<>();
+
 
     /**
      * Добавляет вершину в граф.
@@ -60,8 +64,16 @@ public class AdjacencyMatrix implements Graph {
             return;
         }
 
-        vertexSet.remove(vertex);
         int vertexIndex = getVertexIndex(vertex);
+        vertexSet.remove(vertex);
+
+        if (vertexCount == 1) {
+            // Если была последняя вершина, обнуляем матрицу
+            matrix = null;
+            vertexCount = 0;
+            return;
+        }
+
         int[][] newMatrix = new int[vertexCount - 1][vertexCount - 1];
 
         for (int i = 0, newI = 0; i < vertexCount; i++) {
@@ -101,7 +113,6 @@ public class AdjacencyMatrix implements Graph {
         int toIndex = getVertexIndex(to);
 
         matrix[fromIndex][toIndex] = 1;
-        matrix[toIndex][fromIndex] = 1;
     }
 
     /**
@@ -122,7 +133,6 @@ public class AdjacencyMatrix implements Graph {
         int toIndex = getVertexIndex(to);
 
         matrix[fromIndex][toIndex] = 0;
-        matrix[toIndex][fromIndex] = 0;
     }
 
     /**
@@ -142,7 +152,7 @@ public class AdjacencyMatrix implements Graph {
         int vertexIndex = getVertexIndex(vertex);
 
         for (int i = 0; i < vertexCount; i++) {
-            if (matrix[vertexIndex][i] == 1) {
+            if (matrix[vertexIndex][i] == 1 || matrix[i][vertexIndex] == 1) {
                 int neighbor = getVertexByIndex(i);
                 neighbors.add(neighbor);
             }
@@ -166,16 +176,43 @@ public class AdjacencyMatrix implements Graph {
         for (int i = 0; i < vertexCount; i++) {
             int vertex = getVertexByIndex(i);
             System.out.print(vertex + ": ");
-            for( int j = 0; j < vertexCount; j++) {
+            for (int j = 0; j < vertexCount; j++) {
                 System.out.print(matrix[i][j] + " ");
             }
             System.out.println();
         }
     }
 
+    /**
+     * Возвращает множество всех вершин графа.
+     * @return все вершины графа
+     */
     @Override
     public Set<Integer> getAllVertices() {
         return  new HashSet<>(vertexSet);
+    }
+
+    /**
+     * Возвращает множество исходящих соседей.
+     * @param vertex вершина
+     * @return исходящие соседи
+     */
+    @Override
+    public List<Integer> getOutgoingNeighbors(int vertex) {
+        if (!vertexSet.contains(vertex)) {
+            return List.of();
+        }
+
+        List<Integer> neighbors = new ArrayList<>();
+        int vertexIndex = getVertexIndex(vertex);
+
+        for (int i = 0; i < vertexCount; i++) {
+            if (matrix[vertexIndex][i] == 1) {
+                int neighbor = getVertexByIndex(i);
+                neighbors.add(neighbor);
+            }
+        }
+        return neighbors;
     }
 
     /**

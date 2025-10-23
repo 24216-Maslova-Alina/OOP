@@ -61,6 +61,13 @@ public interface Graph {
     Set<Integer> getAllVertices();
 
     /**
+     * Возвращает множество исходящих соседей.
+     * @param vertex вершина
+     * @return исходящие соседи
+     */
+    List<Integer> getOutgoingNeighbors(int vertex);
+
+    /**
      * Сравнивает текущий граф с другим графом.
      *
      * @param otherGraph другой граф для сравнения
@@ -79,11 +86,10 @@ public interface Graph {
         }
 
         for (int vertex : thisVertices) {
-            List<Integer> thisNeighbors = this.getNeighbors(vertex);
-            List<Integer> otherNeighbors = otherGraph.getNeighbors(vertex);
+            List<Integer> thisOutgoing = this.getOutgoingNeighbors(vertex);
+            List<Integer> otherOutgoing = otherGraph.getOutgoingNeighbors(vertex);
 
-            if (!new HashSet<>(thisNeighbors).containsAll(otherNeighbors)
-                    || !new HashSet<>(otherNeighbors).containsAll(thisNeighbors)) {
+            if (!new HashSet<>(thisOutgoing).equals(new HashSet<>(otherOutgoing))) {
                 return false;
             }
         }

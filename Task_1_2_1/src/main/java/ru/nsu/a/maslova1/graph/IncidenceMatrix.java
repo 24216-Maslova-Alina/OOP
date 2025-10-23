@@ -17,7 +17,6 @@ public class IncidenceMatrix implements Graph {
      * Конструктор.
      */
     public IncidenceMatrix() {
-        this.vertexSet = new HashSet<>();
         this.vertexCount = 0;
         this.edgeCount = 0;
     }
@@ -25,7 +24,7 @@ public class IncidenceMatrix implements Graph {
     private int[][] matrix;
     private int vertexCount;
     private int edgeCount;
-    private Set<Integer> vertexSet = new HashSet<>();
+    private final Set<Integer> vertexSet = new HashSet<>();
 
     /**
      * Добавляет вершину в граф.
@@ -111,11 +110,12 @@ public class IncidenceMatrix implements Graph {
         int fromIndex = getVertexIndex(from);
         int toIndex = getVertexIndex(to);
 
+        // петля - 2; начальная вершина - 1; конечная - -1
         if (from == to) {
             newMatrix[fromIndex][edgeCount] = 2;
         } else {
             newMatrix[fromIndex][edgeCount] = 1;
-            newMatrix[toIndex][edgeCount] = 1;
+            newMatrix[toIndex][edgeCount] = -1;
         }
 
         matrix = newMatrix;
@@ -144,7 +144,7 @@ public class IncidenceMatrix implements Graph {
             if (from == to && matrix[fromIndex][edgeIndex] == 2) {
                 isEdge = true;
             } else {
-                if (matrix[fromIndex][edgeIndex] == 1 && matrix[toIndex][edgeIndex] == 1) {
+                if (matrix[fromIndex][edgeIndex] == 1 && matrix[toIndex][edgeIndex] == -1) {
                     isEdge = true;
                 }
             }
@@ -207,29 +207,63 @@ public class IncidenceMatrix implements Graph {
      * Реализация метода зависит от конкретных требований к выводу.
      */
     public void outputGraph() {
-        System.out.println("Матрица смежности:");
+        System.out.println("Матрица инцидентности:");
         System.out.print("   ");
 
-        for (int v : vertexSet) {
-            System.out.print(v + " ");
+        for (int j = 0; j < edgeCount; j++) {
+            System.out.print("e" + j + " ");  // e0, e1, e2, ...
         }
         System.out.println();
 
         for (int i = 0; i < vertexCount; i++) {
             int vertex = getVertexByIndex(i);
             System.out.print(vertex + ": ");
-            for(int j = 0; j < vertexCount; j++) {
-                System.out.print(matrix[i][j] + " ");
+            for(int j = 0; j < edgeCount; j++) {
+                System.out.print(matrix[i][j] + "  ");
             }
             System.out.println();
         }
     }
 
+    /**
+     * Возвращает множество всех вершин графа.
+     * @return все вершины графа
+     */
     @Override
     public Set<Integer> getAllVertices() {
         return new HashSet<>(vertexSet);
     }
 
+    /**
+     * Возвращает множество исходящих соседей.
+     * @param vertex вершина
+     * @return исходящие соседи
+     */
+    @Override
+    public List<Integer> getOutgoingNeighbors(int vertex) {
+        if (!vertexSet.contains(vertex)){
+            return List.of();
+        }
+
+        int vertexIndex = getVertexIndex(vertex);
+
+        List<Integer> neighborsOut = new ArrayList<>();
+        for (int j = 0; j < edgeCount; j++) {
+            if (matrix[vertexIndex][j] == 1 || matrix[vertexIndex][j] == 2) {
+                for (int i = 0; i < vertexCount; i++) {
+                    if (matrix[vertexIndex][j] == 1 && i != vertexIndex && matrix[i][j] == -1 ) {
+                        int neighbor = getVertexByIndex(i);
+                        neighborsOut.add(neighbor);
+                    }
+                }
+
+                if (matrix[vertexIndex][j] == 2) {
+                    neighborsOut.add(vertex);
+                }
+            }
+        }
+        return neighborsOut;
+    }
 
     /**
      * Возвращает индекс вершины в матрице инцидентности по ее идентификатору.
@@ -273,14 +307,19 @@ public class IncidenceMatrix implements Graph {
      */
     private void removeExcessEdge() {
         for (int edgeIndex = edgeCount - 1; edgeIndex >= 0; edgeIndex--) {
-            int incidentCount = 0;
+            int startCount = 0, endCount = 0;
             for (int i = 0; i < vertexCount; i++) {
-                if (matrix[i][edgeIndex] != 0) {
-                    incidentCount++;
+                if (matrix[i][edgeIndex] == 2) {
+                    startCount++;
+                    endCount++;
+                } else if (matrix[i][edgeIndex] == 1) {
+                    startCount++;
+                } else if (matrix[i][edgeIndex] == -1) {
+                    endCount++;
                 }
             }
 
-            if (incidentCount < 2) {
+            if (startCount == 0 || endCount == 0) {
                 int[][] newMatrix = new int[vertexCount][edgeCount - 1];
 
                 for (int i = 0; i < vertexCount; i++) {
