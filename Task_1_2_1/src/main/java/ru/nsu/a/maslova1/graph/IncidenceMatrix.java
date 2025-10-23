@@ -152,9 +152,9 @@ public class IncidenceMatrix implements Graph {
             if (isEdge) {
                 int[][] newMatrix = new int[vertexCount][edgeCount - 1];
 
-                for(int i = 0; i < vertexCount; i++) {
+                for (int i = 0; i < vertexCount; i++) {
 
-                    for(int j = 0, newJ = 0; j < edgeCount; j++) {
+                    for (int j = 0, newJ = 0; j < edgeCount; j++) {
                         if (j != edgeIndex) {
                             newMatrix[i][newJ] = matrix[i][j];
                             newJ++;
@@ -216,11 +216,11 @@ public class IncidenceMatrix implements Graph {
         }
         System.out.println();
 
-        for(int i = 0; i < vertexCount; i++) {
+        for (int i = 0; i < vertexCount; i++) {
             int vertex = getVertexByIndex(i);
             System.out.print(vertex + ": ");
 
-            for(int j = 0; j < edgeCount; j++) {
+            for (int j = 0; j < edgeCount; j++) {
                 System.out.print(matrix[i][j] + "  ");
             }
             System.out.println();
@@ -245,17 +245,17 @@ public class IncidenceMatrix implements Graph {
      */
     @Override
     public List<Integer> getOutgoingNeighbors(int vertex) {
-        if (!vertexSet.contains(vertex)){
+        if (!vertexSet.contains(vertex)) {
             return List.of();
         }
 
         int vertexIndex = getVertexIndex(vertex);
 
         List<Integer> neighborsOut = new ArrayList<>();
-        for(int j = 0; j < edgeCount; j++) {
+        for (int j = 0; j < edgeCount; j++) {
             if (matrix[vertexIndex][j] == 1 || matrix[vertexIndex][j] == 2) {
 
-                for(int i = 0; i < vertexCount; i++) {
+                for (int i = 0; i < vertexCount; i++) {
                     if (matrix[vertexIndex][j] == 1 && i != vertexIndex && matrix[i][j] == -1) {
                         int neighbor = getVertexByIndex(i);
                         neighborsOut.add(neighbor);
