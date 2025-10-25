@@ -115,4 +115,12 @@ public class AdjacencyList implements Graph {
     public List<Integer> getOutgoingNeighbors(int vertex) {
         return adjMap.getOrDefault(vertex, new ArrayList<>());
     }
+
+    /**
+     * Метод сортировки графа.
+     */
+    @Override
+    public void sorted(Sort sort) {
+        sort.sorted(this);
+    }
 }

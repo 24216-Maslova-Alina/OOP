@@ -271,6 +271,14 @@ public class IncidenceMatrix implements Graph {
     }
 
     /**
+     * Метод сортировки графа.
+     */
+    @Override
+    public void sorted(Sort sort) {
+        sort.sorted(this);
+    }
+
+    /**
      * Возвращает индекс вершины в матрице инцидентности по ее идентификатору.
      *
      * @param vertex идентификатор вершины

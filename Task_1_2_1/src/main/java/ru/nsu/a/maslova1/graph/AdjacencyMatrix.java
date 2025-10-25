@@ -218,6 +218,14 @@ public class AdjacencyMatrix implements Graph {
     }
 
     /**
+     * Метод сортировки графа.
+     */
+    @Override
+    public void sorted(Sort sort) {
+        sort.sorted(this);
+    }
+
+    /**
      * Возвращает идентификатор вершины по ее индексу в матрице смежности.
      *
      * @param index индекс вершины в матрице смежности
