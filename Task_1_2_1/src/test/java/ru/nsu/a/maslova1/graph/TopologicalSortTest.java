@@ -137,4 +137,26 @@ class TopologicalSortTest {
             assertEquals(3, result.get(2));
         }
     }
+
+    @Test
+    void testTopologicalSortEmptyGraph() {
+        Graph graph = new AdjacencyList();
+
+        List<Integer> result = TopologicalSort.topologicalSort(graph);
+        assertTrue(result.isEmpty());
+    }
+
+    @Test
+    void testTopologicalSortWithSelfLoop() {
+        Graph graph = new AdjacencyList();
+        graph.addVertex(1);
+        graph.addVertex(2);
+
+        graph.addEdge(1, 1); // Петля
+        graph.addEdge(1, 2);
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            TopologicalSort.topologicalSort(graph);
+        });
+    }
 }
