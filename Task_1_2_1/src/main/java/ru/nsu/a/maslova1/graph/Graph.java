@@ -68,7 +68,7 @@ public interface Graph {
      */
     List<Integer> getOutgoingNeighbors(int vertex);
 
-    void sorted (Sort sort);
+    void sorted(Sort sort);
 
     /**
      * Сравнивает текущий граф с другим графом.

@@ -11,7 +11,18 @@ import java.util.Queue;
  * Класс для топологической сортировки графов.
  * Реализует алгоритмы Кана и DFS для топологической сортировки.
  */
-public class TopologicalSort {
+public class TopologicalSort implements Sort {
+
+    /**
+     * Вызов сортировки.
+     *
+     * @param graph граф
+     */
+    @Override
+    public void sorted(Graph graph) {
+        List<Integer> result = topologicalSort(graph);
+        System.out.println("Топологический порядок: " + result);
+    }
 
     /**
      * Выполняет топологическую сортировку графа с помощью алгоритма Кана.
@@ -24,7 +35,7 @@ public class TopologicalSort {
         Queue<Integer> queue = new LinkedList<>();
         List<Integer> result = new ArrayList<>();
 
-        calculateInDegree(graph, inDegree);
+        sorted(graph, inDegree);
 
         for (Map.Entry<Integer, Integer> entry : inDegree.entrySet()) {
             if (entry.getValue() == 0) {
@@ -58,7 +69,7 @@ public class TopologicalSort {
      * @param graph граф для расчета
      * @param inDegree карта для хранения полустепеней захода
      */
-    private static void calculateInDegree(Graph graph, Map<Integer, Integer> inDegree) {
+    private static void sorted(Graph graph, Map<Integer, Integer> inDegree) {
         for (int vertex : graph.getAllVertices()) {
             inDegree.put(vertex, 0);
         }
