@@ -1,11 +1,5 @@
 package ru.nsu.a.maslova1.graph;
 
-import ru.nsu.a.maslova1.graph.graphRepresentation.AdjacencyList;
-import ru.nsu.a.maslova1.graph.graphRepresentation.AdjacencyMatrix;
-import ru.nsu.a.maslova1.graph.graphRepresentation.Graph;
-import ru.nsu.a.maslova1.graph.graphRepresentation.IncidenceMatrix;
-import ru.nsu.a.maslova1.graph.sort.TopologicalSort;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -14,6 +8,12 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
+
+import ru.nsu.a.maslova1.graph.graphrepresentation.AdjacencyList;
+import ru.nsu.a.maslova1.graph.graphrepresentation.AdjacencyMatrix;
+import ru.nsu.a.maslova1.graph.graphrepresentation.Graph;
+import ru.nsu.a.maslova1.graph.graphrepresentation.IncidenceMatrix;
+import ru.nsu.a.maslova1.graph.sort.TopologicalSort;
 
 /**
  * Главный класс для тестирования реализаций графа.

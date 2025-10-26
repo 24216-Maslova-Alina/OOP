@@ -6,13 +6,15 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
 import org.junit.jupiter.api.Test;
-import ru.nsu.a.maslova1.graph.graphRepresentation.AdjacencyList;
-import ru.nsu.a.maslova1.graph.graphRepresentation.AdjacencyMatrix;
-import ru.nsu.a.maslova1.graph.graphRepresentation.Graph;
-import ru.nsu.a.maslova1.graph.graphRepresentation.IncidenceMatrix;
+import ru.nsu.a.maslova1.graph.graphrepresentation.AdjacencyList;
+import ru.nsu.a.maslova1.graph.graphrepresentation.AdjacencyMatrix;
+import ru.nsu.a.maslova1.graph.graphrepresentation.Graph;
+import ru.nsu.a.maslova1.graph.graphrepresentation.IncidenceMatrix;
 import ru.nsu.a.maslova1.graph.sort.TopologicalSort;
 
 class TopologicalSortTest {
+
+    TopologicalSort sort = new TopologicalSort();
 
     @Test
     void testTopologicalSortSimpleGraph() {
@@ -24,7 +26,7 @@ class TopologicalSortTest {
         graph.addEdge(1, 2);
         graph.addEdge(2, 3);
 
-        List<Integer> result = TopologicalSort.topologicalSort(graph);
+        List<Integer> result = sort.topologicalSort(graph);
         assertEquals(3, result.size());
         assertEquals(1, result.get(0));
         assertEquals(2, result.get(1));
@@ -43,7 +45,7 @@ class TopologicalSortTest {
         graph.addEdge(2, 3);
         graph.addEdge(3, 4);
 
-        List<Integer> result = TopologicalSort.topologicalSort(graph);
+        List<Integer> result = sort.topologicalSort(graph);
         assertEquals(4, result.size());
 
         // 1 и 2 должны быть перед 3
@@ -64,7 +66,7 @@ class TopologicalSortTest {
         graph.addEdge(3, 1); // Цикл
 
         assertThrows(IllegalArgumentException.class, () -> {
-            TopologicalSort.topologicalSort(graph);
+            sort.topologicalSort(graph);
         });
     }
 
@@ -73,7 +75,7 @@ class TopologicalSortTest {
         Graph graph = new AdjacencyList();
         graph.addVertex(1);
 
-        List<Integer> result = TopologicalSort.topologicalSort(graph);
+        List<Integer> result = sort.topologicalSort(graph);
         assertEquals(1, result.size());
         assertEquals(1, result.get(0));
     }
@@ -87,7 +89,7 @@ class TopologicalSortTest {
 
         // Нет рёбер - все вершины изолированы
 
-        List<Integer> result = TopologicalSort.topologicalSort(graph);
+        List<Integer> result = sort.topologicalSort(graph);
         assertEquals(3, result.size());
         // Любой порядок допустим для изолированных вершин
     }
@@ -107,7 +109,7 @@ class TopologicalSortTest {
         graph.addEdge(3, 4);
         graph.addEdge(4, 5);
 
-        List<Integer> result = TopologicalSort.topologicalSort(graph);
+        List<Integer> result = sort.topologicalSort(graph);
         assertEquals(5, result.size());
 
         // Проверяем зависимости
@@ -135,7 +137,7 @@ class TopologicalSortTest {
             graph.addEdge(1, 2);
             graph.addEdge(2, 3);
 
-            List<Integer> result = TopologicalSort.topologicalSort(graph);
+            List<Integer> result = sort.topologicalSort(graph);
             assertEquals(3, result.size());
             assertEquals(1, result.get(0));
             assertEquals(2, result.get(1));
@@ -147,7 +149,7 @@ class TopologicalSortTest {
     void testTopologicalSortEmptyGraph() {
         Graph graph = new AdjacencyList();
 
-        List<Integer> result = TopologicalSort.topologicalSort(graph);
+        List<Integer> result = sort.topologicalSort(graph);
         assertTrue(result.isEmpty());
     }
 
@@ -161,7 +163,7 @@ class TopologicalSortTest {
         graph.addEdge(1, 2);
 
         assertThrows(IllegalArgumentException.class, () -> {
-            TopologicalSort.topologicalSort(graph);
+            sort.topologicalSort(graph);
         });
     }
 }

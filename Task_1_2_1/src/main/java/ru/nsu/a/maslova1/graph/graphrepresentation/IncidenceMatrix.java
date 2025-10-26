@@ -1,12 +1,11 @@
-package ru.nsu.a.maslova1.graph.graphRepresentation;
-
-import ru.nsu.a.maslova1.graph.sort.Sort;
+package ru.nsu.a.maslova1.graph.graphrepresentation;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import ru.nsu.a.maslova1.graph.sort.Sort;
 /**
  * Реализация графа с использованием матрицы инцидентности.
  * Матрица инцидентности представляет собой двумерный массив, где строки соответствуют вершинам,

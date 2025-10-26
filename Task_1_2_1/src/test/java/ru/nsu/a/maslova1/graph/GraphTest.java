@@ -5,9 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
-import ru.nsu.a.maslova1.graph.graphRepresentation.AdjacencyList;
-import ru.nsu.a.maslova1.graph.graphRepresentation.AdjacencyMatrix;
-import ru.nsu.a.maslova1.graph.graphRepresentation.Graph;
+import ru.nsu.a.maslova1.graph.graphrepresentation.AdjacencyList;
+import ru.nsu.a.maslova1.graph.graphrepresentation.AdjacencyMatrix;
+import ru.nsu.a.maslova1.graph.graphrepresentation.Graph;
 
 class GraphTest {
 
