@@ -30,7 +30,7 @@ public class TopologicalSort implements Sort {
      * @param graph граф для сортировки
      * @return список вершин в топологическом порядке
      */
-    public static List<Integer> topologicalSort(Graph graph) {
+    public List<Integer> topologicalSort(Graph graph) {
         Map<Integer, Integer> inDegree = new HashMap<>();
         Queue<Integer> queue = new LinkedList<>();
         List<Integer> result = new ArrayList<>();
@@ -69,7 +69,7 @@ public class TopologicalSort implements Sort {
      * @param graph граф для расчета
      * @param inDegree карта для хранения полустепеней захода
      */
-    private static void sorted(Graph graph, Map<Integer, Integer> inDegree) {
+    private void sorted(Graph graph, Map<Integer, Integer> inDegree) {
         for (int vertex : graph.getAllVertices()) {
             inDegree.put(vertex, 0);
         }

@@ -91,15 +91,16 @@ public class Main {
                 }
 
                 System.out.println("\nТопологическая сортировка:");
+                TopologicalSort sort = new TopologicalSort();
                 try {
-                    List<Integer> topologicalOrder = TopologicalSort.topologicalSort(graph);
+                    List<Integer> topologicalOrder = sort.topologicalSort(graph);
                     System.out.println("Топологический порядок: " + topologicalOrder);
                 } catch (IllegalArgumentException e) {
                     System.out.println("Топологическая сортировка невозможна: " + e.getMessage());
                 }
 
                 try {
-                    List<Integer> topologicalOrderdfs = TopologicalSort.topologicalSort(graph);
+                    List<Integer> topologicalOrderdfs = sort.topologicalSort(graph);
                     System.out.println("Топологический порядок (DFS): " + topologicalOrderdfs);
                 } catch (IllegalArgumentException e) {
                     System.out.println("Топологическая сортировка невозможна: " + e.getMessage());
