@@ -6,6 +6,11 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
 import org.junit.jupiter.api.Test;
+import ru.nsu.a.maslova1.graph.graphRepresentation.AdjacencyList;
+import ru.nsu.a.maslova1.graph.graphRepresentation.AdjacencyMatrix;
+import ru.nsu.a.maslova1.graph.graphRepresentation.Graph;
+import ru.nsu.a.maslova1.graph.graphRepresentation.IncidenceMatrix;
+import ru.nsu.a.maslova1.graph.sort.TopologicalSort;
 
 class TopologicalSortTest {
 

@@ -1,4 +1,6 @@
-package ru.nsu.a.maslova1.graph;
+package ru.nsu.a.maslova1.graph.sort;
+
+import ru.nsu.a.maslova1.graph.graphRepresentation.Graph;
 
 /**
  * Интерфейс сортировок.

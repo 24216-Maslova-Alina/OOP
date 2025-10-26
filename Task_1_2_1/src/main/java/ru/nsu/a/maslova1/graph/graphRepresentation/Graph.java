@@ -1,4 +1,6 @@
-package ru.nsu.a.maslova1.graph;
+package ru.nsu.a.maslova1.graph.graphRepresentation;
+
+import ru.nsu.a.maslova1.graph.sort.Sort;
 
 import java.util.HashSet;
 import java.util.List;

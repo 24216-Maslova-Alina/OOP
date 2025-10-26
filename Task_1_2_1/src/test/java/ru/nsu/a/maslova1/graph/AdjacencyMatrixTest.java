@@ -10,6 +10,8 @@ import java.util.List;
 import java.util.Set;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import ru.nsu.a.maslova1.graph.graphRepresentation.AdjacencyMatrix;
+import ru.nsu.a.maslova1.graph.graphRepresentation.Graph;
 
 class AdjacencyMatrixTest {
     private Graph graph;
