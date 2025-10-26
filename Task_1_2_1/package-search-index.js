@@ -1,1 +1,1 @@
-packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"ru.nsu.a.maslova1.graph"}];updateSearchResults();
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"ru.nsu.a.maslova1.graph"},{"l":"ru.nsu.a.maslova1.graph.graphrepresentation"},{"l":"ru.nsu.a.maslova1.graph.sort"}];updateSearchResults();
