@@ -1,0 +1,263 @@
+package ru.nsu.a.maslova1.graph.graphrepresentation;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+import ru.nsu.a.maslova1.graph.sort.Sort;
+
+/**
+ * Реализация графа с использованием матрицы смежности.
+ * Матрица смежности представляет собой двумерный массив, где matrix[i][j] = 1
+ * указывает на наличие ребра между вершинами i и j.
+ */
+public class AdjacencyMatrix implements Graph {
+    private int[][] matrix;
+    private int vertexCount;
+    private final Set<Integer> vertexSet;
+
+    /**
+     * Конструктор.
+     */
+    public AdjacencyMatrix() {
+        this.vertexSet = new HashSet<>();
+        this.vertexCount = 0;
+    }
+
+
+
+    /**
+     * Добавляет вершину в граф.
+     * Если вершина уже существует, метод не выполняет никаких действий.
+     * При добавлении новой вершины матрица смежности пересоздается с увеличенным размером.
+     *
+     * @param vertex идентификатор добавляемой вершины
+     */
+    @Override
+    public void addVertex(int vertex) {
+        if (vertexSet.contains(vertex)) {
+            return;
+        }
+
+        vertexSet.add(vertex);
+        int[][] newMatrix = new int[vertexCount + 1][vertexCount + 1];
+
+        if (matrix != null) {
+            for  (int i = 0; i < vertexCount; i++) {
+                System.arraycopy(matrix[i], 0, newMatrix[i], 0, vertexCount);
+            }
+        }
+
+        matrix = newMatrix;
+        vertexCount++;
+    }
+
+    /**
+     * Удаляет вершину из графа.
+     * Если вершина не существует, метод не выполняет никаких действий.
+     * При удалении вершины матрица смежности пересоздается с уменьшенным размером.
+     *
+     * @param vertex идентификатор удаляемой вершины
+     */
+    @Override
+    public void removeVertex(int vertex) {
+        if (!vertexSet.contains(vertex)) {
+            return;
+        }
+
+        int vertexIndex = getVertexIndex(vertex);
+        vertexSet.remove(vertex);
+
+        if (vertexCount == 1) {
+            // Если была последняя вершина, обнуляем матрицу
+            matrix = null;
+            vertexCount = 0;
+            return;
+        }
+
+        int[][] newMatrix = new int[vertexCount - 1][vertexCount - 1];
+
+        for (int i = 0, newI = 0; i < vertexCount; i++) {
+            if (i == vertexIndex) {
+                continue;
+            }
+            for (int j = 0, newJ = 0; j < vertexCount; j++) {
+                if (j == vertexIndex) {
+                    continue;
+                }
+
+                newMatrix[newI][newJ] = matrix[i][j];
+                newJ++;
+            }
+            newI++;
+        }
+
+        matrix = newMatrix;
+        vertexCount--;
+    }
+
+    /**
+     * Добавляет ребро между двумя вершинами.
+     * Если одна или обе вершины не существуют в графе, выбрасывается исключение.
+     * Для неориентированного графа ребро добавляется в обоих направлениях.
+     *
+     * @param from идентификатор исходной вершины
+     * @param to идентификатор конечной вершины
+     */
+    @Override
+    public void addEdge(int from, int to) {
+        if (!vertexSet.contains(from) || !vertexSet.contains(to)) {
+            throw new IllegalArgumentException("Not all vertices must exist in the graph");
+        }
+
+        int fromIndex = getVertexIndex(from);
+        int toIndex = getVertexIndex(to);
+
+        matrix[fromIndex][toIndex] = 1;
+    }
+
+    /**
+     * Удаляет ребро между двумя вершинами.
+     * Если одна или обе вершины не существуют в графе, выбрасывается исключение.
+     * Для неориентированного графа ребро удаляется в обоих направлениях.
+     *
+     * @param from идентификатор исходной вершины
+     * @param to идентификатор конечной вершины
+     */
+    @Override
+    public void removeEdge(int from, int to) {
+        if (!vertexSet.contains(from) || !vertexSet.contains(to)) {
+            throw new IllegalArgumentException("Not all vertices must exist in the graph");
+        }
+
+        int fromIndex = getVertexIndex(from);
+        int toIndex = getVertexIndex(to);
+
+        matrix[fromIndex][toIndex] = 0;
+    }
+
+    /**
+     * Возвращает список соседей указанной вершины.
+     * Соседями считаются все вершины, соединенные ребром с данной вершиной.
+     *
+     * @param vertex идентификатор вершины, для которой запрашиваются соседи
+     * @return список идентификаторов соседних вершин; пустой список, если вершина не существует
+     */
+    @Override
+    public List<Integer> getNeighbors(int vertex) {
+        if (!vertexSet.contains(vertex)) {
+            return List.of();
+        }
+
+        List<Integer> neighbors = new ArrayList<>();
+        int vertexIndex = getVertexIndex(vertex);
+
+        for (int i = 0; i < vertexCount; i++) {
+            if (matrix[vertexIndex][i] == 1 || matrix[i][vertexIndex] == 1) {
+                int neighbor = getVertexByIndex(i);
+                neighbors.add(neighbor);
+            }
+        }
+        return neighbors;
+    }
+
+    /**
+     * Выводит граф в заданном формате.
+     * Реализация метода зависит от конкретных требований к выводу.
+     */
+    @Override
+    public void outputGraph() {
+        System.out.println("Матрица смежности:");
+        System.out.print("   ");
+        for (int v : vertexSet) {
+            System.out.print(v + " ");
+        }
+        System.out.println();
+
+        for (int i = 0; i < vertexCount; i++) {
+            int vertex = getVertexByIndex(i);
+            System.out.print(vertex + ": ");
+            for (int j = 0; j < vertexCount; j++) {
+                System.out.print(matrix[i][j] + " ");
+            }
+            System.out.println();
+        }
+    }
+
+    /**
+     * Возвращает множество всех вершин графа.
+     *
+     * @return все вершины графа
+     */
+    @Override
+    public Set<Integer> getAllVertices() {
+        return  new HashSet<>(vertexSet);
+    }
+
+    /**
+     * Возвращает множество исходящих соседей.
+     *
+     * @param vertex вершина
+     * @return исходящие соседи
+     */
+    @Override
+    public List<Integer> getOutgoingNeighbors(int vertex) {
+        if (!vertexSet.contains(vertex)) {
+            return List.of();
+        }
+
+        List<Integer> neighbors = new ArrayList<>();
+        int vertexIndex = getVertexIndex(vertex);
+
+        for (int i = 0; i < vertexCount; i++) {
+            if (matrix[vertexIndex][i] == 1) {
+                int neighbor = getVertexByIndex(i);
+                neighbors.add(neighbor);
+            }
+        }
+        return neighbors;
+    }
+
+    /**
+     * Метод сортировки графа.
+     */
+    @Override
+    public void sorted(Sort sort) {
+        sort.sorted(this);
+    }
+
+    /**
+     * Возвращает идентификатор вершины по ее индексу в матрице смежности.
+     *
+     * @param index индекс вершины в матрице смежности
+     * @return идентификатор вершины
+     */
+    private int getVertexByIndex(int index) {
+        int current = 0;
+        for (int v : vertexSet) {
+            if (current == index) {
+                return v;
+            }
+            current++;
+        }
+        throw new IllegalArgumentException("Invalid vertex index");
+    }
+
+    /**
+     * Возвращает индекс вершины в матрице смежности по ее идентификатору.
+     *
+     * @param vertex идентификатор вершины
+     * @return индекс вершины в матрице смежности или -1, если вершина не найдена
+     */
+    private int getVertexIndex(int vertex) {
+        int index = 0;
+        for (int v : vertexSet) {
+            if (v == vertex) {
+                return index;
+            }
+            index++;
+        }
+        return -1;
+    }
+}
