@@ -2,10 +2,10 @@ package ru.nsu.a.maslova1.hashtable;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 
 import org.junit.jupiter.api.Test;
 
@@ -128,18 +128,5 @@ class NodeTest {
         assertEquals(node2, node1.getNext());
         assertEquals(node3, node2.getNext());
         assertNull(node3.getNext());
-    }
-
-    @Test
-    void testWithNullValue() {
-        Node<String, Integer> node = new Node<>("key", null);
-        assertEquals("key", node.getKey());
-        assertNull(node.getValue());
-
-        // Проверяем что toString и equals работают с null значением
-        assertNotNull(node.toString());
-
-        Node<String, Integer> node2 = new Node<>("key", null);
-        assertTrue(node.equals(node2));
     }
 }

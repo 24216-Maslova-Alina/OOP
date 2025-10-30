@@ -80,12 +80,11 @@ public class HashTable<K, V> implements Iterable<Node<K, V>> {
     private void resize() {
         int newCapacity = capacity * 2;
         Node<K, V>[] newTab = (Node<K, V>[]) new Node[newCapacity];
-        Node<K, V>[] oldTab = tab;
-
         tab = newTab;
         capacity = newCapacity;
         size = 0;
 
+        Node<K, V>[] oldTab = tab;
         for (Node<K, V> kvNode : oldTab) {
             Node<K, V> current = kvNode;
             while (current != null) {
@@ -262,7 +261,9 @@ public class HashTable<K, V> implements Iterable<Node<K, V>> {
         for (int i = 0; i < capacity; i++) {
             Node<K, V> current = tab[i];
             while (current != null) {
-                if (!first) result.append(", ");
+                if (!first) {
+                    result.append(", ");
+                }
                 result.append(current.toString());
                 first = false;
                 current = current.getNext();
@@ -298,6 +299,7 @@ public class HashTable<K, V> implements Iterable<Node<K, V>> {
                     currentNode = tab[currentBucket];
                 }
             }
+            
             @Override
             public boolean hasNext() {
                 checkForModification();
