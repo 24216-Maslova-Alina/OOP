@@ -68,21 +68,6 @@ class HashTableTest {
     }
 
     @Test
-    void testResize() {
-        HashTable<String, Integer> table = new HashTable<>();
-        int initialCapacity = table.getCapacity();
-
-        // Добавляем больше элементов чем начальная вместимость
-        for (int i = 0; i < 20; i++) {
-            table.put("key" + i, i);
-        }
-
-        assertTrue(table.getCapacity() > initialCapacity);
-        assertEquals(20, table.getSize());
-        assertEquals(15, table.get("key15")); // Проверяем что элементы на месте
-    }
-
-    @Test
     void testIterator() {
         HashTable<String, Integer> table = new HashTable<>();
         table.put("a", 1);

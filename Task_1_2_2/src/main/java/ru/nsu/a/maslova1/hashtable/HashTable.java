@@ -299,7 +299,7 @@ public class HashTable<K, V> implements Iterable<Node<K, V>> {
                     currentNode = tab[currentBucket];
                 }
             }
-            
+
             @Override
             public boolean hasNext() {
                 checkForModification();
