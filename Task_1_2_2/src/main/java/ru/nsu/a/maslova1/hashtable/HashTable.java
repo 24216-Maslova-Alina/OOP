@@ -28,21 +28,6 @@ public class HashTable<K, V> implements Iterable<Node<K, V>> {
         this.modCount = 0;
     }
 
-    /**
-     * Вычисляет индекс корзины для заданного ключа.
-     *
-     * @param key ключ для вычисления индекса
-     * @return индекс в диапазоне [0, capacity-1]
-     */
-    private int getIndex(K key) {
-        if (key == null) {
-            return 0;
-        }
-        int hash = key.hashCode();
-        hash = hash ^ (hash >>> 16);
-
-        return Math.abs(hash % capacity);
-    }
 
     /**
      * Добавляет пару ключ-значение в таблицу.
@@ -74,31 +59,7 @@ public class HashTable<K, V> implements Iterable<Node<K, V>> {
         modCount++;
     }
 
-    /**
-     * Увеличивает вместимость таблицы в 2 раза и перераспределяет все элементы.
-     */
-    private void resize() {
-        int newCapacity = capacity * 2;
-        Node<K, V>[] newTab = (Node<K, V>[]) new Node[newCapacity];
-        tab = newTab;
-        capacity = newCapacity;
-        size = 0;
 
-        Node<K, V>[] oldTab = tab;
-        for (Node<K, V> kvNode : oldTab) {
-            Node<K, V> current = kvNode;
-            while (current != null) {
-                int index = getIndex(current.getKey());
-                Node<K, V> newNode = new Node<>(current.getKey(), current.getValue());
-                newNode.setNext(tab[index]);
-                tab[index] = newNode;
-                size++;
-
-                current = current.getNext();
-            }
-        }
-        modCount++;
-    }
 
     /**
      * Удаляет пару ключ-значение из таблицы по ключу.
@@ -176,7 +137,7 @@ public class HashTable<K, V> implements Iterable<Node<K, V>> {
      * @param key ключ для проверки
      * @return true если ключ существует и значение не null, иначе false
      */
-    public boolean hasValueForKey(K key) {
+    public boolean containsKey(K key) {
         int index = getIndex(key);
         Node<K, V> current = tab[index];
 
@@ -285,7 +246,7 @@ public class HashTable<K, V> implements Iterable<Node<K, V>> {
         return new Iterator<Node<K, V>>() {
             private int currentBucket = 0;
             private Node<K, V> currentNode = null;
-            private int expectedModCount = modCount;
+            private final int expectedModCount = modCount;
 
             {
                 findNextBucket();
@@ -321,11 +282,55 @@ public class HashTable<K, V> implements Iterable<Node<K, V>> {
                 return resultNode;
             }
 
+
+
             private void checkForModification() {
                 if (modCount != expectedModCount) {
                     throw new ConcurrentModificationException();
                 }
             }
         };
+    }
+
+    /**
+     * Вычисляет индекс корзины для заданного ключа.
+     *
+     * @param key ключ для вычисления индекса
+     * @return индекс в диапазоне [0, capacity-1]
+     */
+    private int getIndex(K key) {
+        if (key == null) {
+            return 0;
+        }
+        int hash = key.hashCode();
+        hash = hash ^ (hash >>> 16);
+
+        return Math.abs(hash % capacity);
+    }
+
+    /**
+     * Увеличивает вместимость таблицы в 2 раза и перераспределяет все элементы.
+     */
+    private void resize() {
+        int newCapacity = capacity * 2;
+        Node<K, V>[] newTab = (Node<K, V>[]) new Node[newCapacity];
+        tab = newTab;
+        capacity = newCapacity;
+        size = 0;
+
+        Node<K, V>[] oldTab = tab;
+        for (Node<K, V> kvNode : oldTab) {
+            Node<K, V> current = kvNode;
+            while (current != null) {
+                int index = getIndex(current.getKey());
+                Node<K, V> newNode = new Node<>(current.getKey(), current.getValue());
+                newNode.setNext(tab[index]);
+                tab[index] = newNode;
+                size++;
+
+                current = current.getNext();
+            }
+        }
+        modCount++;
     }
 }

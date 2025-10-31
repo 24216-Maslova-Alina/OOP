@@ -19,7 +19,7 @@ class HashTableTest {
         assertEquals(0, table.getSize());
         assertEquals(16, table.getCapacity());
         assertNull(table.get("key"));
-        assertFalse(table.hasValueForKey("key"));
+        assertFalse(table.containsKey("key"));
     }
 
     @Test
@@ -62,9 +62,9 @@ class HashTableTest {
         table.put("key", 10);
         table.put("nullKey", null);
 
-        assertTrue(table.hasValueForKey("key"));
-        assertFalse(table.hasValueForKey("nullKey")); // значение null
-        assertFalse(table.hasValueForKey("unknown"));
+        assertTrue(table.containsKey("key"));
+        assertFalse(table.containsKey("nullKey")); // значение null
+        assertFalse(table.containsKey("unknown"));
     }
 
     @Test
@@ -152,6 +152,6 @@ class HashTableTest {
         table.put(null, 42);
 
         assertEquals(42, table.get(null));
-        assertTrue(table.hasValueForKey(null));
+        assertTrue(table.containsKey(null));
     }
 }
