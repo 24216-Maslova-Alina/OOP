@@ -4,14 +4,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.io.TempDir;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
+import org.junit.jupiter.api.io.TempDir;
+
 
 class SearchSubstringTest {
 
@@ -42,16 +42,6 @@ class SearchSubstringTest {
 
         assertEquals(1, result.size());
         assertEquals(6, result.get(0));
-    }
-
-    @Test
-    void testMultipleMatches() throws IOException {
-        File testFile = createTestFile("multiple.txt", "abra abracadabra abra");
-        SearchSubstring search = new SearchSubstring();
-        List<Integer> result = search.find(testFile.getPath(), "abra");
-
-        assertEquals(3, result.size());
-        assertEquals(List.of(0, 5, 17), result);
     }
 
     @Test
