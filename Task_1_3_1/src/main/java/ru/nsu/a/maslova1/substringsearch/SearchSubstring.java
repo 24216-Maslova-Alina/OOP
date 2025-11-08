@@ -12,41 +12,26 @@ import java.util.List;
  * Класс для реализации поиска подстроки.
  */
 public class SearchSubstring {
-    private int size;
-    private int kmpState = 0;
-    private int[] lps;
-    List<Integer> array;
-
     /**
      * Запуск поиска.
      *
-     * @param input файл для чтения
+     * @param filename файл для чтения
      * @param substring подстрока
      * @return список индексов найденных подстрок
      */
-    public List<Integer> find(String input, String substring) {
-        array = new ArrayList<>();
-        kmpState = 0;
-
+    public List<Integer> find(String filename, String substring) {
         // Обработка пустой подстроки
         if (substring == null || substring.isEmpty()) {
-            this.size = 0;
-            return array;
+            return new ArrayList<>();
         }
 
-        bufferRead(input, substring);
+        List<Integer> array = new ArrayList<>();
+        int[] lps = computeLps(substring);
+        int kmpState = 0;
 
-        this.size = array.size();
+        bufferRead(filename, substring, lps, array, kmpState);
+
         return array;
-    }
-
-    /**
-     * Получение размера массива.
-     *
-     * @return размер массива
-     */
-    public int getSize() {
-        return this.size;
     }
 
     /**
@@ -55,7 +40,8 @@ public class SearchSubstring {
      * @param filename файл для чтения
      * @param substring подстрока
      */
-    private void bufferRead(String filename, String substring) {
+    private void bufferRead(String filename, String substring,
+                            int[] lps, List<Integer> array, int kmpState) {
         int chunkSize = 8192;
 
         int overlapSize = Math.max(0, substring.length() - 1);
@@ -89,7 +75,7 @@ public class SearchSubstring {
 
                 // Проверяем, что буфер достаточно большой для поиска
                 if (totalSize >= substring.length()) {
-                    searchInChunk(buffer, totalSize, substring, globalPosition - overlapLength);
+                    kmpState = searchInChunk(buffer, totalSize, substring, globalPosition - overlapLength, array, lps, kmpState);
                 }
 
                 // Обновляем перекрытие для следующего чанка
@@ -115,9 +101,9 @@ public class SearchSubstring {
      *
      * @param substring подстрока
      */
-    private void computeLps(String substring) {
+    private int[] computeLps(String substring) {
         int m = substring.length();
-        lps = new int[m];
+        int[] lps = new int[m];
 
         int len = 0;
         int i = 1;
@@ -135,6 +121,7 @@ public class SearchSubstring {
                 }
             }
         }
+        return lps;
     }
 
     /**
@@ -145,24 +132,26 @@ public class SearchSubstring {
      * @param substring подстрока
      * @param globalPosition позиция во всем файле
      */
-    private void searchInChunk(char[] buffer, int totalSize,
-                               String substring, long globalPosition) {
+    private int searchInChunk(char[] buffer, int totalSize, String substring,
+                              long globalPosition, List<Integer> array, int[] lps, int kmpState) {
         int m = substring.length();
+        int state = kmpState;
 
         for (int i = 0; i < totalSize; i++) {
-            while (kmpState > 0 && buffer[i] != substring.charAt(kmpState)) {
-                kmpState = lps[kmpState - 1];
+            while (state > 0 && buffer[i] != substring.charAt(state)) {
+                state = lps[state - 1];
             }
 
-            if (buffer[i] == substring.charAt(kmpState)) {
-                kmpState++;
+            if (buffer[i] == substring.charAt(state)) {
+                state++;
             }
 
-            if (kmpState == m) {
+            if (state == m) {
                 long position = globalPosition + i - m + 1;
                 array.add((int) position);
-                kmpState = lps[kmpState - 1];
+                state = lps[state - 1];
             }
         }
+        return state;
     }
 }

@@ -20,12 +20,11 @@ public class Main {
         String substring = scanner.nextLine();
 
         List<Integer> answer = search.find(file, substring);
-        int arraySize = search.getSize();
 
         System.out.print("[");
-        for (int  i = 0; i < arraySize; i++) {
+        for (int  i = 0; i < answer.size(); i++) {
             System.out.print(answer.get(i));
-            if (i < arraySize - 1) {
+            if (i < answer.size() - 1) {
                 System.out.print(", ");
             }
         }
