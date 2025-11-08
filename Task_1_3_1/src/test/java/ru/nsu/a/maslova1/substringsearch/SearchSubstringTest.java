@@ -130,4 +130,50 @@ class SearchSubstringTest {
         }
         return testFile;
     }
+
+    @Test
+    void testCrossBufferBoundary() throws IOException {
+        StringBuilder content = new StringBuilder();
+
+        int bufferSize = 8192;
+        int overlapSize = 3; // "ABC" в одном буфере, "D" в следующем
+
+        content.append("X".repeat(bufferSize - overlapSize));
+
+        // Используем уникальную подстроку, которая не будет случайно совпадать с заполнителем
+        String searchPattern = "ABCD";
+
+        // Добавляем первую часть подстроки в конце первого буфера
+        content.append("ABC"); // первые 3 символа
+
+        // Добавляем вторую часть подстроки в начале следующего буфера
+        content.append("D"); // последний символ
+
+        // Добавляем разделитель
+        content.append("XYZ");
+
+        // Добавляем еще одну подстроку, которая полностью в одном буфере
+        content.append("ABCD");
+
+        File testFile = createTestFile("cross_buffer.txt", content.toString());
+        SearchSubstring search = new SearchSubstring();
+        List<Integer> result = search.find(testFile.getPath(), searchPattern);
+
+        System.out.println("Found matches at positions: " + result);
+        System.out.println("Content length: " + content.length());
+        System.out.println("Expected positions: [" + (bufferSize - overlapSize) + ", " +
+                (bufferSize - overlapSize + searchPattern.length() + "XYZ".length()) + "]");
+
+        // Проверим, что находится в этих позициях
+        for (int pos : result) {
+            if (pos + searchPattern.length() <= content.length()) {
+                String found = content.substring(pos, pos + searchPattern.length());
+                System.out.println("At position " + pos + ": '" + found + "'");
+            }
+        }
+
+        assertEquals(2, result.size());
+        assertEquals(bufferSize - overlapSize, result.get(0));
+        assertEquals(bufferSize - overlapSize + searchPattern.length() + "XYZ".length(), result.get(1));
+    }
 }
