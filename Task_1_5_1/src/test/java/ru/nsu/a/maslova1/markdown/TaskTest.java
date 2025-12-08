@@ -2,8 +2,8 @@ package ru.nsu.a.maslova1.markdown;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
@@ -41,8 +41,6 @@ class TaskTest {
         // Строковые конструкторы
         Task task1 = new Task("Same task", false);
         Task task2 = new Task("Same task", false);
-        Task task3 = new Task("Same task", true);  // другой статус
-        Task task4 = new Task("Different", false); // другой текст
 
         // Element конструкторы
         Task task5 = new Task(new Text("Task"), false);
@@ -54,9 +52,11 @@ class TaskTest {
         assertEquals(task5, task6);
 
         // Разный статус
+        Task task3 = new Task("Same task", true);  // другой статус
         assertNotEquals(task1, task3);
 
         // Разный текст
+        Task task4 = new Task("Different", false); // другой текст
         assertNotEquals(task1, task4);
 
         // Рефлексивность
@@ -69,7 +69,7 @@ class TaskTest {
         // Сравнение разных конструкторов с одинаковым содержимым
         Task strTask = new Task("Text", false);
         Task elemTask = new Task(new Text("Text"), false);
-        assertEquals(strTask, elemTask); // Должны быть равны, так как Text.equals() сравнивает содержимое
+        assertEquals(strTask, elemTask);
     }
 
     @Test

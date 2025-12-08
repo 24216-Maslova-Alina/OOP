@@ -45,7 +45,6 @@ class ImagesTest {
         Images image1 = new Images(text1, "https://example.com/1.png");
         Images image2 = new Images(text2, "https://example.com/1.png");
         Images image3 = new Images(text1, "https://example.com/2.png");
-        Images image4 = new Images(text3, "https://example.com/1.png");
 
         // Равные объекты
         assertEquals(image1, image2);
@@ -55,6 +54,7 @@ class ImagesTest {
         assertNotEquals(image1, image3);
 
         // Разный текст
+        Images image4 = new Images(text3, "https://example.com/1.png");
         assertNotEquals(image1, image4);
 
         // Рефлексивность

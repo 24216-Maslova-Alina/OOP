@@ -31,9 +31,6 @@ class CodeTest {
     void testEqualsBasicCases() {
         Code code1 = new Code("java", "code");
         Code code2 = new Code("java", "code");
-        Code code3 = new Code("python", "code");
-        Code code4 = new Code("java", "different");
-        Code code5 = new Code("code");
 
         // Рефлексивность и равенство одинаковых объектов
         assertEquals(code1, code1);
@@ -41,12 +38,15 @@ class CodeTest {
         assertEquals(code1.hashCode(), code2.hashCode());
 
         // Разные языки
+        Code code3 = new Code("python", "code");
         assertNotEquals(code1, code3);
 
         // Разное содержимое
+        Code code4 = new Code("java", "different");
         assertNotEquals(code1, code4);
 
         // С null языком vs с языком
+        Code code5 = new Code("code");
         assertNotEquals(code1, code5);
     }
 

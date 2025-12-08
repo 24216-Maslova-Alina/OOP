@@ -44,7 +44,6 @@ class HeadingTest {
         Heading h1 = new Heading(1, text1);
         Heading h1Same = new Heading(1, text2);
         Heading h2 = new Heading(2, text1);
-        Heading h1DiffContent = new Heading(1, text3);
 
         // Равные объекты
         assertEquals(h1, h1Same);
@@ -54,6 +53,7 @@ class HeadingTest {
         assertNotEquals(h1, h2);
 
         // Разное содержимое
+        Heading h1DiffContent = new Heading(1, text3);
         assertNotEquals(h1, h1DiffContent);
 
         // Сравнение с собой

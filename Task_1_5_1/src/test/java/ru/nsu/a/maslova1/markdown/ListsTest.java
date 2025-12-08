@@ -63,7 +63,7 @@ class ListsTest {
         // Неупорядоченные списки
         Lists unordered1 = Lists.unorderedList(item1, item2);
         Lists unordered2 = Lists.unorderedList(item1, item2);
-        Lists unorderedDiff = Lists.unorderedList(item3);
+
 
         // Упорядоченные списки
         Lists ordered1 = Lists.orderedList(item1, item2);
@@ -78,6 +78,7 @@ class ListsTest {
         assertNotEquals(unordered1, ordered1);
 
         // Разное содержимое
+        Lists unorderedDiff = Lists.unorderedList(item3);
         assertNotEquals(unordered1, unorderedDiff);
 
         // Рефлексивность

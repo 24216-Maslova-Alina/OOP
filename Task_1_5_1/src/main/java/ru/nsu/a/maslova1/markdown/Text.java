@@ -17,7 +17,7 @@ public class Text extends Element {
      *
      * @param content текстовое содержимое
      */
-    public Text (String content) {
+    public Text(String content) {
         this(content, false, false, false, false);
     }
 
@@ -46,7 +46,7 @@ public class Text extends Element {
      * @return новый текстовый элемент без стилей
      */
     public Text plain(String content) {
-        return new Text(content,false, false, false, false);
+        return new Text(content, false, false, false, false);
     }
 
     /**
@@ -56,7 +56,7 @@ public class Text extends Element {
      * @return новый полужирный текстовый элемент
      */
     public static Text bold(String content) {
-        return new Text(content,true, false, false, false);
+        return new Text(content, true, false, false, false);
     }
 
     /**
@@ -66,7 +66,7 @@ public class Text extends Element {
      * @return новый курсивный текстовый элемент
      */
     public static Text italic(String content) {
-        return new Text(content,false, true, false, false);
+        return new Text(content, false, true, false, false);
     }
 
     /**
@@ -76,7 +76,7 @@ public class Text extends Element {
      * @return новый зачеркнутый текстовый элемент
      */
     public static Text strikethrough(String content) {
-        return new Text(content,false, false, true, false);
+        return new Text(content, false, false, true, false);
     }
 
     /**
@@ -86,7 +86,7 @@ public class Text extends Element {
      * @return новый текстовый элемент в формате кода
      */
     public static Text code(String content) {
-        return new Text(content,false, false, false, true);
+        return new Text(content, false, false, false, true);
     }
 
     /**

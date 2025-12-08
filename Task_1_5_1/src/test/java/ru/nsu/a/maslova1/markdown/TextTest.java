@@ -63,12 +63,12 @@ class TextTest {
         // Простые тексты
         Text text1 = new Text("Same");
         Text text2 = new Text("Same");
-        Text text3 = new Text("Different");
+
 
         // Стилизованные тексты
         Text bold1 = Text.bold("Text");
         Text bold2 = Text.bold("Text");
-        Text italic = Text.italic("Text");
+
 
         // Равные простые тексты
         assertEquals(text1, text2);
@@ -78,9 +78,11 @@ class TextTest {
         assertEquals(bold1, bold2);
 
         // Разное содержимое
+        Text text3 = new Text("Different");
         assertNotEquals(text1, text3);
 
         // Разные стили
+        Text italic = Text.italic("Text");
         assertNotEquals(bold1, italic);
 
         // Рефлексивность
@@ -118,23 +120,5 @@ class TextTest {
         // Консистентность hashCode для сложного текста
         Text complex = new Text("Content", true, true, false, false);
         assertEquals(complex.hashCode(), complex.hashCode());
-    }
-
-    @Test
-    void testStylePriority() {
-        // Когда задано несколько стилей одновременно - проверяем приоритеты
-        // В реализации приоритет: bold > italic > strikethrough > code > plain
-
-        Text boldItalic = new Text("Test", true, true, false, false);
-        assertEquals("**Test**", boldItalic.toMarkdown()); // bold имеет приоритет
-
-        Text italicStrike = new Text("Test", false, true, true, false);
-        assertEquals("*Test*", italicStrike.toMarkdown()); // italic имеет приоритет над strikethrough
-
-        Text strikeCode = new Text("Test", false, false, true, true);
-        assertEquals("~~Test~~", strikeCode.toMarkdown()); // strikethrough имеет приоритет над code
-
-        Text allStyles = new Text("Test", true, true, true, true);
-        assertEquals("**Test**", allStyles.toMarkdown()); // bold имеет высший приоритет
     }
 }

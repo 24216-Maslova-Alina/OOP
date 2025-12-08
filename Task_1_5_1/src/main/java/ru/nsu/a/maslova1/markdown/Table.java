@@ -106,7 +106,7 @@ public class Table extends Element {
      * Сравнивает данную таблицу с другим объектом.
      *
      * @param obj объект для сравнения
-     * @return true, если объекты равны (одинаковые строки, выравнивания и ограничение строк), иначе false
+     * @return true, если объекты равны
      */
     @Override
     public boolean equals(Object obj) {
@@ -161,7 +161,7 @@ public class Table extends Element {
      */
     private int[] alignCell(int columnCount, int rowsCount, List<List<Element>> rows) {
         int[] answer = new int[columnCount];
-        for(int i = 0; i < rowsCount; i++) {
+        for (int i = 0; i < rowsCount; i++) {
             List<Element> row = rows.get(i);
             for (int j = 0; j < columnCount; j++) {
                 String cell = row.get(j).toMarkdown();
@@ -217,12 +217,16 @@ public class Table extends Element {
 
             List<Element> row = new ArrayList<>();
             for (Object cell : cells) {
-                switch (cell) {
-                    case null -> row.add(new Text(""));
-                    case String _ -> row.add(new Text((String) cell));
-                    case Integer _ -> row.add(new Text(String.valueOf(cell)));
-                    case Element element -> row.add(element);
-                    default -> row.add(new Text(cell.toString()));
+                if (cell == null) {
+                    row.add(new Text(""));
+                } else if (cell instanceof String) {
+                    row.add(new Text((String) cell));
+                } else if (cell instanceof Integer) {
+                    row.add(new Text(String.valueOf(cell)));
+                } else if (cell instanceof Element) {
+                    row.add((Element) cell);
+                } else {
+                    row.add(new Text(cell.toString()));
                 }
             }
             rows.add(row);

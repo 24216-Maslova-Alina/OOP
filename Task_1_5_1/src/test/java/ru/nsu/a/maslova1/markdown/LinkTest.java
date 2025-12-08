@@ -48,7 +48,6 @@ class LinkTest {
         Link link1 = new Link(text1, "https://example.com");
         Link link2 = new Link(text2, "https://example.com");
         Link link3 = new Link(text1, "https://different.com");
-        Link link4 = new Link(text3, "https://example.com");
 
         // Равные объекты
         assertEquals(link1, link2);
@@ -58,6 +57,7 @@ class LinkTest {
         assertNotEquals(link1, link3);
 
         // Разный текст
+        Link link4 = new Link(text3, "https://example.com");
         assertNotEquals(link1, link4);
 
         // Рефлексивность

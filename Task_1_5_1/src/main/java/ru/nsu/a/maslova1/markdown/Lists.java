@@ -58,7 +58,7 @@ public class Lists extends Element {
         if (this == obj) {
             return true;
         }
-        if (obj == null || getClass() != obj.getClass() ) {
+        if (obj == null || getClass() != obj.getClass()) {
             return false;
         }
         Lists list = (Lists) obj;
