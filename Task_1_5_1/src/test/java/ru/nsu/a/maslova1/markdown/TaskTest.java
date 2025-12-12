@@ -6,12 +6,12 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
-import ru.nsu.a.maslova1.markdown.elements.Link;
-import ru.nsu.a.maslova1.markdown.elements.Task;
 import ru.nsu.a.maslova1.markdown.elements.Code;
-import ru.nsu.a.maslova1.markdown.elements.Text;
 import ru.nsu.a.maslova1.markdown.elements.Heading;
+import ru.nsu.a.maslova1.markdown.elements.Link;
 import ru.nsu.a.maslova1.markdown.elements.Lists;
+import ru.nsu.a.maslova1.markdown.elements.Task;
+import ru.nsu.a.maslova1.markdown.elements.Text;
 
 class TaskTest {
 
