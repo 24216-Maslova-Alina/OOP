@@ -62,7 +62,6 @@ class ListsTest {
     void testEqualsAndHashCode() {
         Element item1 = new Text("Item");
         Element item2 = new Text("Item");
-        Element item3 = new Text("Different");
 
         // Неупорядоченные списки
         Lists unordered1 = Lists.unorderedList(item1, item2);
@@ -82,6 +81,7 @@ class ListsTest {
         assertNotEquals(unordered1, ordered1);
 
         // Разное содержимое
+        Element item3 = new Text("Different");
         Lists unorderedDiff = Lists.unorderedList(item3);
         assertNotEquals(unordered1, unorderedDiff);
 

@@ -1,8 +1,7 @@
 package ru.nsu.a.maslova1.markdown.elements;
 
-import ru.nsu.a.maslova1.markdown.Element;
-
 import java.util.Objects;
+import ru.nsu.a.maslova1.markdown.Element;
 
 /**
  * Класс, представляющий задачу (чекбокс) в Markdown формате.

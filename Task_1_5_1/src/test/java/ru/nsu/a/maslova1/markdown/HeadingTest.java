@@ -42,7 +42,6 @@ class HeadingTest {
     void testEqualsAndHashCode() {
         Element text1 = new Text("Title");
         Element text2 = new Text("Title");
-        Element text3 = new Text("Different");
 
         Heading h1 = new Heading(1, text1);
         Heading h1Same = new Heading(1, text2);
@@ -56,6 +55,7 @@ class HeadingTest {
         assertNotEquals(h1, h2);
 
         // Разное содержимое
+        Element text3 = new Text("Different");
         Heading h1DiffContent = new Heading(1, text3);
         assertNotEquals(h1, h1DiffContent);
 

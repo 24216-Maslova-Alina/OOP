@@ -4,7 +4,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import org.junit.jupiter.api.Test;
-import ru.nsu.a.maslova1.markdown.elements.*;
+import ru.nsu.a.maslova1.markdown.elements.Text;
+import ru.nsu.a.maslova1.markdown.elements.Code;
+import ru.nsu.a.maslova1.markdown.elements.Link;
+import ru.nsu.a.maslova1.markdown.elements.Heading;
+import ru.nsu.a.maslova1.markdown.elements.Images;
 
 class LinkTest {
 
@@ -44,7 +48,6 @@ class LinkTest {
     void testEqualsAndHashCode() {
         Element text1 = new Text("Link text");
         Element text2 = new Text("Link text");
-        Element text3 = new Text("Different");
 
         Link link1 = new Link(text1, "https://example.com");
         Link link2 = new Link(text2, "https://example.com");
@@ -58,6 +61,7 @@ class LinkTest {
         assertNotEquals(link1, link3);
 
         // Разный текст
+        Element text3 = new Text("Different");
         Link link4 = new Link(text3, "https://example.com");
         assertNotEquals(link1, link4);
 

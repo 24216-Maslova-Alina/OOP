@@ -1,11 +1,10 @@
 package ru.nsu.a.maslova1.markdown.elements;
 
-import ru.nsu.a.maslova1.markdown.Element;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import ru.nsu.a.maslova1.markdown.Element;
 
 /**
  * Класс, представляющий таблицу в Markdown формате.
@@ -15,9 +14,9 @@ public class Table extends Element {
     private final int[] alignments;
     private final int rowLimit;
 
-    public final static int ALIGN_RIGHT = 0;
-    public final static int ALIGN_LEFT = 1;
-    public final static int ALIGN_CENTER = 2;
+    public static final int ALIGN_RIGHT = 0;
+    public static final int ALIGN_LEFT = 1;
+    public static final int ALIGN_CENTER = 2;
 
     /**
      * Конструктор.

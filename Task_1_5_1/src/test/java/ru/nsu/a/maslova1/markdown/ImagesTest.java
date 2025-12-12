@@ -44,7 +44,6 @@ class ImagesTest {
     void testEqualsAndHashCode() {
         Element text1 = new Text("Alt");
         Element text2 = new Text("Alt");
-        Element text3 = new Text("Different");
 
         Images image1 = new Images(text1, "https://example.com/1.png");
         Images image2 = new Images(text2, "https://example.com/1.png");
@@ -58,6 +57,7 @@ class ImagesTest {
         assertNotEquals(image1, image3);
 
         // Разный текст
+        Element text3 = new Text("Different");
         Images image4 = new Images(text3, "https://example.com/1.png");
         assertNotEquals(image1, image4);
 

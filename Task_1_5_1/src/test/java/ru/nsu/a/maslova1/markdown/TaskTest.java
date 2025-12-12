@@ -1,12 +1,17 @@
 package ru.nsu.a.maslova1.markdown;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
-import ru.nsu.a.maslova1.markdown.elements.*;
+import ru.nsu.a.maslova1.markdown.elements.Link;
+import ru.nsu.a.maslova1.markdown.elements.Task;
+import ru.nsu.a.maslova1.markdown.elements.Code;
+import ru.nsu.a.maslova1.markdown.elements.Text;
+import ru.nsu.a.maslova1.markdown.elements.Heading;
+import ru.nsu.a.maslova1.markdown.elements.Lists;
 
 class TaskTest {
 
