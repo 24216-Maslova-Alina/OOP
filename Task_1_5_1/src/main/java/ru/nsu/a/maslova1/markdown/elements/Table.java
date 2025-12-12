@@ -220,13 +220,26 @@ public class Table extends Element {
 
             List<Element> row = new ArrayList<>();
             for (Object cell : cells) {
-                row.add(switch (cell) {
-                    case null -> new Text("");
-                    case String s -> new Text(s);
-                    case Integer i -> new Text(i.toString());
-                    case Element e -> e;
-                    default -> new Text(cell.toString());
-                });
+                Object element;
+                if (cell == null) {
+                    element = new Text("");
+                } else {
+                    switch (cell.getClass().getSimpleName()) {
+                        case "String":
+                            element = new Text((String) cell);
+                            break;
+                        case "Integer":
+                            element = new Text(cell.toString());
+                            break;
+                        default:
+                            if (cell instanceof Element) {
+                                element = cell;
+                            } else {
+                                element = new Text(cell.toString());
+                            }
+                    }
+                }
+                row.add((Element) element);
             }
             rows.add(row);
             return this;
