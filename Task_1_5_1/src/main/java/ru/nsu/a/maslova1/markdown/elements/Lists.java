@@ -1,4 +1,7 @@
-package ru.nsu.a.maslova1.markdown;
+package ru.nsu.a.maslova1.markdown.elements;
+
+import ru.nsu.a.maslova1.markdown.ContainerType;
+import ru.nsu.a.maslova1.markdown.Element;
 
 import java.util.Arrays;
 import java.util.List;

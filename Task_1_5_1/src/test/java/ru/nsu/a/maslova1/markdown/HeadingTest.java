@@ -4,6 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import org.junit.jupiter.api.Test;
+import ru.nsu.a.maslova1.markdown.elements.Code;
+import ru.nsu.a.maslova1.markdown.elements.Heading;
+import ru.nsu.a.maslova1.markdown.elements.Text;
 
 class HeadingTest {
 

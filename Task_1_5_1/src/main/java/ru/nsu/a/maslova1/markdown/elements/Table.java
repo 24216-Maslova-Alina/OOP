@@ -1,4 +1,6 @@
-package ru.nsu.a.maslova1.markdown;
+package ru.nsu.a.maslova1.markdown.elements;
+
+import ru.nsu.a.maslova1.markdown.Element;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -13,9 +15,9 @@ public class Table extends Element {
     private final int[] alignments;
     private final int rowLimit;
 
-    public static int ALIGN_RIGHT = 0;
-    public static int ALIGN_LEFT = 1;
-    public static int ALIGN_CENTER = 2;
+    public final static int ALIGN_RIGHT = 0;
+    public final static int ALIGN_LEFT = 1;
+    public final static int ALIGN_CENTER = 2;
 
     /**
      * Конструктор.
@@ -140,6 +142,7 @@ public class Table extends Element {
      * @return строка выравнивания в формате Markdown
      */
     private String getAlignment(int width, int alignment) {
+        width = Math.max(width, 3);
         String line = "-".repeat(width);
         if (alignment == ALIGN_CENTER) {
             return ":" + line.substring(2) + ":";
@@ -217,17 +220,13 @@ public class Table extends Element {
 
             List<Element> row = new ArrayList<>();
             for (Object cell : cells) {
-                if (cell == null) {
-                    row.add(new Text(""));
-                } else if (cell instanceof String) {
-                    row.add(new Text((String) cell));
-                } else if (cell instanceof Integer) {
-                    row.add(new Text(String.valueOf(cell)));
-                } else if (cell instanceof Element) {
-                    row.add((Element) cell);
-                } else {
-                    row.add(new Text(cell.toString()));
-                }
+                row.add(switch (cell) {
+                    case null -> new Text("");
+                    case String s -> new Text(s);
+                    case Integer i -> new Text(i.toString());
+                    case Element e -> e;
+                    default -> new Text(cell.toString());
+                });
             }
             rows.add(row);
             return this;

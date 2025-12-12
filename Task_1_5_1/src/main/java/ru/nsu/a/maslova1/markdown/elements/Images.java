@@ -1,4 +1,6 @@
-package ru.nsu.a.maslova1.markdown;
+package ru.nsu.a.maslova1.markdown.elements;
+
+import ru.nsu.a.maslova1.markdown.Element;
 
 import java.util.Objects;
 
@@ -16,8 +18,17 @@ public class Images extends Element {
      * @param url URL-адрес изображения
      */
     public Images(Element text, String url) {
-        this.text = text;
-        this.url = url;
+        if (text != null) {
+            this.text = text;
+        } else {
+            this.text = new Text("");
+        }
+
+        if (url != null) {
+            this.url = url;
+        } else {
+            this.url = "";
+        }
     }
 
     /**

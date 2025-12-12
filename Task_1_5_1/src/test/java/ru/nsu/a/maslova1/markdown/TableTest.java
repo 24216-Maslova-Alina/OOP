@@ -6,6 +6,10 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
+import ru.nsu.a.maslova1.markdown.elements.Code;
+import ru.nsu.a.maslova1.markdown.elements.Link;
+import ru.nsu.a.maslova1.markdown.elements.Table;
+import ru.nsu.a.maslova1.markdown.elements.Text;
 
 class TableTest {
 

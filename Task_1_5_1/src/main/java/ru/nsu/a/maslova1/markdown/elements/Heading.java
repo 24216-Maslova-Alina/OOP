@@ -1,4 +1,6 @@
-package ru.nsu.a.maslova1.markdown;
+package ru.nsu.a.maslova1.markdown.elements;
+
+import ru.nsu.a.maslova1.markdown.Element;
 
 import java.util.Objects;
 
@@ -10,10 +12,7 @@ public class Heading extends Element {
     private final Element content;
 
     /**
-     * Создает заголовок указанного уровня с заданным содержимым.
-     *
-     * @param level уровень заголовка (от 1 до 6)
-     * @param content содержимое заголовка
+     * Конструктор.
      */
     public Heading(int level, Element content) {
         this.level = level;
