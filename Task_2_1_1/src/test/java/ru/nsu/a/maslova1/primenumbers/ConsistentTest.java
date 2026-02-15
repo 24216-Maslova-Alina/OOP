@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import ru.nsu.a.maslova1.primenumbers.solutions.Consistent;
 
 /**
- * Тесты для Consistent
+ * Тесты для Consistent.
  */
 public class ConsistentTest {
 

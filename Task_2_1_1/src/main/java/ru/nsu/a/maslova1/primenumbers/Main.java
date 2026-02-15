@@ -3,7 +3,6 @@ package ru.nsu.a.maslova1.primenumbers;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
-
 import ru.nsu.a.maslova1.primenumbers.solutions.Consistent;
 import ru.nsu.a.maslova1.primenumbers.solutions.ParallelStream;
 import ru.nsu.a.maslova1.primenumbers.solutions.ParallelThreads;
@@ -45,6 +44,7 @@ public class Main {
             System.out.println("Последовательное решение: false");
         }
         long time1 = timer.end();
+        System.out.printf("  Время последовательного решения: %d\n", time1);
 
         ParallelThreads check2 = new ParallelThreads(arr, 0, 0, arr.length);
 
@@ -56,6 +56,7 @@ public class Main {
             System.out.println("Параллельное с потоками: false");
         }
         long time22 = timer.end();
+        System.out.printf("    Время решения с 2 потоками: %d\n", time22);
 
         // 4 потока
         timer.start();
@@ -65,6 +66,7 @@ public class Main {
             System.out.println("Параллельное с потоками: false");
         }
         long time24 = timer.end();
+        System.out.printf("    Время решения с 4 потоками: %d\n", time24);
 
         // 6 потоков
         timer.start();
@@ -74,6 +76,7 @@ public class Main {
             System.out.println("Параллельное с потоками: false");
         }
         long time26 = timer.end();
+        System.out.printf("    Время решения с 6 потоками: %d\n", time26);
 
         // 8 потоков
         timer.start();
@@ -83,6 +86,7 @@ public class Main {
             System.out.println("Параллельное с потоками: false");
         }
         long time28 = timer.end();
+        System.out.printf("    Время решения с 8 потоками: %d\n", time28);
 
         // Параллель стрим
         ParallelStream check3 = new ParallelStream();
@@ -93,19 +97,6 @@ public class Main {
             System.out.println("Parallel strim: false");
         }
         long time3 = timer.end();
-
-        System.out.print("|--------------------------------------|\n");
-        System.out.printf("  Время последовательного решения: %d\n", time1);
-        System.out.print("|--------------------------------------|\n");
-        System.out.printf("    Время решения с 2 потоками: %d\n", time22);
-        System.out.print("|--------------------------------------|\n");
-        System.out.printf("    Время решения с 4 потоками: %d\n", time24);
-        System.out.print("|--------------------------------------|\n");
-        System.out.printf("    Время решения с 6 потоками: %d\n", time26);
-        System.out.print("|--------------------------------------|\n");
-        System.out.printf("    Время решения с 8 потоками: %d\n", time28);
-        System.out.print("|--------------------------------------|\n");
         System.out.printf("        Параллельный стрим: %d\n", time3);
-        System.out.print("|--------------------------------------|\n");
     }
 }

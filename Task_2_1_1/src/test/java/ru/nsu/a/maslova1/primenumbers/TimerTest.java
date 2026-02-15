@@ -1,10 +1,11 @@
 package ru.nsu.a.maslova1.primenumbers;
 
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
- * Тесты для Timer
+ * Тесты для Timer.
  */
 public class TimerTest {
 

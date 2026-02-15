@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import ru.nsu.a.maslova1.primenumbers.solutions.ParallelThreads;
 
 /**
- * Тесты для ParallelThreads
+ * Тесты для ParallelThreads.
  */
 public class ParallelThreadsTest {
 
