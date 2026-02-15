@@ -10,6 +10,7 @@ public class ParallelThreads extends Thread {
     private final int step;
     private final int len;
     private boolean foundPrime = false;
+    private static volatile boolean foundGlobal = false; // Общий флаг для всех потоков
 
     /**
      * Конструктор по умолчанию.
@@ -41,12 +42,14 @@ public class ParallelThreads extends Thread {
     /**
      * Метод выполнения потока.
      * Проверяет числа в массиве с заданным шагом.
+     * Останавливается, если другой поток уже нашел составное число.
      */
     @Override
     public void run() {
-        for (int i = start; i < len; i += step) {
+        for (int i = start; i < len && !foundGlobal; i += step) {
             if (!prime.isPrime(arr[i])) {
                 foundPrime = true;
+                foundGlobal = true; // Сигнализируем остальным потокам остановиться
                 break;
             }
         }
@@ -62,6 +65,9 @@ public class ParallelThreads extends Thread {
      * @return true если найдено хотя бы одно не простое число, иначе false
      */
     public boolean hasNotPrimeThreads(int[] arr, int len, int count) {
+        // Сбрасываем глобальный флаг перед началом проверки
+        foundGlobal = false;
+
         if (count > len) {
             count = len;
         }
@@ -73,21 +79,32 @@ public class ParallelThreads extends Thread {
             threads[i] = new ParallelThreads(arr, i, count, len);
         }
 
+        // Запускаем все потоки
         for (ParallelThreads thread : threads) {
             thread.start();
         }
 
+        boolean result = false;
+
+        // Ждем завершения всех потоков
         for (ParallelThreads thread : threads) {
             try {
                 thread.join();
                 if (thread.getResult()) {
-                    return true;
+                    result = true;
+                    // Прерываем остальные потоки, если они еще работают
+                    for (ParallelThreads t : threads) {
+                        if (t != thread && t.isAlive()) {
+                            t.interrupt();
+                        }
+                    }
                 }
             } catch (InterruptedException e) {
-                return false;
+                Thread.currentThread().interrupt();
+                return result; // Возвращаем то, что уже нашли
             }
         }
-        return false;
+        return result;
     }
 
     /**
