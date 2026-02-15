@@ -44,8 +44,8 @@ public class ParallelThreads extends Thread {
      */
     @Override
     public void run() {
-        for(int i = start; i < len; i += step) {
-            if (!prime.isPrime(arr[i])){
+        for (int i = start; i < len; i += step) {
+            if (!prime.isPrime(arr[i])) {
                 foundPrime = true;
                 break;
             }
@@ -69,7 +69,7 @@ public class ParallelThreads extends Thread {
         this.arr = arr;
 
         ParallelThreads[] threads = new ParallelThreads[count];
-        for (int i = 0; i < count; i++){
+        for (int i = 0; i < count; i++) {
             threads[i] = new ParallelThreads(arr, i, count, len);
         }
 

@@ -8,6 +8,9 @@ import org.junit.jupiter.api.Test;
 import ru.nsu.a.maslova1.primenumbers.solutions.Consistent;
 import ru.nsu.a.maslova1.primenumbers.solutions.ParallelStream;
 
+/**
+ * Тесты для ParallelStream
+ */
 public class ParallelStreamTest {
 
     @Test
