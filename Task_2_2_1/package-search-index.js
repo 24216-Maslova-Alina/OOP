@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"ru.nsu.a.maslova1.pizzeria"},{"l":"ru.nsu.a.maslova1.pizzeria.init"},{"l":"ru.nsu.a.maslova1.pizzeria.input"},{"l":"ru.nsu.a.maslova1.pizzeria.model"},{"l":"ru.nsu.a.maslova1.pizzeria.storage"},{"l":"ru.nsu.a.maslova1.pizzeria.workers"}];updateSearchResults();
