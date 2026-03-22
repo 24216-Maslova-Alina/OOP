@@ -5,6 +5,7 @@ import ru.nsu.a.maslova1.pizzeria.model.OrderStatus;
 
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.logging.Logger;
 
 /**
  * Склад готовых заказов.
@@ -33,9 +34,17 @@ public class Warehouse {
      * @throws InterruptedException если поток был прерван во время ожидания
      */
     public synchronized void put(Order order) throws InterruptedException {
-        if (storage.size() >= capacity) {
-            System.out.print("На складе нет свободных мест\n");
-            wait();
+        while (storage.size() >= capacity) {
+            if (Thread.currentThread().isInterrupted()) {
+                return;
+            }
+            try {
+                System.out.print("На складе нет свободных мест\n");
+                wait();
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+                return;
+            }
         }
 
         storage.add(order);
@@ -54,7 +63,14 @@ public class Warehouse {
      */
     public synchronized Order getOrder() throws InterruptedException {
         while (storage.isEmpty()) {
-            wait();
+            try {
+                wait();
+            } catch (InterruptedException e) {
+                Logger.getLogger(Warehouse.class.getName())
+                        .warning("Interrupted while waiting in getOrder()");
+                Thread.currentThread().interrupt();
+                return null;
+            }
         }
 
         notifyAll();

@@ -1,5 +1,7 @@
 package ru.nsu.a.maslova1.pizzeria.input;
 
+import java.util.logging.Logger;
+
 import ru.nsu.a.maslova1.pizzeria.model.Order;
 import ru.nsu.a.maslova1.pizzeria.model.OrderQueue;
 
@@ -7,7 +9,8 @@ import ru.nsu.a.maslova1.pizzeria.model.OrderQueue;
  * Клиент, который генерирует заказы и добавляет их в очередь.
  * Работает в отдельном потоке, создавая заказы через случайные интервалы.
  */
-public class Client extends Thread{
+public class Client extends Thread {
+    private static final Logger logger = Logger.getLogger(Client.class.getName());
     private volatile boolean running = false;
     private int orderCounter = 0;
     OrderQueue orderQueue;
@@ -38,6 +41,7 @@ public class Client extends Thread{
             try {
                 Thread.sleep(pause);
             } catch (InterruptedException e) {
+                logger.info("Client stopped");
                 Thread.currentThread().interrupt();
                 break;
             }

@@ -5,12 +5,15 @@ import ru.nsu.a.maslova1.pizzeria.model.Order;
 import ru.nsu.a.maslova1.pizzeria.model.OrderQueue;
 import ru.nsu.a.maslova1.pizzeria.model.OrderStatus;
 
+import java.util.logging.Logger;
+
 /**
  * Пекарь, который готовит заказы.
  * Берёт заказы из очереди, готовит их указанное время
  * и передаёт готовые заказы на склад.
  */
-public class Baker extends Thread{
+public class Baker extends Thread {
+    private static final Logger logger = Logger.getLogger(Baker.class.getName());
     private int speed;
     OrderQueue queue;
     Warehouse warehouse;
@@ -37,6 +40,10 @@ public class Baker extends Thread{
         while (!Thread.currentThread().isInterrupted()) {
             try {
                 Order currentOrder = queue.getOrder();
+                if (currentOrder == null) {
+                    break;
+                }
+
                 currentOrder.setStatus(OrderStatus.BAKING);
                 System.out.printf("%d Заказ готовится\n", currentOrder.getId());
 
@@ -47,6 +54,7 @@ public class Baker extends Thread{
 
                 warehouse.put(currentOrder);
             } catch (InterruptedException e) {
+                logger.info("Baker stopped: " + Thread.currentThread().getName());
                 Thread.currentThread().interrupt();
                 break;
             }

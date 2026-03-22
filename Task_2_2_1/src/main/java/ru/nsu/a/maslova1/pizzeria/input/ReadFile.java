@@ -1,96 +1,61 @@
-// ПЕРЕДЕЛАТЬ ФОРМАТ ВХОДНЫХ ДАННЫХ
 package ru.nsu.a.maslova1.pizzeria.input;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.Scanner;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
- * Считывает конфигурацию пиццерии из файла.
- * Формат файла:
- * - количество пекарей
- * - скорость каждого пекаря (сколько заказов готовит за такт)
- * - количество курьеров
- * - вместимость сумки каждого курьера
- * - вместимость склада
- * - таймер (время работы пиццерии)
+ * Класс для чтения конфигурации пиццерии из JSON-файла.
  */
 public class ReadFile {
-    private int bakers;
-    private int couriers;
-    private final int[] bakersSpeed;
-    private final int[] trunkCapacity;
-    private final int warehouseCapacity;
-    private final int timer;
+
+    private static final Logger logger = Logger.getLogger(ReadFile.class.getName());
 
     /**
-     * Создаёт объект с настройками из указанного файла.
+     * Считывает конфигурацию из JSON-файла.
      *
-     * @param file путь к файлу конфигурации
-     * @throws FileNotFoundException если файл не найден
+     * @param file путь к файлу (например, information.json)
+     * @return объект конфигурации PizzeriaConfig
+     * @throws IOException если файл не найден или JSON некорректный
      */
-    public ReadFile(String file) throws FileNotFoundException {
-        Scanner scanner =  new Scanner(new File(file));
+    public static PizzeriaConfig read(String file) throws IOException {
+        ObjectMapper mapper = new ObjectMapper();
 
-        bakers = scanner.nextInt();
-        this.bakersSpeed = new int[bakers];
+        try {
+            PizzeriaConfig config = mapper.readValue(new File(file), PizzeriaConfig.class);
 
-        for (int i = 0; i < bakers; i++) {
-            bakersSpeed[i] = scanner.nextInt();
+            validate(config);
+
+            return config;
+
+        } catch (IOException e) {
+            logger.log(Level.SEVERE, "Ошибка чтения конфигурации из файла: " + file, e);
+            throw e; // не теряем исключение!
+        }
+    }
+
+    /**
+     * Проверка корректности конфигурации.
+     */
+    private static void validate(PizzeriaConfig config) {
+
+        if (config.bakers == null || config.bakers.length == 0) {
+            throw new IllegalArgumentException("Список пекарей пуст");
         }
 
-        couriers = scanner.nextInt();
-        this.trunkCapacity = new int[couriers];
-
-        for (int i = 0; i < couriers; i++) {
-            trunkCapacity[i] = scanner.nextInt();
+        if (config.couriers == null || config.couriers.length == 0) {
+            throw new IllegalArgumentException("Список курьеров пуст");
         }
 
-        warehouseCapacity = scanner.nextInt();
-        timer = scanner.nextInt();
+        if (config.warehouseCapacity <= 0) {
+            throw new IllegalArgumentException("Вместимость склада должна быть > 0");
+        }
 
-        scanner.close();
-    }
-
-    /**
-     * @return количество пекарей
-     */
-    public int getBakers() {
-        return bakers;
-    }
-
-    /**
-     * @return массив скоростей пекарей
-     */
-    public int[] getBakersSpeed() {
-        return bakersSpeed;
-    }
-
-    /**
-     * @return количество курьеров
-     */
-    public int getCouriers() {
-        return couriers;
-    }
-
-    /**
-     * @return массив вместимостей сумок курьеров
-     */
-    public int[] getTrunkCapacity() {
-        return trunkCapacity;
-    }
-
-    /**
-     * @return вместимость склада
-     */
-    public int getWarehouseCapacity() {
-        return warehouseCapacity;
-    }
-
-    /**
-     * @return время работы пиццерии в тактах
-     */
-    public int getTimer() {
-        return timer;
+        if (config.workTime <= 0) {
+            throw new IllegalArgumentException("Время работы должно быть > 0");
+        }
     }
 }

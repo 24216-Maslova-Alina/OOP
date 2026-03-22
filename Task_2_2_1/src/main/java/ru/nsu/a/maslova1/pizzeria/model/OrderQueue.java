@@ -20,7 +20,15 @@ public class OrderQueue {
      */
     public synchronized Order getOrder() throws InterruptedException {
         while (queue.isEmpty()) {
-            wait();
+            if (Thread.currentThread().isInterrupted()) {
+                return null;
+            }
+            try {
+                wait();
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+                return null;
+            }
         }
         return queue.poll();
     }
@@ -41,7 +49,7 @@ public class OrderQueue {
      *
      * @return true если очередь пуста, иначе false
      */
-    public boolean isEmpty() {
+    public synchronized boolean isEmpty() {
         return queue.isEmpty();
     }
 
@@ -50,7 +58,7 @@ public class OrderQueue {
      *
      * @return размер очереди
      */
-    public int size() {
+    public synchronized int size() {
         return queue.size();
     }
 }
