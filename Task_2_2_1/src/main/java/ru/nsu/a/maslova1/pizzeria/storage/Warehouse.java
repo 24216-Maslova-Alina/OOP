@@ -1,9 +1,9 @@
 package ru.nsu.a.maslova1.pizzeria.storage;
 
-import java.util.logging.Logger;
 import java.util.LinkedList;
-import ru.nsu.a.maslova1.pizzeria.model.Order;
 import java.util.Queue;
+import java.util.logging.Logger;
+import ru.nsu.a.maslova1.pizzeria.model.Order;
 import ru.nsu.a.maslova1.pizzeria.model.OrderStatus;
 
 /**

@@ -1,14 +1,14 @@
 package ru.nsu.a.maslova1.pizzeria.input;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import org.junit.jupiter.api.Test;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 /**
@@ -29,11 +29,11 @@ class ReadFileTest {
     @Test
     void testReadValidConfig() throws IOException {
         String json = "{\n"
-                + "  \"bakers\": [1000, 1500],\n" +
-                "  \"couriers\": [2, 3],\n" +
-                "  \"warehouseCapacity\": 10,\n" +
-                "  \"workTime\": 30\n" +
-                "}";
+                + "  \"bakers\": [1000, 1500],\n"
+                + "  \"couriers\": [2, 3],\n"
+                + "  \"warehouseCapacity\": 10,\n"
+                + "  \"workTime\": 30\n"
+                + "}";
 
         File configFile = tempDir.resolve("config.json").toFile();
         java.nio.file.Files.write(configFile.toPath(), json.getBytes());

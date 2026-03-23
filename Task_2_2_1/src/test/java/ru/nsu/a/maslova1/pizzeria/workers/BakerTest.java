@@ -4,8 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-import org.junit.jupiter.api.Test;
 import java.lang.reflect.Field;
+import org.junit.jupiter.api.Test;
 import ru.nsu.a.maslova1.pizzeria.model.Order;
 import ru.nsu.a.maslova1.pizzeria.model.OrderQueue;
 import ru.nsu.a.maslova1.pizzeria.model.OrderStatus;

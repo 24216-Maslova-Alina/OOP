@@ -1,9 +1,9 @@
 package ru.nsu.a.maslova1.pizzeria;
 
+import java.io.IOException;
 import ru.nsu.a.maslova1.pizzeria.init.PizzeriaComponents;
 import ru.nsu.a.maslova1.pizzeria.init.PizzeriaInitializer;
 import ru.nsu.a.maslova1.pizzeria.input.PizzeriaConfig;
-import java.io.IOException;
 import ru.nsu.a.maslova1.pizzeria.input.ReadFile;
 
 /**
