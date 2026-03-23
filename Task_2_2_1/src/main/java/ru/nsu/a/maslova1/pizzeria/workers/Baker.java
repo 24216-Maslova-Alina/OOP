@@ -1,11 +1,10 @@
 package ru.nsu.a.maslova1.pizzeria.workers;
 
-import ru.nsu.a.maslova1.pizzeria.storage.Warehouse;
+import java.util.logging.Logger;
 import ru.nsu.a.maslova1.pizzeria.model.Order;
 import ru.nsu.a.maslova1.pizzeria.model.OrderQueue;
 import ru.nsu.a.maslova1.pizzeria.model.OrderStatus;
-
-import java.util.logging.Logger;
+import ru.nsu.a.maslova1.pizzeria.storage.Warehouse;
 
 /**
  * Пекарь, который готовит заказы.

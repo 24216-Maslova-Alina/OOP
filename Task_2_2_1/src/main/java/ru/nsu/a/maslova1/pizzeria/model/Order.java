@@ -20,6 +20,8 @@ public class Order {
     }
 
     /**
+     * Возвращает статус.
+     *
      * @return текущий статус заказа
      */
     public OrderStatus getStatus() {
@@ -27,6 +29,8 @@ public class Order {
     }
 
     /**
+     * Возвращает Id.
+     *
      * @return уникальный номер заказа
      */
     public int getId() {

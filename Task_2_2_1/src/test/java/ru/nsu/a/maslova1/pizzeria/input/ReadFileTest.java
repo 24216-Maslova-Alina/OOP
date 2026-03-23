@@ -1,15 +1,15 @@
 package ru.nsu.a.maslova1.pizzeria.input;
 
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.io.TempDir;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
+import org.junit.jupiter.api.io.TempDir;
 
 /**
  * Тестовый класс для проверки чтения конфигурации из файла {@link ReadFile}.
@@ -28,8 +28,8 @@ class ReadFileTest {
      */
     @Test
     void testReadValidConfig() throws IOException {
-        String json = "{\n" +
-                "  \"bakers\": [1000, 1500],\n" +
+        String json = "{\n"
+                + "  \"bakers\": [1000, 1500],\n" +
                 "  \"couriers\": [2, 3],\n" +
                 "  \"warehouseCapacity\": 10,\n" +
                 "  \"workTime\": 30\n" +
@@ -65,12 +65,12 @@ class ReadFileTest {
     @Test
     void testValidateEmptyBakers() {
         // Создаём временный файл с некорректной конфигурацией
-        String invalidJson = "{\n" +
-                "  \"bakers\": [],\n" +
-                "  \"couriers\": [2, 3],\n" +
-                "  \"warehouseCapacity\": 10,\n" +
-                "  \"workTime\": 30\n" +
-                "}";
+        String invalidJson = "{\n"
+                + "  \"bakers\": [],\n"
+                + "  \"couriers\": [2, 3],\n"
+                + "  \"warehouseCapacity\": 10,\n"
+                + "  \"workTime\": 30\n"
+                + "}";
 
         File configFile = tempDir.resolve("invalid_config.json").toFile();
 
@@ -86,12 +86,12 @@ class ReadFileTest {
      */
     @Test
     void testValidateEmptyCouriers() {
-        String invalidJson = "{\n" +
-                "  \"bakers\": [1000, 1500],\n" +
-                "  \"couriers\": [],\n" +
-                "  \"warehouseCapacity\": 10,\n" +
-                "  \"workTime\": 30\n" +
-                "}";
+        String invalidJson = "{\n"
+                + "  \"bakers\": [1000, 1500],\n"
+                + "  \"couriers\": [],\n"
+                + "  \"warehouseCapacity\": 10,\n"
+                + "  \"workTime\": 30\n"
+                + "}";
 
         File configFile = tempDir.resolve("invalid_config2.json").toFile();
 
@@ -107,12 +107,12 @@ class ReadFileTest {
      */
     @Test
     void testValidateZeroWarehouseCapacity() {
-        String invalidJson = "{\n" +
-                "  \"bakers\": [1000, 1500],\n" +
-                "  \"couriers\": [2, 3],\n" +
-                "  \"warehouseCapacity\": 0,\n" +
-                "  \"workTime\": 30\n" +
-                "}";
+        String invalidJson = "{\n"
+                + "  \"bakers\": [1000, 1500],\n"
+                + "  \"couriers\": [2, 3],\n"
+                + "  \"warehouseCapacity\": 0,\n"
+                + "  \"workTime\": 30\n"
+                + "}";
 
         File configFile = tempDir.resolve("invalid_config3.json").toFile();
 

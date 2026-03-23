@@ -2,11 +2,11 @@ package ru.nsu.a.maslova1.pizzeria.input;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import ru.nsu.a.maslova1.pizzeria.model.OrderQueue;
 import org.junit.jupiter.api.Test;
+import ru.nsu.a.maslova1.pizzeria.model.OrderQueue;
 
 /**
  * Тестовый класс для проверки клиента {@link Client}.

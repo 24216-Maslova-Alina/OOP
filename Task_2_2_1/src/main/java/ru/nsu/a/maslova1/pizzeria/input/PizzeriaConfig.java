@@ -12,13 +12,13 @@ public class PizzeriaConfig {
     public int workTime;              // время работы (сек)
 
     /**
-     * Пустой конструктор обязателен для Jackson
+     * Пустой конструктор обязателен для Jackson.
      */
     public PizzeriaConfig() {
     }
 
     /**
-     * Удобный конструктор (не обязателен, но полезен)
+     * Удобный конструктор (не обязателен, но полезен).
      */
     public PizzeriaConfig(
             int[] bakers,

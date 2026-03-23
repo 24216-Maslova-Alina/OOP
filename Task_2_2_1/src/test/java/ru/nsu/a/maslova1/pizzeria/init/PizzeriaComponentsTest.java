@@ -3,13 +3,13 @@ package ru.nsu.a.maslova1.pizzeria.init;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-import ru.nsu.a.maslova1.pizzeria.model.OrderQueue;
-import ru.nsu.a.maslova1.pizzeria.storage.Warehouse;
-import ru.nsu.a.maslova1.pizzeria.input.Client;
-import ru.nsu.a.maslova1.pizzeria.workers.Baker;
-import ru.nsu.a.maslova1.pizzeria.workers.Courier;
 import org.junit.jupiter.api.Test;
 import java.util.List;
+import ru.nsu.a.maslova1.pizzeria.model.OrderQueue;
+import ru.nsu.a.maslova1.pizzeria.input.Client;
+import ru.nsu.a.maslova1.pizzeria.storage.Warehouse;
+import ru.nsu.a.maslova1.pizzeria.workers.Baker;
+import ru.nsu.a.maslova1.pizzeria.workers.Courier;
 
 /**
  * Тестовый класс для проверки компонентов пиццерии {@link PizzeriaComponents}.

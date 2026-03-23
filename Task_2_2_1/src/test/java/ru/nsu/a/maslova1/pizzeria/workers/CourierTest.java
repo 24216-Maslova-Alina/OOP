@@ -1,9 +1,12 @@
 package ru.nsu.a.maslova1.pizzeria.workers;
 
-import ru.nsu.a.maslova1.pizzeria.storage.Warehouse;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.junit.jupiter.api.Test;
 import java.lang.reflect.Field;
-import static org.junit.jupiter.api.Assertions.*;
+import ru.nsu.a.maslova1.pizzeria.storage.Warehouse;
 
 /**
  * Тестовый класс для проверки курьера {@link Courier}.

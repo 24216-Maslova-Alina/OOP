@@ -1,5 +1,6 @@
 package ru.nsu.a.maslova1.pizzeria;
 
+import java.util.List;
 import ru.nsu.a.maslova1.pizzeria.init.PizzeriaComponents;
 import ru.nsu.a.maslova1.pizzeria.input.Client;
 import ru.nsu.a.maslova1.pizzeria.model.OrderQueue;
@@ -7,8 +8,11 @@ import ru.nsu.a.maslova1.pizzeria.storage.Warehouse;
 import ru.nsu.a.maslova1.pizzeria.workers.Baker;
 import ru.nsu.a.maslova1.pizzeria.workers.Courier;
 
-import java.util.List;
-
+/**
+ * Главный класс пиццерии, который управляет работой всех компонентов системы.
+ * Координирует взаимодействие между клиентом, пекарями, курьерами,
+ * очередью заказов и складом готовой продукции.
+ */
 public class Pizzeria {
 
     private final Client client;
@@ -18,6 +22,11 @@ public class Pizzeria {
     private final Warehouse warehouse;
     private final int workTime;
 
+    /**
+     * Конструктор пиццерии.
+     *
+     * @param components объект, содержащий все необходимые компоненты для работы пиццерии
+     */
     public Pizzeria(PizzeriaComponents components) {
         this.client = components.client;
         this.bakers = components.bakers;
@@ -27,6 +36,11 @@ public class Pizzeria {
         this.workTime = components.workTime;
     }
 
+    /**
+     * Запускает работу пиццерии.
+     * Запускает потоки клиента, пекарей и курьеров, затем ожидает
+     * указанное время работы и инициирует завершение.
+     */
     public void start() {
         System.out.println("Пиццерия открывается!\n");
 
@@ -49,6 +63,11 @@ public class Pizzeria {
         shutdown();
     }
 
+    /**
+     * Инициирует процесс корректного завершения работы пиццерии.
+     * Останавливает поступление новых заказов и ожидает завершения всех
+     * начатых заказов перед остановкой потоков работников.
+     */
     private void shutdown() {
         System.out.println("\nПиццерия закрывается!");
 
@@ -65,25 +84,28 @@ public class Pizzeria {
         }
     }
 
+    /**
+     * Завершает все начатые заказы.
+     * Сначала останавливает клиента, затем ожидает опустошения очереди заказов
+     * и склада. После этого прерывает потоки пекарей и курьеров и ожидает
+     * их завершения.
+     */
     private void finishAllOrders() {
         System.out.println("Завершаем все начатые заказы...\n");
 
-        // 1. Останавливаем клиента (больше заказов не будет)
         client.shutdown();
 
-        // 2. Даем пекарям и курьерам доделать текущие заказы
         while (!queue.isEmpty() || !warehouse.isEmpty()) {
             try {
                 Thread.sleep(1000);
-                System.out.println("Очередь: " + queue.size() +
-                        ", Склад: " + warehouse.getSize());
+                System.out.println("Очередь: " + queue.size()
+                        + ", Склад: " + warehouse.getSize());
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
                 break;
             }
         }
 
-        // 3. ТОЛЬКО ПОСЛЕ обработки всех заказов прерываем работников
         for (Thread baker : bakers) {
             baker.interrupt();
         }
@@ -91,7 +113,6 @@ public class Pizzeria {
             courier.interrupt();
         }
 
-        // 4. Ждем завершения всех потоков
         try {
             for (Thread baker : bakers) {
                 baker.join(5000); // timeout 5 сек

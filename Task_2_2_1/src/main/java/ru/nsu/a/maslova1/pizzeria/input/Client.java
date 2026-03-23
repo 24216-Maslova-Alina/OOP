@@ -1,7 +1,6 @@
 package ru.nsu.a.maslova1.pizzeria.input;
 
 import java.util.logging.Logger;
-
 import ru.nsu.a.maslova1.pizzeria.model.Order;
 import ru.nsu.a.maslova1.pizzeria.model.OrderQueue;
 
@@ -37,7 +36,7 @@ public class Client extends Thread {
             Order order = new Order(++orderCounter);
             orderQueue.addOrder(order);
 
-            int pause = 100 + (int)(Math.random() * 1000);
+            int pause = 100 + (int) (Math.random() * 1000);
             try {
                 Thread.sleep(pause);
             } catch (InterruptedException e) {

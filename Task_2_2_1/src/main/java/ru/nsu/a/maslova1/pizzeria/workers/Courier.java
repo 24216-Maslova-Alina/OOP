@@ -1,11 +1,10 @@
 package ru.nsu.a.maslova1.pizzeria.workers;
 
-import ru.nsu.a.maslova1.pizzeria.storage.Warehouse;
-import ru.nsu.a.maslova1.pizzeria.model.Order;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
+import ru.nsu.a.maslova1.pizzeria.model.Order;
+import ru.nsu.a.maslova1.pizzeria.storage.Warehouse;
 
 /**
  * Курьер, который доставляет заказы со склада.

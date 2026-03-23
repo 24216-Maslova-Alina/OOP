@@ -1,11 +1,10 @@
 package ru.nsu.a.maslova1.pizzeria.storage;
 
-import ru.nsu.a.maslova1.pizzeria.model.Order;
-import ru.nsu.a.maslova1.pizzeria.model.OrderStatus;
-
-import java.util.LinkedList;
-import java.util.Queue;
 import java.util.logging.Logger;
+import java.util.LinkedList;
+import ru.nsu.a.maslova1.pizzeria.model.Order;
+import java.util.Queue;
+import ru.nsu.a.maslova1.pizzeria.model.OrderStatus;
 
 /**
  * Склад готовых заказов.
@@ -83,6 +82,8 @@ public class Warehouse {
     }
 
     /**
+     * Возвращает вместимость склада.
+     *
      * @return максимальная вместимость склада
      */
     public int getCapacity() {
@@ -90,6 +91,8 @@ public class Warehouse {
     }
 
     /**
+     * Возвращает количество заказов.
+     *
      * @return текущее количество заказов на складе
      */
     public int getSize() {

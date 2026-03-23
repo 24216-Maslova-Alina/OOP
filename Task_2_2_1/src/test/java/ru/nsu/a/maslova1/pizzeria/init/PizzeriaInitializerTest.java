@@ -3,8 +3,8 @@ package ru.nsu.a.maslova1.pizzeria.init;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-import ru.nsu.a.maslova1.pizzeria.input.PizzeriaConfig;
 import org.junit.jupiter.api.Test;
+import ru.nsu.a.maslova1.pizzeria.input.PizzeriaConfig;
 
 /**
  * Тестовый класс для проверки инициализатора пиццерии {@link PizzeriaInitializer}.

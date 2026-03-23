@@ -1,14 +1,22 @@
 package ru.nsu.a.maslova1.pizzeria;
 
-import ru.nsu.a.maslova1.pizzeria.input.PizzeriaConfig;
 import ru.nsu.a.maslova1.pizzeria.init.PizzeriaComponents;
 import ru.nsu.a.maslova1.pizzeria.init.PizzeriaInitializer;
+import ru.nsu.a.maslova1.pizzeria.input.PizzeriaConfig;
+import java.io.IOException;
 import ru.nsu.a.maslova1.pizzeria.input.ReadFile;
 
-import java.io.IOException;
-
+/**
+ * Главный класс приложения.
+ * Запускает пиццерию, инициализируя компоненты из конфигурационного файла.
+ */
 public class Main {
 
+    /**
+     * Точка входа в программу.
+     *
+     * @param args аргументы командной строки (не используются)
+     */
     public static void main(String[] args) {
 
         Thread.setDefaultUncaughtExceptionHandler((thread, throwable) -> {

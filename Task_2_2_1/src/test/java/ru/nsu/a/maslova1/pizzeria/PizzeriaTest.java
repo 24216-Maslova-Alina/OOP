@@ -1,10 +1,12 @@
 package ru.nsu.a.maslova1.pizzeria;
 
-import ru.nsu.a.maslova1.pizzeria.init.PizzeriaComponents;
-import ru.nsu.a.maslova1.pizzeria.input.PizzeriaConfig;
-import ru.nsu.a.maslova1.pizzeria.init.PizzeriaInitializer;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+import ru.nsu.a.maslova1.pizzeria.init.PizzeriaComponents;
+import ru.nsu.a.maslova1.pizzeria.init.PizzeriaInitializer;
+import ru.nsu.a.maslova1.pizzeria.input.PizzeriaConfig;
 
 /**
  * Тестовый класс для проверки пиццерии {@link Pizzeria}.

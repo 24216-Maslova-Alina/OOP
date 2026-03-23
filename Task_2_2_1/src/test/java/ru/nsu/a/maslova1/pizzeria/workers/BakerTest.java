@@ -1,12 +1,15 @@
 package ru.nsu.a.maslova1.pizzeria.workers;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
+import org.junit.jupiter.api.Test;
+import java.lang.reflect.Field;
 import ru.nsu.a.maslova1.pizzeria.model.Order;
 import ru.nsu.a.maslova1.pizzeria.model.OrderQueue;
 import ru.nsu.a.maslova1.pizzeria.model.OrderStatus;
 import ru.nsu.a.maslova1.pizzeria.storage.Warehouse;
-import org.junit.jupiter.api.Test;
-import java.lang.reflect.Field;
-import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Тестовый класс для проверки пекаря {@link Baker}.
