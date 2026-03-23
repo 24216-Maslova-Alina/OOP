@@ -77,6 +77,9 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">Pizzeria</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
+<div class="block">Главный класс пиццерии, который управляет работой всех компонентов системы.
+ Координирует взаимодействие между клиентом, пекарями, курьерами,
+ очередью заказов и складом готовой продукции.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -89,7 +92,9 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(ru.nsu.a.maslova1.pizzeria.init.PizzeriaComponents)" class="member-name-link">Pizzeria</a><wbr>(<a href="init/PizzeriaComponents.html" title="class in ru.nsu.a.maslova1.pizzeria.init">PizzeriaComponents</a>&nbsp;components)</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">Конструктор пиццерии.</div>
+</div>
 </div>
 </section>
 </li>
@@ -106,7 +111,9 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#start()" class="member-name-link">start</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Запускает работу пиццерии.</div>
+</div>
 </div>
 </div>
 </div>
@@ -128,6 +135,11 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="&lt;init&gt;(ru.nsu.a.maslova1.pizzeria.init.PizzeriaComponents)">
 <h3>Pizzeria</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">Pizzeria</span><wbr><span class="parameters">(<a href="init/PizzeriaComponents.html" title="class in ru.nsu.a.maslova1.pizzeria.init">PizzeriaComponents</a>&nbsp;components)</span></div>
+<div class="block">Конструктор пиццерии.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>components</code> - объект, содержащий все необходимые компоненты для работы пиццерии</dd>
+</dl>
 </section>
 </li>
 </ul>
@@ -142,6 +154,9 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="start()">
 <h3>start</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">start</span>()</div>
+<div class="block">Запускает работу пиццерии.
+ Запускает потоки клиента, пекарей и курьеров, затем ожидает
+ указанное время работы и инициирует завершение.</div>
 </section>
 </li>
 </ul>
