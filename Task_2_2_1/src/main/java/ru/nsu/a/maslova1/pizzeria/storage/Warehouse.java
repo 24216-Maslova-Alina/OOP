@@ -9,11 +9,10 @@ import ru.nsu.a.maslova1.pizzeria.model.OrderStatus;
 /**
  * Склад готовых заказов.
  * Выступает буфером между пекарями и курьерами.
- * Имеет ограниченную вместимость и обеспечивает потокобезопасный доступ.
  */
 public class Warehouse {
-    private Queue<Order> storage = new LinkedList<>();
-    private int capacity;
+    private final Queue<Order> storage = new LinkedList<>();
+    private final int capacity;
 
     /**
      * Создаёт склад с указанной вместимостью.
@@ -30,9 +29,8 @@ public class Warehouse {
      * Статус заказа меняется на IN_WAREHOUSE.
      *
      * @param order готовый заказ от пекаря
-     * @throws InterruptedException если поток был прерван во время ожидания
-     */
-    public synchronized void put(Order order) throws InterruptedException {
+\     */
+    public synchronized void put(Order order) {
         while (storage.size() >= capacity) {
             if (Thread.currentThread().isInterrupted()) {
                 return;
@@ -48,7 +46,7 @@ public class Warehouse {
 
         storage.add(order);
         order.setStatus(OrderStatus.IN_WAREHOUSE);
-        System.out.printf("Заказ на складе, ищем курьера\n");
+        System.out.print("Заказ на складе, ищем курьера\n");
         notifyAll();
     }
 
@@ -75,7 +73,7 @@ public class Warehouse {
         notifyAll();
         Order order = storage.remove();
         order.setStatus(OrderStatus.DELIVERED);
-        System.out.printf("Заказ передан в доставку\n");
+        System.out.print("Заказ передан в доставку\n");
         notifyAll();
         return order;
 

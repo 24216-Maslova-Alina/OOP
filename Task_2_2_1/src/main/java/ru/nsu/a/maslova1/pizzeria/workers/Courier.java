@@ -13,8 +13,8 @@ import ru.nsu.a.maslova1.pizzeria.storage.Warehouse;
  */
 public class Courier extends Thread {
     private static final Logger logger = Logger.getLogger(Courier.class.getName());
-    private int capacity;
-    Warehouse warehouse;
+    private final int capacity;
+    private final Warehouse warehouse;
 
     /**
      * Создаёт курьера с указанной вместимостью сумки.

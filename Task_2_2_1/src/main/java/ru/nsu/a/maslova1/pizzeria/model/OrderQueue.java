@@ -1,5 +1,6 @@
 package ru.nsu.a.maslova1.pizzeria.model;
 
+import java.util.logging.Logger;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -9,16 +10,17 @@ import java.util.Queue;
  * Реализует паттерн Producer-Consumer с синхронизацией.
  */
 public class OrderQueue {
-    public Queue<Order> queue = new LinkedList<>();
+    private static final Logger logger = Logger.getLogger(OrderQueue.class.getName());
+
+    private final Queue<Order> queue = new LinkedList<>();
 
     /**
      * Получает заказ из очереди.
      * Если очередь пуста, поток блокируется до появления нового заказа.
      *
      * @return заказ из очереди
-     * @throws InterruptedException если поток был прерван во время ожидания
      */
-    public synchronized Order getOrder() throws InterruptedException {
+    public synchronized Order getOrder() {
         while (queue.isEmpty()) {
             if (Thread.currentThread().isInterrupted()) {
                 return null;
@@ -26,6 +28,7 @@ public class OrderQueue {
             try {
                 wait();
             } catch (InterruptedException e) {
+                logger.info("Thread(queue) was interrupted while waiting for order");
                 Thread.currentThread().interrupt();
                 return null;
             }
