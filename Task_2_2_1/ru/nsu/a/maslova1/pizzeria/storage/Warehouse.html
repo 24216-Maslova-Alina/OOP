@@ -78,8 +78,7 @@ loadScripts(document, 'script');</script>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">Warehouse</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
 <div class="block">Склад готовых заказов.
- Выступает буфером между пекарями и курьерами.
- Имеет ограниченную вместимость и обеспечивает потокобезопасный доступ.</div>
+ Выступает буфером между пекарями и курьерами.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -173,16 +172,14 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="put(ru.nsu.a.maslova1.pizzeria.model.Order)">
 <h3>put</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">put</span><wbr><span class="parameters">(<a href="../model/Order.html" title="class in ru.nsu.a.maslova1.pizzeria.model">Order</a>&nbsp;order)</span>
-         throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/InterruptedException.html" title="class or interface in java.lang" class="external-link">InterruptedException</a></span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">put</span><wbr><span class="parameters">(<a href="../model/Order.html" title="class in ru.nsu.a.maslova1.pizzeria.model">Order</a>&nbsp;order)</span></div>
 <div class="block">Помещает готовый заказ на склад.
  Если склад полон, поток блокируется до освобождения места.
  Статус заказа меняется на IN_WAREHOUSE.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>order</code> - готовый заказ от пекаря</dd>
-<dt>Throws:</dt>
-<dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/InterruptedException.html" title="class or interface in java.lang" class="external-link">InterruptedException</a></code> - если поток был прерван во время ожидания</dd>
+<dd><code>order</code> - готовый заказ от пекаря
+\</dd>
 </dl>
 </section>
 </li>
