@@ -1,0 +1,49 @@
+plugins {
+    id 'java'
+    id 'jacoco'
+    id 'application'
+    id 'org.openjfx.javafxplugin' version '0.1.0'
+}
+
+group = 'ru.nsu.a.maslova1.snake'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+javafx {
+    version = '21'
+    modules = ['javafx.controls', 'javafx.fxml', 'javafx.graphics', 'javafx.base']
+}
+
+dependencies {
+    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+jacocoTestReport {
+    reports {
+        xml.required = true
+    }
+}
+
+application {
+    mainClass = 'ru.nsu.a.maslova1.snake.Main'
+}
+
+run {
+    // Параметры для macOS
+    jvmArgs = [
+            '--add-opens', 'javafx.graphics/com.sun.javafx.tk.quantum=ALL-UNNAMED',
+            '--add-opens', 'javafx.graphics/com.sun.glass.ui=ALL-UNNAMED',
+            '--add-opens', 'javafx.graphics/com.sun.javafx.application=ALL-UNNAMED',
+            '-Dprism.order=sw',
+            '-Dglass.gtk.ui=sw'
+    ]
+}

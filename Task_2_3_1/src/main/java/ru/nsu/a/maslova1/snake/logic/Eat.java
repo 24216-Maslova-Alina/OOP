@@ -1,0 +1,28 @@
+package ru.nsu.a.maslova1.snake.logic;
+
+import ru.nsu.a.maslova1.snake.model.Point;
+
+import java.util.ArrayList;
+
+public class Eat {
+    private int count = 2;
+
+    public boolean collisionApple(Point head, ArrayList<Point> apple) {
+        for (Point fruit : apple) {
+            if (head.equals(fruit)) {
+                count++;
+                apple.remove(fruit);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public int countingScore() {
+        return count;
+    }
+
+    public void resetStore() {
+        count = 2;
+    }
+}
