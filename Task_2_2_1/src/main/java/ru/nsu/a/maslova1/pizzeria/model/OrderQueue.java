@@ -6,8 +6,6 @@ import java.util.Queue;
 
 /**
  * Потокобезопасная очередь заказов.
- * Используется для передачи заказов от клиентов пекарям.
- * Реализует паттерн Producer-Consumer с синхронизацией.
  */
 public class OrderQueue {
     private static final Logger logger = Logger.getLogger(OrderQueue.class.getName());
