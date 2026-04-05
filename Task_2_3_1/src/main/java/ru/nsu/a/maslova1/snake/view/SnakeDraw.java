@@ -1,4 +1,3 @@
-// Вначале змейка из 1 звена
 package ru.nsu.a.maslova1.snake.view;
 
 import javafx.scene.canvas.GraphicsContext;
@@ -13,21 +12,10 @@ public class SnakeDraw {
     private final int cols = GameConfig.COLS;
     private final int rows = GameConfig.ROWS;
 
-    private ArrayList<Point> snake = new ArrayList<>();
     private final GraphicsContext brush;
 
     public SnakeDraw(GraphicsContext brush) {
         this.brush = brush;
-    }
-
-    public void initSnake() {
-        snake.clear();
-
-        Point head = new Point(cols / 2, rows / 2);
-        Point tail = new Point(cols / 2 - 1, rows / 2);
-
-        snake.add(head);
-        snake.add(tail);
     }
 
     public void clearField() {
@@ -36,7 +24,7 @@ public class SnakeDraw {
         brush.fillRect(0, 0, cols * cellSize, rows * cellSize);
     }
 
-    public void drawSnake() {
+    public void drawSnake(ArrayList<Point> snake) {
         for (int i = 0; i < snake.size(); i++) {
             Point p = snake.get(i);
             int x = p.getX() * cellSize;
@@ -50,13 +38,5 @@ public class SnakeDraw {
             }
             brush.fillRect(x, y, cellSize - 1, cellSize - 1);
         }
-    }
-
-    public ArrayList<Point> getSnake() {
-        return snake;
-    }
-
-    public void reset() {
-        snake.clear();
     }
 }

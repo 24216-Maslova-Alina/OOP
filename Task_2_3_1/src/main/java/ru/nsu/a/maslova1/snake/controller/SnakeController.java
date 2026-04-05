@@ -1,4 +1,4 @@
-package ru.nsu.a.maslova1.snake;
+package ru.nsu.a.maslova1.snake.controller;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -9,8 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
 import javafx.util.Duration;
-import ru.nsu.a.maslova1.snake.logic.Directions;
-import ru.nsu.a.maslova1.snake.manager.GameManager;
+import ru.nsu.a.maslova1.snake.model.Directions;
 
 public class SnakeController {
 
@@ -26,8 +25,12 @@ public class SnakeController {
     @FXML
     private Button pauseButton;
 
+    @FXML
+    private Label bestLabel;
+
     private GraphicsContext brush;
     private GameManager gameManager;
+    private boolean wasGameRunning = false;
 
     private boolean keysInstalled = false;
 
@@ -36,13 +39,21 @@ public class SnakeController {
         brush = gameCanvas.getGraphicsContext2D();
         gameManager = new GameManager(brush);
 
-        startButton.setOnAction(e -> gameManager.startGame());
+        startButton.setOnAction(e -> {
+            gameManager.startGame();
+            wasGameRunning = true;
+            bestLabel.setText(String.valueOf(gameManager.getBestScore()));  // ДОБАВИТЬ - обновить при старте
+        });
         pauseButton.setOnAction(e -> gameManager.pauseGame());
 
         setupKeysHandling();
         Timeline uiUpdater = new Timeline(
                 new KeyFrame(Duration.millis(100), e -> {
                     lengthLabel.setText(String.valueOf(gameManager.getScore()));
+                    if (wasGameRunning && !gameManager.isGameRunning()) {
+                        bestLabel.setText(String.valueOf(gameManager.getBestScore()));
+                        wasGameRunning = false;
+                    }
                 })
         );
 
@@ -74,4 +85,3 @@ public class SnakeController {
         }
     }
 }
-

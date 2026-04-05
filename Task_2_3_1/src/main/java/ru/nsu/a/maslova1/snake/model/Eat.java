@@ -1,6 +1,4 @@
-package ru.nsu.a.maslova1.snake.logic;
-
-import ru.nsu.a.maslova1.snake.model.Point;
+package ru.nsu.a.maslova1.snake.model;
 
 import java.util.ArrayList;
 

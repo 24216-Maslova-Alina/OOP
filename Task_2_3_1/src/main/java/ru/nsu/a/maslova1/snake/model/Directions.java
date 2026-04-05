@@ -1,4 +1,4 @@
-package ru.nsu.a.maslova1.snake.logic;
+package ru.nsu.a.maslova1.snake.model;
 
 public enum Directions {
     UP(0, -1),
