@@ -11,6 +11,18 @@ public class OrderQueue {
     private static final Logger logger = Logger.getLogger(OrderQueue.class.getName());
 
     private final Queue<Order> queue = new LinkedList<>();
+    private final int capacity;
+    private boolean flagBound = false;
+
+    public OrderQueue() {
+        this.capacity = -1;
+        this.flagBound = false;
+    }
+
+    public OrderQueue(int capacity) {
+        this.capacity = capacity;
+        this.flagBound = true;
+    }
 
     /**
      * Получает заказ из очереди.
@@ -41,6 +53,19 @@ public class OrderQueue {
      * @param order заказ для добавления
      */
     public synchronized void addOrder(Order order) {
+        while (flagBound && queue.size() >= capacity) {
+            if (Thread.currentThread().isInterrupted()) {
+                return;
+            }
+            try {
+                System.out.print("На складе нет свободных мест\n");
+                wait();
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+                return;
+            }
+        }
+
         queue.add(order);
         notifyAll();
     }

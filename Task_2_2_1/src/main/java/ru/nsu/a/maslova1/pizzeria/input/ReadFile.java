@@ -32,7 +32,7 @@ public class ReadFile {
 
         } catch (IOException e) {
             logger.log(Level.SEVERE, "Ошибка чтения конфигурации из файла: " + file, e);
-            throw e; // не теряем исключение!
+            throw e;
         }
     }
 

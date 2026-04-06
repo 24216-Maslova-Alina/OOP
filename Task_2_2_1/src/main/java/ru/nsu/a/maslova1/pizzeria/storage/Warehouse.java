@@ -5,47 +5,26 @@ import ru.nsu.a.maslova1.pizzeria.model.OrderQueue;
 import ru.nsu.a.maslova1.pizzeria.model.OrderStatus;
 
 public class Warehouse {
-    private final OrderQueue storage = new OrderQueue();
     private final int capacity;
+    private final OrderQueue storage;
 
     public Warehouse(int capacity) {
         this.capacity = capacity;
+        this.storage = new OrderQueue(capacity);
     }
 
-    public synchronized void put(Order order) {
-        while (storage.size() >= capacity) {
-            if (Thread.currentThread().isInterrupted()) {
-                return;
-            }
-            try {
-                System.out.print("На складе нет свободных мест\n");
-                wait();
-            } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
-                return;
-            }
-        }
-
+    public void put(Order order) {
         storage.addOrder(order);
         order.setStatus(OrderStatus.IN_WAREHOUSE);
         System.out.print("Заказ на складе, ищем курьера\n");
-        notifyAll();
     }
 
-    public synchronized Order getOrder() throws InterruptedException {
-        while (storage.isEmpty()) {
-            try {
-                wait();
-            } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
-                return null;
-            }
-        }
-
+    public Order getOrder() throws InterruptedException {
         Order order = storage.getOrder();
-        order.setStatus(OrderStatus.DELIVERED);
-        System.out.print("Заказ передан в доставку\n");
-        notifyAll();
+        if (order != null) {
+            order.setStatus(OrderStatus.DELIVERED);
+            System.out.print("Заказ передан в доставку\n");
+        }
         return order;
     }
 
@@ -57,7 +36,7 @@ public class Warehouse {
         return storage.size();
     }
 
-    public synchronized boolean isEmpty() {
+    public boolean isEmpty() {
         return storage.isEmpty();
     }
 }
