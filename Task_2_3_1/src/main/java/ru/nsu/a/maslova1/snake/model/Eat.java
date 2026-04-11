@@ -5,13 +5,18 @@ import java.util.ArrayList;
 public class Eat {
     private int count = 2;
 
-    public boolean collisionApple(Point head, ArrayList<Point> apple) {
+    public boolean collisionApple(Point head, ArrayList<Point> apple, AppleLogic logic) {
         for (Point fruit : apple) {
             if (head.equals(fruit)) {
                 count++;
                 apple.remove(fruit);
                 return true;
             }
+        }
+        if (head.equals(logic.getGoldApple())) {
+            count += 3;
+            logic.removeGoldApple();
+            return true;
         }
         return false;
     }

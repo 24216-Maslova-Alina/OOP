@@ -1,9 +1,9 @@
 package ru.nsu.a.maslova1.snake.model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Collision {
-
     public boolean collisionTail(ArrayList<Point> snake) {
         Point head = snake.get(0);
         for (int i = 1; i < snake.size(); i++) {
@@ -16,9 +16,18 @@ public class Collision {
         return false;
     }
 
-    public boolean collisionWall(Point head, int cols, int rows) {
+    public boolean collisionBorder(Point head, int cols, int rows) {
         int x = head.getX();
         int y = head.getY();
         return x < 0 || x >= cols || y < 0 || y >= rows;
+    }
+
+    public boolean collisionWall(List<Point> walls, Point head) {
+        for (Point w : walls) {
+            if (w.equals(head)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

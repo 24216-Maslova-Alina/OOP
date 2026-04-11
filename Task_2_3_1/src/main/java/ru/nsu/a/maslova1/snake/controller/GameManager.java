@@ -8,6 +8,7 @@ import ru.nsu.a.maslova1.snake.config.GameConfig;
 import ru.nsu.a.maslova1.snake.model.*;
 import ru.nsu.a.maslova1.snake.view.AppleDraw;
 import ru.nsu.a.maslova1.snake.view.SnakeDraw;
+import ru.nsu.a.maslova1.snake.view.Walls;
 
 import java.util.ArrayList;
 
@@ -16,6 +17,7 @@ public class GameManager {
     private final SnakeInit snakeInit;
     private final AppleDraw appleDraw;
     private final AppleLogic appleLogic;
+    private final Walls walls;
 
     private final Move move;
     private final Collision collision;
@@ -25,7 +27,6 @@ public class GameManager {
     private Timeline timeline;
 
     private ArrayList<Point> snake;
-    private ArrayList<Point> apples;
 
     private boolean isGameRunning = false;
 
@@ -34,6 +35,7 @@ public class GameManager {
         this.snakeInit = new SnakeInit();
         this.appleDraw = new AppleDraw(brush);
         this.appleLogic = new AppleLogic();
+        this.walls = new Walls(brush);
 
         this.eat = new Eat();
         this.move = new Move(eat);
@@ -41,7 +43,6 @@ public class GameManager {
         this.statistic = new Statistic(eat);
 
         this.snake = new ArrayList<>();
-        this.apples = new ArrayList<>();
     }
 
     public void startGame() {
@@ -51,7 +52,6 @@ public class GameManager {
 
         snake = snakeInit.initSnake();
         appleLogic.reset();
-        apples = appleLogic.getApples();
 
         eat.resetStore();
         isGameRunning = true;
@@ -65,14 +65,15 @@ public class GameManager {
     }
 
     private void gameLoop() {
+        appleLogic.checkGoldAppleLifetime();
         appleLogic.generateApples(snake);
-        apples = appleLogic.getApples();
 
-        move.move(snake, apples);
+        move.move(snake, appleLogic.getApples(), appleLogic);
 
         Point head = snake.get(0);
 
-        if (collision.collisionWall(head, GameConfig.COLS, GameConfig.ROWS)
+        if (collision.collisionWall(GameConfig.WALLS, head)
+                || collision.collisionBorder(head, GameConfig.COLS, GameConfig.ROWS)
                 || collision.collisionTail(snake)) {
             isGameRunning = false;
             stopGame();
@@ -86,12 +87,18 @@ public class GameManager {
         snakeDraw.clearField();
         snakeDraw.drawSnake(snake);
 
-        appleDraw.drawApple(apples, snake);
+        walls.drawWalls();
+
+        appleDraw.drawApple(appleLogic.getApples(), appleLogic.getGoldApple());
     }
 
-    public void pauseGame() {
-        if (timeline != null) {
+    public void togglePause() {
+        if (timeline == null) return;
+
+        if (timeline.getStatus() == Timeline.Status.RUNNING) {
             timeline.pause();
+        } else if (timeline.getStatus() == Timeline.Status.PAUSED) {
+            timeline.play();
         }
     }
 
@@ -107,6 +114,10 @@ public class GameManager {
 
     public int getScore() {
         return eat.countingScore();
+    }
+
+    public int getLength() {
+        return snake.size();
     }
 
     public int getBestScore() {

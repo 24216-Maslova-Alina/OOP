@@ -11,7 +11,7 @@ public class Move {
         this.eat = eat;
     }
 
-    public void move(ArrayList<Point> snake, ArrayList<Point> apple) {
+    public void move(ArrayList<Point> snake, ArrayList<Point> apple, AppleLogic logic) {
         if (dirNew != null && !dirNew.isOpposite(dirCurrent)) {
             dirCurrent = dirNew;
         }
@@ -24,7 +24,7 @@ public class Move {
         );
 
         snake.add(0, newHead);
-        if (!eat.collisionApple(newHead, apple)) {
+        if (!eat.collisionApple(newHead, apple, logic)) {
             snake.remove(snake.size() - 1);
         }
     }

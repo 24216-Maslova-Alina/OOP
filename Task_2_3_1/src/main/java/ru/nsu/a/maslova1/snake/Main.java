@@ -14,7 +14,13 @@ public class Main extends Application {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Snake.fxml"));
         Scene scene = new Scene(loader.load());
 
-        primaryStage.setTitle("Змейка - тест Canvas");
+        primaryStage.setTitle("Змейка");
+
+        primaryStage.setResizable(false);
+
+        primaryStage.setWidth(950);
+        primaryStage.setHeight(800);
+
         primaryStage.setScene(scene);
         primaryStage.show();
     }

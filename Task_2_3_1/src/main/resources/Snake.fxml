@@ -8,22 +8,37 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.layout.StackPane?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="571.0" prefWidth="641.0"
             style="-fx-background-color: #C8E6E0;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="ru.nsu.a.maslova1.snake.controller.SnakeController">
     <top>
-        <HBox alignment="CENTER" prefHeight="64.0" prefWidth="641.0" style="-fx-background-color: #D4E8E2;" BorderPane.alignment="CENTER">
+        <HBox alignment="CENTER" prefHeight="80.0" prefWidth="641.0" spacing="40" style="-fx-background-color: #D4E8E2;" BorderPane.alignment="CENTER">
             <effect>
                 <ColorAdjust contrast="0.05" saturation="0.1" />
             </effect>
-            <VBox alignment="CENTER" prefHeight="64.0" prefWidth="175.0" spacing="5">
-                <Label prefHeight="30.0" prefWidth="76.0" text="Length" textAlignment="CENTER" textFill="#B5838D">
+
+            <VBox alignment="CENTER" prefHeight="64.0" prefWidth="120.0" spacing="2">
+                <Label text="LENGTH" textAlignment="CENTER" textFill="#B5838D">
                     <font>
-                        <Font name="System Bold" size="18.0" />
+                        <Font name="System Bold" size="16.0" />
                     </font>
                 </Label>
-                <Label fx:id="lengthLabel" prefHeight="29.0" prefWidth="59.0" text="0" textFill="#6D6875">
+                <Label fx:id="lengthLabel" text="0" textFill="#6D6875">
+                    <font>
+                        <Font name="System Bold" size="24.0" />
+                    </font>
+                </Label>
+            </VBox>
+
+            <VBox alignment="CENTER" prefHeight="64.0" prefWidth="120.0" spacing="2">
+                <Label text="SCORE" textAlignment="CENTER" textFill="#B5838D">
+                    <font>
+                        <Font name="System Bold" size="16.0" />
+                    </font>
+                </Label>
+                <Label fx:id="scoreLabel" text="0" textFill="#6D6875">
                     <font>
                         <Font name="System Bold" size="24.0" />
                     </font>
@@ -33,8 +48,13 @@
     </top>
 
     <center>
-        <Canvas fx:id="gameCanvas" height="900.0" width="900.0" />
-    </center>
+        <StackPane>
+            <children>
+                <Canvas fx:id="gameCanvas" height="625.0" width="625.0" />
+
+                <fx:include fx:id="gameOverOverlay" source="GameOver.fxml" visible="false" />
+            </children>
+        </StackPane>    </center>
 
     <right>
         <VBox alignment="CENTER" prefHeight="300.0" prefWidth="120.0" spacing="15" style="-fx-background-color: #D4E8E2; -fx-background-radius: 10;">

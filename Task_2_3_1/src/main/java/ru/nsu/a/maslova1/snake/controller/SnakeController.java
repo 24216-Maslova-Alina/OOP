@@ -8,30 +8,25 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 import ru.nsu.a.maslova1.snake.model.Directions;
 
 public class SnakeController {
 
-    @FXML
-    private Canvas gameCanvas;
+    @FXML private Canvas gameCanvas;
+    @FXML private Label lengthLabel;
+    @FXML private Label scoreLabel;
+    @FXML private Label bestLabel;
+    @FXML private Button startButton;
+    @FXML private Button pauseButton;
 
-    @FXML
-    private Label lengthLabel;
-
-    @FXML
-    private Button startButton;
-
-    @FXML
-    private Button pauseButton;
-
-    @FXML
-    private Label bestLabel;
+    @FXML private VBox gameOverOverlay;
+    @FXML private GameOverController gameOverOverlayController;
 
     private GraphicsContext brush;
     private GameManager gameManager;
     private boolean wasGameRunning = false;
-
     private boolean keysInstalled = false;
 
     @FXML
@@ -39,33 +34,69 @@ public class SnakeController {
         brush = gameCanvas.getGraphicsContext2D();
         gameManager = new GameManager(brush);
 
+        // Связываем контроллер окна Game Over с главным контроллером
+        if (gameOverOverlayController != null) {
+            gameOverOverlayController.setMainController(this);
+        }
+
         startButton.setOnAction(e -> {
-            gameManager.startGame();
-            wasGameRunning = true;
-            bestLabel.setText(String.valueOf(gameManager.getBestScore()));  // ДОБАВИТЬ - обновить при старте
+            restartGameFromOverlay();
         });
-        pauseButton.setOnAction(e -> gameManager.pauseGame());
+
+        pauseButton.setOnAction(e -> {
+            if (gameManager.isGameRunning()) {
+                gameManager.togglePause();
+                updatePauseButtonText();
+            }
+        });
 
         setupKeysHandling();
+
         Timeline uiUpdater = new Timeline(
                 new KeyFrame(Duration.millis(100), e -> {
-                    lengthLabel.setText(String.valueOf(gameManager.getScore()));
+                    lengthLabel.setText(String.valueOf(gameManager.getLength()));
+                    scoreLabel.setText(String.valueOf(gameManager.getScore()));
+
                     if (wasGameRunning && !gameManager.isGameRunning()) {
-                        bestLabel.setText(String.valueOf(gameManager.getBestScore()));
-                        wasGameRunning = false;
+                        handleGameOver();
                     }
                 })
         );
-
         uiUpdater.setCycleCount(Timeline.INDEFINITE);
         uiUpdater.play();
+    }
+
+    private void handleGameOver() {
+        wasGameRunning = false;
+        bestLabel.setText(String.valueOf(gameManager.getBestScore()));
+        pauseButton.setText("Пауза");
+
+        if (gameOverOverlayController != null) {
+            gameOverOverlayController.setStats(gameManager.getScore(), gameManager.getLength());
+        }
+        gameOverOverlay.setVisible(true);
+    }
+
+    public void restartGameFromOverlay() {
+        gameOverOverlay.setVisible(false);
+        gameManager.startGame();
+        wasGameRunning = true;
+        bestLabel.setText(String.valueOf(gameManager.getBestScore()));
+        pauseButton.setText("Пауза");
+    }
+
+    private void updatePauseButtonText() {
+        if (pauseButton.getText().equals("Пауза")) {
+            pauseButton.setText("Продолжить");
+        } else {
+            pauseButton.setText("Пауза");
+        }
     }
 
     private void setupKeysHandling() {
         gameCanvas.sceneProperty().addListener((obs, oldScene, newScene) -> {
             if (newScene != null && !keysInstalled) {
                 keysInstalled = true;
-
                 newScene.addEventFilter(KeyEvent.KEY_PRESSED, this::handleKeys);
             }
         });
