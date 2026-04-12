@@ -4,14 +4,23 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.util.Duration;
+import java.util.ArrayList;
 import ru.nsu.a.maslova1.snake.config.GameConfig;
-import ru.nsu.a.maslova1.snake.model.*;
+import ru.nsu.a.maslova1.snake.model.Eat;
+import ru.nsu.a.maslova1.snake.model.Statistic;
+import ru.nsu.a.maslova1.snake.model.Point;
+import ru.nsu.a.maslova1.snake.model.Directions;
+import ru.nsu.a.maslova1.snake.model.AppleLogic;
+import ru.nsu.a.maslova1.snake.model.Collision;
+import ru.nsu.a.maslova1.snake.model.Move;
+import ru.nsu.a.maslova1.snake.model.SnakeInit;
 import ru.nsu.a.maslova1.snake.view.AppleDraw;
 import ru.nsu.a.maslova1.snake.view.SnakeDraw;
 import ru.nsu.a.maslova1.snake.view.Walls;
 
-import java.util.ArrayList;
-
+/**
+ * Управляет игровым циклом: запуск, пауза, остановка, столкновения и отрисовка.
+ */
 public class GameManager {
     private final SnakeDraw snakeDraw;
     private final SnakeInit snakeInit;
@@ -30,6 +39,10 @@ public class GameManager {
 
     private boolean isGameRunning = false;
 
+    /**
+     * Создаёт менеджер игры.
+     * @param brush контекст для отрисовки
+     */
     public GameManager(GraphicsContext brush) {
         this.snakeDraw = new SnakeDraw(brush);
         this.snakeInit = new SnakeInit();
@@ -45,6 +58,9 @@ public class GameManager {
         this.snake = new ArrayList<>();
     }
 
+    /**
+     * Запускает новую игру.
+     */
     public void startGame() {
         if (timeline != null) {
             timeline.stop();
@@ -64,6 +80,9 @@ public class GameManager {
         timeline.play();
     }
 
+    /**
+     * Игровой цикл: движение, проверка столкновений, отрисовка.
+     */
     private void gameLoop() {
         appleLogic.checkGoldAppleLifetime();
         appleLogic.generateApples(snake);
@@ -83,6 +102,9 @@ public class GameManager {
         redraw();
     }
 
+    /**
+     * Перерисовывает игровое поле.
+     */
     private void redraw() {
         snakeDraw.clearField();
         snakeDraw.drawSnake(snake);
@@ -92,8 +114,13 @@ public class GameManager {
         appleDraw.drawApple(appleLogic.getApples(), appleLogic.getGoldApple());
     }
 
+    /**
+     * Ставит игру на паузу или снимает с неё.
+     */
     public void togglePause() {
-        if (timeline == null) return;
+        if (timeline == null) {
+            return;
+        }
 
         if (timeline.getStatus() == Timeline.Status.RUNNING) {
             timeline.pause();
@@ -102,28 +129,51 @@ public class GameManager {
         }
     }
 
+    /**
+     * Останавливает игру.
+     */
     public void stopGame() {
         if (timeline != null) {
             timeline.stop();
         }
     }
 
+    /**
+     * Устанавливает направление движения змейки.
+     * @param dir новое направление
+     */
     public void setDirection(Directions dir) {
         move.setDirNew(dir);
     }
 
+    /**
+     * Возвращает текущий счёт.
+     * @return текущий счёт
+     */
     public int getScore() {
         return eat.countingScore();
     }
 
+    /**
+     * Возвращает длину змеи.
+     * @return длина змейки
+     */
     public int getLength() {
         return snake.size();
     }
 
+    /**
+     * Возвращает лучший результат.
+     * @return лучший результат
+     */
     public int getBestScore() {
         return statistic.getBestResult();
     }
 
+    /**
+     * Возвращает статус игры.
+     * @return true, если игра запущена
+     */
     public boolean isGameRunning() {
         return isGameRunning;
     }

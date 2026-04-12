@@ -1,9 +1,11 @@
 package ru.nsu.a.maslova1.snake.config;
 
+import java.util.List;
 import ru.nsu.a.maslova1.snake.model.Point;
 
-import java.util.List;
-
+/**
+ * Конфигурация игры: размеры поля, ячейки и список стен.
+ */
 public class GameConfig {
     public static final int CELL_SIZE = 25;
     public static final int COLS = 25;
@@ -22,8 +24,6 @@ public class GameConfig {
                 new Point(21, 15),
                 new Point(5, 20),
                 new Point(24, 20),
-                new Point(12, 25),
-                new Point(17, 25),
                 new Point(14, 3),
                 new Point(10, 8),
                 new Point(19, 8),
@@ -31,10 +31,7 @@ public class GameConfig {
                 new Point(21, 18),
                 new Point(15, 10),
                 new Point(15, 20),
-                new Point(7, 25),
-                new Point(22, 25),
                 new Point(4, 15),
-                new Point(25, 15),
                 new Point(1, 22)
         );
     }

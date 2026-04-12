@@ -1,14 +1,27 @@
 package ru.nsu.a.maslova1.snake.model;
 
+/**
+ * Точка на игровом поле с координатами X и Y.
+ */
 public class Point {
-    private int x;
-    private int y;
+    private int pointX;
+    private int pointY;
 
+    /**
+     * Создаёт точку с заданными координатами.
+     * @param x координата X
+     * @param y координата Y
+     */
     public Point(int x, int y) {
-        this.x = x;
-        this.y = y;
+        this.pointX = x;
+        this.pointY = y;
     }
 
+    /**
+     * Сравнивает две точки на равенство координат.
+     * @param obj объект для сравнения
+     * @return true, если координаты совпадают
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -20,14 +33,22 @@ public class Point {
         }
 
         Point other = (Point) obj;
-        return x == other.x && y == other.y;
+        return pointX == other.pointX && pointY == other.pointY;
     }
 
-    public int getX() {
-        return x;
+    /**
+     * Возвращает x.
+     * @return координата X
+     */
+    public int getPointX() {
+        return pointX;
     }
 
-    public int getY() {
-        return y;
+    /**
+     * Возвращает y.
+     * @return координата Y
+     */
+    public int getPointY() {
+        return pointY;
     }
 }

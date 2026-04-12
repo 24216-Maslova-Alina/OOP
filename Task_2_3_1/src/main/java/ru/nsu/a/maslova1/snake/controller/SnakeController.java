@@ -12,6 +12,9 @@ import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 import ru.nsu.a.maslova1.snake.model.Directions;
 
+/**
+ * Главный контроллер игры, управляющий интерфейсом и обработкой ввода.
+ */
 public class SnakeController {
 
     @FXML private Canvas gameCanvas;
@@ -29,6 +32,9 @@ public class SnakeController {
     private boolean wasGameRunning = false;
     private boolean keysInstalled = false;
 
+    /**
+     * Инициализирует контроллер: создаёт GameManager, настраивает кнопки и обработку клавиш.
+     */
     @FXML
     public void initialize() {
         brush = gameCanvas.getGraphicsContext2D();
@@ -66,6 +72,9 @@ public class SnakeController {
         uiUpdater.play();
     }
 
+    /**
+     * Обрабатывает завершение игры: обновляет рекорд и показывает окно Game Over.
+     */
     private void handleGameOver() {
         wasGameRunning = false;
         bestLabel.setText(String.valueOf(gameManager.getBestScore()));
@@ -77,6 +86,9 @@ public class SnakeController {
         gameOverOverlay.setVisible(true);
     }
 
+    /**
+     * Перезапускает игру из окна Game Over.
+     */
     public void restartGameFromOverlay() {
         gameOverOverlay.setVisible(false);
         gameManager.startGame();
@@ -85,6 +97,9 @@ public class SnakeController {
         pauseButton.setText("Пауза");
     }
 
+    /**
+     * Обновляет текст кнопки паузы.
+     */
     private void updatePauseButtonText() {
         if (pauseButton.getText().equals("Пауза")) {
             pauseButton.setText("Продолжить");
@@ -93,6 +108,9 @@ public class SnakeController {
         }
     }
 
+    /**
+     * Настраивает обработку нажатий клавиш.
+     */
     private void setupKeysHandling() {
         gameCanvas.sceneProperty().addListener((obs, oldScene, newScene) -> {
             if (newScene != null && !keysInstalled) {
@@ -102,6 +120,10 @@ public class SnakeController {
         });
     }
 
+    /**
+     * Обрабатывает нажатия клавиш стрелок для управления змейкой.
+     * @param event событие клавиши
+     */
     private void handleKeys(KeyEvent event) {
         Directions dir = switch (event.getCode()) {
             case UP -> Directions.UP;
