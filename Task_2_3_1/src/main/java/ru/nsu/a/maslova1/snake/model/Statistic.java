@@ -9,6 +9,7 @@ public class Statistic {
 
     /**
      * Создаёт объект статистики.
+     *
      * @param eat счётчик очков
      */
     public Statistic(Eat eat) {
@@ -17,6 +18,7 @@ public class Statistic {
 
     /**
      * Возвращает лучший результат, обновляя его при необходимости.
+     *
      * @return лучший счёт за игру
      */
     public int getBestResult() {

@@ -26,6 +26,7 @@ public class AppleLogic {
 
     /**
      * Находит случайную свободную клетку на поле.
+     *
      * @param snake текущее положение змейки
      * @return свободная клетка или null, если свободных нет
      */
@@ -52,6 +53,7 @@ public class AppleLogic {
 
     /**
      * Генерирует обычные яблоки (до count штук) и золотое яблоко с заданным шансом.
+     *
      * @param snake текущее положение змейки
      */
     public void generateApples(ArrayList<Point> snake) {
@@ -81,6 +83,7 @@ public class AppleLogic {
 
     /**
      * Возвращает список обычных яблок.
+     *
      * @return список координат обычных яблок
      */
     public ArrayList<Point> getApples() {
@@ -89,6 +92,7 @@ public class AppleLogic {
 
     /**
      * Возвращает координаты золотого яблока.
+     *
      * @return координаты золотого яблока или null, если его нет
      */
     public Point getGoldApple() {

@@ -15,6 +15,7 @@ public class AppleDraw {
 
     /**
      * Создаёт отрисовщик яблок.
+     *
      * @param brush контекст для рисования
      */
     public AppleDraw(GraphicsContext brush) {
@@ -23,6 +24,7 @@ public class AppleDraw {
 
     /**
      * Рисует обычные и золотое яблоко на поле.
+     *
      * @param apples список обычных яблок
      * @param golden золотое яблоко (может быть null)
      */

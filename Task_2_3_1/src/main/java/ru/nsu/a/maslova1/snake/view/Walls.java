@@ -13,6 +13,7 @@ public class Walls {
 
     /**
      * Создаёт отрисовщик стен.
+     *
      * @param brush контекст для рисования
      */
     public Walls(GraphicsContext brush) {

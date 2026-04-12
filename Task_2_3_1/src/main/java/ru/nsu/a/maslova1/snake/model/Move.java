@@ -12,6 +12,7 @@ public class Move {
 
     /**
      * Создаёт объект движения.
+     *
      * @param eat обработчик поедания яблок
      */
     public Move(Eat eat) {
@@ -20,6 +21,7 @@ public class Move {
 
     /**
      * Выполняет один шаг движения змейки.
+     *
      * @param snake список точек змейки
      * @param apple список яблок
      * @param logic логика яблок
@@ -44,6 +46,7 @@ public class Move {
 
     /**
      * Устанавливает текущее направление движения.
+     *
      * @param dir направление
      */
     public void setDirCurrent(Directions dir) {
@@ -52,6 +55,7 @@ public class Move {
 
     /**
      * Устанавливает новое желаемое направление.
+     *
      * @param dir направление
      */
     public void setDirNew(Directions dir) {

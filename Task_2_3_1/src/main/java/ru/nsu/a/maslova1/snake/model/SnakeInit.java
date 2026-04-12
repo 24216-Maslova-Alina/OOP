@@ -21,6 +21,7 @@ public class SnakeInit {
 
     /**
      * Создаёт змейку в начальной позиции: голова в центре, хвост слева.
+     *
      * @return список точек змейки
      */
     public ArrayList<Point> initSnake() {
@@ -37,6 +38,7 @@ public class SnakeInit {
 
     /**
      * Устанавливает список точек змейки.
+     *
      * @param snake список точек
      */
     public void setSnake(ArrayList<Point> snake) {
@@ -45,6 +47,7 @@ public class SnakeInit {
 
     /**
      * Возвращает массив точек змеи.
+     *
      * @return список точек змейки
      */
     public ArrayList<Point> getSnake() {

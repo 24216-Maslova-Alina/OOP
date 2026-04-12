@@ -13,6 +13,7 @@ public class Main extends Application {
 
     /**
      * Запускает JavaFX приложение, загружая интерфейс из FXML.
+     *
      * @param primaryStage главное окно приложения
      * @throws IOException если FXML файл не найден
      */
@@ -31,6 +32,7 @@ public class Main extends Application {
 
     /**
      * Точка входа в приложение.
+     *
      * @param args аргументы командной строки
      */
     public static void main(String[] args) {

@@ -18,6 +18,7 @@ public class SnakeDraw {
 
     /**
      * Создаёт отрисовщик змейки.
+     *
      * @param brush контекст для рисования
      */
     public SnakeDraw(GraphicsContext brush) {
@@ -34,6 +35,7 @@ public class SnakeDraw {
 
     /**
      * Рисует змейку: голову с глазами и сегменты тела.
+     *
      * @param snake список точек змейки
      */
     public void drawSnake(ArrayList<Point> snake) {

@@ -14,6 +14,7 @@ public enum Directions {
 
     /**
      * Создаёт направление с заданным смещением.
+     *
      * @param x смещение по X
      * @param y смещение по Y
      */
@@ -24,6 +25,7 @@ public enum Directions {
 
     /**
      * Возвращает x.
+     *
      * @return смещение по X
      */
     public int getPointX() {
@@ -32,6 +34,7 @@ public enum Directions {
 
     /**
      * Возвращает y.
+     *
      * @return смещение по Y
      */
     public int getPointY() {
@@ -40,6 +43,7 @@ public enum Directions {
 
     /**
      * Проверяет, является ли переданное направление противоположным текущему.
+     *
      * @param other другое направление
      * @return true, если направления противоположны
      */

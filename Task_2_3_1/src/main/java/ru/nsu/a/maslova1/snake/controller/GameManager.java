@@ -41,6 +41,7 @@ public class GameManager {
 
     /**
      * Создаёт менеджер игры.
+     *
      * @param brush контекст для отрисовки
      */
     public GameManager(GraphicsContext brush) {
@@ -140,6 +141,7 @@ public class GameManager {
 
     /**
      * Устанавливает направление движения змейки.
+     *
      * @param dir новое направление
      */
     public void setDirection(Directions dir) {
@@ -148,6 +150,7 @@ public class GameManager {
 
     /**
      * Возвращает текущий счёт.
+     *
      * @return текущий счёт
      */
     public int getScore() {
@@ -156,6 +159,7 @@ public class GameManager {
 
     /**
      * Возвращает длину змеи.
+     *
      * @return длина змейки
      */
     public int getLength() {
@@ -164,6 +168,7 @@ public class GameManager {
 
     /**
      * Возвращает лучший результат.
+     *
      * @return лучший результат
      */
     public int getBestScore() {
@@ -172,6 +177,7 @@ public class GameManager {
 
     /**
      * Возвращает статус игры.
+     *
      * @return true, если игра запущена
      */
     public boolean isGameRunning() {

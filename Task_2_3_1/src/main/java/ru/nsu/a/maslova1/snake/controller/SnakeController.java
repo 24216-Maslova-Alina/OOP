@@ -122,6 +122,7 @@ public class SnakeController {
 
     /**
      * Обрабатывает нажатия клавиш стрелок для управления змейкой.
+     *
      * @param event событие клавиши
      */
     private void handleKeys(KeyEvent event) {

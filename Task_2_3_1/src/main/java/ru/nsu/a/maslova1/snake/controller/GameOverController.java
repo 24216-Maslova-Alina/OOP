@@ -14,6 +14,7 @@ public class GameOverController {
 
     /**
      * Устанавливает ссылку на главный контроллер.
+     *
      * @param controller главный контроллер
      */
     public void setMainController(SnakeController controller) {
@@ -22,6 +23,7 @@ public class GameOverController {
 
     /**
      * Отображает результаты игры.
+     *
      * @param score счёт
      * @param length длина змейки
      */

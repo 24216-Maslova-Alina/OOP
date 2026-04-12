@@ -9,6 +9,7 @@ public class Point {
 
     /**
      * Создаёт точку с заданными координатами.
+     *
      * @param x координата X
      * @param y координата Y
      */
@@ -19,6 +20,7 @@ public class Point {
 
     /**
      * Сравнивает две точки на равенство координат.
+     *
      * @param obj объект для сравнения
      * @return true, если координаты совпадают
      */
@@ -38,6 +40,7 @@ public class Point {
 
     /**
      * Возвращает x.
+     *
      * @return координата X
      */
     public int getPointX() {
@@ -46,6 +49,7 @@ public class Point {
 
     /**
      * Возвращает y.
+     *
      * @return координата Y
      */
     public int getPointY() {
