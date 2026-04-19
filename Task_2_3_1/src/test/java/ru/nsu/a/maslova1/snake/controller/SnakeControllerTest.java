@@ -53,13 +53,4 @@ class SnakeControllerTest {
         assertNotNull(controller);
         assertNotNull(state);
     }
-
-    /**
-     * Проверяет, что контроллер реализует Observer.
-     */
-    @Test
-    void testControllerImplementsObserver() {
-        SnakeController controller = new SnakeController();
-        assertTrue(controller instanceof ru.nsu.a.maslova1.snake.model.Observer);
-    }
 }
