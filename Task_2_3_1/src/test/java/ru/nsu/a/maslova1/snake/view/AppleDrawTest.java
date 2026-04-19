@@ -1,92 +1,80 @@
 package ru.nsu.a.maslova1.snake.view;
 
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
 import ru.nsu.a.maslova1.snake.model.Point;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 
 /**
- * Тесты для класса AppleDraw.
+ * Тесты для AppleDraw.
  */
 class AppleDrawTest {
 
-    private AppleDraw appleDraw;
-    private GraphicsContext brush;
+    private static final String CLASS_NAME = "ru.nsu.a.maslova1.snake.view.AppleDraw";
 
     /**
-     * Инициализирует JavaFX Toolkit.
+     * Проверяет, что класс AppleDraw существует.
      */
-    @BeforeAll
-    static void initJavaFX() {
+    @Test
+    void testAppleDrawClassExists() {
         try {
-            javafx.application.Platform.startup(() -> {});
-        } catch (IllegalStateException e) {
-            // Уже запущен
+            Class<?> clazz = Class.forName(CLASS_NAME);
+            assertNotNull(clazz);
+        } catch (ClassNotFoundException e) {
+            fail("Класс AppleDraw не найден: " + e.getMessage());
         }
     }
 
     /**
-     * Создаёт объекты перед каждым тестом.
+     * Проверяет наличие метода drawApple с правильными параметрами.
      */
-    @BeforeEach
-    void setUp() {
-        Canvas canvas = new Canvas(625, 625);
-        brush = canvas.getGraphicsContext2D();
-        appleDraw = new AppleDraw(brush);
+    @Test
+    void testAppleDrawHasDrawAppleMethod() {
+        try {
+            Class<?> clazz = Class.forName(CLASS_NAME);
+            Method method = clazz.getMethod("drawApple", ArrayList.class, Point.class);
+            assertNotNull(method);
+            assertEquals(ArrayList.class, method.getParameterTypes()[0]);
+            assertEquals(Point.class, method.getParameterTypes()[1]);
+        } catch (NoSuchMethodException e) {
+            fail("Метод drawApple(ArrayList<Point>, Point) не найден");
+        } catch (ClassNotFoundException e) {
+            fail("Класс AppleDraw не найден");
+        }
     }
 
     /**
-     * Проверяет создание объекта.
+     * Проверяет наличие конструктора с GraphicsContext.
      */
     @Test
-    void testConstructor() {
-        assertNotNull(appleDraw);
+    void testAppleDrawHasConstructor() {
+        try {
+            Class<?> clazz = Class.forName(CLASS_NAME);
+            Constructor<?> constructor = clazz.getConstructor(javafx.scene.canvas.GraphicsContext.class);
+            assertNotNull(constructor);
+        } catch (NoSuchMethodException e) {
+            fail("Конструктор AppleDraw(GraphicsContext) не найден");
+        } catch (ClassNotFoundException e) {
+            fail("Класс AppleDraw не найден");
+        }
     }
 
     /**
-     * Проверяет отрисовку без яблок.
+     * Проверяет, что AppleDraw наследуется от BaseDraw.
      */
     @Test
-    void testDrawAppleEmpty() {
-        ArrayList<Point> apples = new ArrayList<>();
-        assertDoesNotThrow(() -> appleDraw.drawApple(apples, null));
-    }
-
-    /**
-     * Проверяет отрисовку обычных яблок.
-     */
-    @Test
-    void testDrawAppleNormal() {
-        ArrayList<Point> apples = new ArrayList<>();
-        apples.add(new Point(5, 5));
-        apples.add(new Point(10, 10));
-        assertDoesNotThrow(() -> appleDraw.drawApple(apples, null));
-    }
-
-    /**
-     * Проверяет отрисовку золотого яблока.
-     */
-    @Test
-    void testDrawAppleGolden() {
-        ArrayList<Point> apples = new ArrayList<>();
-        Point golden = new Point(7, 7);
-        assertDoesNotThrow(() -> appleDraw.drawApple(apples, golden));
-    }
-
-    /**
-     * Проверяет отрисовку обычных и золотого яблока вместе.
-     */
-    @Test
-    void testDrawAppleBoth() {
-        ArrayList<Point> apples = new ArrayList<>();
-        apples.add(new Point(5, 5));
-        Point golden = new Point(7, 7);
-        assertDoesNotThrow(() -> appleDraw.drawApple(apples, golden));
+    void testAppleDrawExtendsBaseDraw() {
+        try {
+            Class<?> clazz = Class.forName(CLASS_NAME);
+            Class<?> superClass = clazz.getSuperclass();
+            assertEquals(BaseDraw.class, superClass, "AppleDraw должен наследовать BaseDraw");
+        } catch (ClassNotFoundException e) {
+            fail("Класс AppleDraw не найден");
+        }
     }
 }

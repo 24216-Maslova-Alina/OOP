@@ -1,11 +1,13 @@
 package ru.nsu.a.maslova1.snake.view;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.junit.jupiter.api.Test;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import ru.nsu.a.maslova1.snake.config.GameConfig;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Тесты для BaseDraw.

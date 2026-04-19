@@ -1,14 +1,14 @@
 package ru.nsu.a.maslova1.snake.view;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+
 import org.junit.jupiter.api.Test;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import ru.nsu.a.maslova1.snake.model.GameState;
 import ru.nsu.a.maslova1.snake.model.Point;
-
 import java.util.ArrayList;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Тесты для GameView.

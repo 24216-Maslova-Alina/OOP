@@ -1,13 +1,14 @@
 package ru.nsu.a.maslova1.snake.controller;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.junit.jupiter.api.Test;
 import ru.nsu.a.maslova1.snake.model.GameManager;
 import ru.nsu.a.maslova1.snake.model.GameState;
 import ru.nsu.a.maslova1.snake.model.Point;
-
 import java.util.ArrayList;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Тесты для SnakeController.
