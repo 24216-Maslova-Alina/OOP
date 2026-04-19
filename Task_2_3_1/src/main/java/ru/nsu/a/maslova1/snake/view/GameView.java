@@ -1,5 +1,6 @@
 package ru.nsu.a.maslova1.snake.view;
 
+import javafx.scene.control.Label;
 import javafx.scene.canvas.GraphicsContext;
 import ru.nsu.a.maslova1.snake.model.GameState;
 import ru.nsu.a.maslova1.snake.model.Observer;
@@ -12,15 +13,20 @@ public class GameView implements Observer {
     private final AppleDraw appleDraw;
     private final Walls walls;
 
+    private final Label scoreLabel;
+    private final Label lengthLabel;
+
     /**
      * Инициализирует компоненты отрисовки с использованием предоставленного графического контекста.
      *
      * @param brush объект GraphicsContext для рисования на Canvas.
      */
-    public GameView(GraphicsContext brush) {
+    public GameView(GraphicsContext brush, Label scoreLabel, Label lengthLabel) {
         this.snakeDraw = new SnakeDraw(brush);
         this.appleDraw = new AppleDraw(brush);
         this.walls = new Walls(brush);
+        this.scoreLabel = scoreLabel;
+        this.lengthLabel = lengthLabel;
     }
 
     /**
@@ -34,5 +40,8 @@ public class GameView implements Observer {
         snakeDraw.drawSnake(state.getSnake());
         walls.drawWalls();
         appleDraw.drawApple(state.getApples(), state.getGoldApple());
+
+        scoreLabel.setText(String.valueOf(state.getScore()));
+        lengthLabel.setText(String.valueOf(state.getLength()));
     }
 }

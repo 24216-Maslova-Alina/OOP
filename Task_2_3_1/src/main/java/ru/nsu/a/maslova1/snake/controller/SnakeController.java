@@ -13,13 +13,11 @@ import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 import ru.nsu.a.maslova1.snake.model.Directions;
 import ru.nsu.a.maslova1.snake.model.GameManager;
-import ru.nsu.a.maslova1.snake.model.GameState;
-import ru.nsu.a.maslova1.snake.model.Observer;
 
 /**
  * Основной контроллер игры "Змейка".
  */
-public class SnakeController implements Observer {
+public class SnakeController {
 
     @FXML private Canvas gameCanvas;
     @FXML private Label lengthLabel;
@@ -50,6 +48,9 @@ public class SnakeController implements Observer {
             if (gameManager != null) {
                 gameManager.makeStep();
             }
+            if (!gameManager.isGameRunning() && wasGameRunning) {
+                handleGameOver();
+            }
         }));
         timeline.setCycleCount(Timeline.INDEFINITE);
 
@@ -70,7 +71,6 @@ public class SnakeController implements Observer {
      */
     public void setModel(GameManager model) {
         this.gameManager = model;
-        this.gameManager.addObserver(this);
     }
 
     /**
@@ -108,22 +108,6 @@ public class SnakeController implements Observer {
         wasGameRunning = true;
         bestLabel.setText(String.valueOf(gameManager.getBestScore()));
         pauseButton.setText("Пауза");
-    }
-
-    /**
-     * Вызывается при обновлении состояния модели.
-     * Обновляет текстовые метки интерфейса и обрабатывает ситуацию завершения игры.
-     *
-     * @param state текущее состояние игры.
-     */
-    @Override
-    public void notify(GameState state) {
-        lengthLabel.setText(String.valueOf(state.getLength()));
-        scoreLabel.setText(String.valueOf(state.getScore()));
-
-        if (state.isGameOver() && wasGameRunning) {
-            handleGameOver();
-        }
     }
 
     /**
@@ -186,5 +170,22 @@ public class SnakeController implements Observer {
         if (dir != null) {
             gameManager.setDirection(dir);
         }
+    }
+
+    /**
+     * Возвращает лучший результат.
+     *
+     * @return лучший результат.
+     */
+    public Label getScoreLabel() {
+        return scoreLabel;
+    }
+
+    /**
+     * Возвращает длину.
+     * @return длина.
+     */
+    public Label getLengthLabel() {
+        return lengthLabel;
     }
 }

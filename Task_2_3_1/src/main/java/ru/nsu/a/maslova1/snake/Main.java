@@ -30,7 +30,11 @@ public class Main extends Application {
 
         GameManager model = new GameManager();
 
-        GameView view = new GameView(controller.getGraphicsContext());
+        GameView view = new GameView(
+                controller.getGraphicsContext(),
+                controller.getScoreLabel(),
+                controller.getLengthLabel()
+        );
 
         model.addObserver(view);
         controller.setModel(model);
