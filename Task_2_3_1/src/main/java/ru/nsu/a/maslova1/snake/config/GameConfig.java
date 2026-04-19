@@ -7,7 +7,6 @@ import ru.nsu.a.maslova1.snake.model.Point;
  * Конфигурация игры: размеры поля, ячейки и список стен.
  */
 public class GameConfig {
-    public static final int CELL_SIZE = 25;
     public static final int COLS = 25;
     public static final int ROWS = 25;
 

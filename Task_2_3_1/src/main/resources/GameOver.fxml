@@ -7,8 +7,8 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-      prefHeight="625.0" prefWidth="625.0" spacing="20.0"
+<VBox alignment="CENTER" maxHeight="Infinity" maxWidth="Infinity"
+      spacing="20.0"
       style="-fx-background-color: rgba(0, 0, 0, 0.7); -fx-background-radius: 20;"
       xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="ru.nsu.a.maslova1.snake.controller.GameOverController">

@@ -9,40 +9,43 @@ import ru.nsu.a.maslova1.snake.model.Point;
 /**
  * Отрисовка змейки и игрового поля.
  */
-public class SnakeDraw {
-    private final int size = GameConfig.CELL_SIZE;
+public class SnakeDraw extends BaseDraw {
     private final int cols = GameConfig.COLS;
     private final int rows = GameConfig.ROWS;
 
-    private final GraphicsContext brush;
-
-    /**
-     * Создаёт отрисовщик змейки.
-     *
-     * @param brush контекст для рисования
-     */
     public SnakeDraw(GraphicsContext brush) {
-        this.brush = brush;
+        super(brush);
     }
 
     /**
-     * Очищает игровое поле, заливая фоновым цветом.
+     * Очищает игровое поле, заливая фоновым цветом на весь экран, и рисует рамку по центру.
      */
     public void clearField() {
         brush.setFill(Color.rgb(225, 245, 240));
-        brush.fillRect(0, 0, cols * size, rows * size);
+        brush.fillRect(0, 0, brush.getCanvas().getWidth(), brush.getCanvas().getHeight());
+
+        double size = getCellSize();
+        double offX = getOffsetX();
+        double offY = getOffsetY();
+
+        brush.setStroke(Color.rgb(70, 130, 120));
+        brush.setLineWidth(3);
+        brush.strokeRect(offX, offY, cols * size, rows * size);
     }
 
     /**
-     * Рисует змейку: голову с глазами и сегменты тела.
-     *
-     * @param snake список точек змейки
+     * Рисует змейку с учетом центрирования.
      */
     public void drawSnake(ArrayList<Point> snake) {
+        double size = getCellSize();
+        double offX = getOffsetX(); // Получаем отступ X
+        double offY = getOffsetY(); // Получаем отступ Y
+
         for (int i = 0; i < snake.size(); i++) {
             Point p = snake.get(i);
-            int x = p.getPointX() * size;
-            int y = p.getPointY() * size;
+
+            double x = offX + p.getPointX() * size;
+            double y = offY + p.getPointY() * size;
 
             if (i == 0) {
                 brush.setFill(Color.web("#388E3C"));

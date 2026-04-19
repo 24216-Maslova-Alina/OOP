@@ -48,13 +48,14 @@
     </top>
 
     <center>
-        <StackPane>
+        <StackPane fx:id="gamePane" style="-fx-background-color: #C8E6E0;" BorderPane.alignment="CENTER">
             <children>
-                <Canvas fx:id="gameCanvas" height="625.0" width="625.0" />
+                <Canvas fx:id="gameCanvas" height="400.0" width="400.0" />
 
                 <fx:include fx:id="gameOverOverlay" source="GameOver.fxml" visible="false" />
             </children>
-        </StackPane>    </center>
+        </StackPane>
+    </center>
 
     <right>
         <VBox alignment="CENTER" prefHeight="300.0" prefWidth="120.0" spacing="15" style="-fx-background-color: #D4E8E2; -fx-background-radius: 10;">

@@ -14,7 +14,7 @@ public class AppleLogic {
     private Point goldApple = null;
     private final List<Point> walls = GameConfig.WALLS;
 
-    private final int count = 4;
+    private final int count = 5;
     private final Random random = new Random();
     private final int goldFlag = 3;
 

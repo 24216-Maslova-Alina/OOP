@@ -8,14 +8,18 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 import ru.nsu.a.maslova1.snake.model.Directions;
+import ru.nsu.a.maslova1.snake.model.GameManager;
+import ru.nsu.a.maslova1.snake.model.GameState;
+import ru.nsu.a.maslova1.snake.model.Observer;
 
 /**
- * Главный контроллер игры, управляющий интерфейсом и обработкой ввода.
+ * Основной контроллер игры "Змейка".
  */
-public class SnakeController {
+public class SnakeController implements Observer {
 
     @FXML private Canvas gameCanvas;
     @FXML private Label lengthLabel;
@@ -26,56 +30,107 @@ public class SnakeController {
 
     @FXML private VBox gameOverOverlay;
     @FXML private GameOverController gameOverOverlayController;
+    @FXML private StackPane gamePane;
 
-    private GraphicsContext brush;
     private GameManager gameManager;
+    private Timeline timeline;
     private boolean wasGameRunning = false;
     private boolean keysInstalled = false;
 
     /**
-     * Инициализирует контроллер: создаёт GameManager, настраивает кнопки и обработку клавиш.
+     * Инициализирует контроллер.
      */
     @FXML
     public void initialize() {
-        brush = gameCanvas.getGraphicsContext2D();
-        gameManager = new GameManager(brush);
-
-        // Связываем контроллер окна Game Over с главным контроллером
         if (gameOverOverlayController != null) {
             gameOverOverlayController.setMainController(this);
         }
 
-        startButton.setOnAction(e -> {
-            restartGameFromOverlay();
-        });
-
-        pauseButton.setOnAction(e -> {
-            if (gameManager.isGameRunning()) {
-                gameManager.togglePause();
-                updatePauseButtonText();
+        timeline = new Timeline(new KeyFrame(Duration.millis(150), e -> {
+            if (gameManager != null) {
+                gameManager.makeStep();
             }
-        });
+        }));
+        timeline.setCycleCount(Timeline.INDEFINITE);
+
+        startButton.setOnAction(e -> restartGameFromOverlay());
+        pauseButton.setOnAction(e -> togglePause());
+
+        //Canvas всегда будет такого же размера, как StackPane
+        gameCanvas.widthProperty().bind(gamePane.widthProperty());
+        gameCanvas.heightProperty().bind(gamePane.heightProperty());
 
         setupKeysHandling();
-
-        Timeline uiUpdater = new Timeline(
-                new KeyFrame(Duration.millis(100), e -> {
-                    lengthLabel.setText(String.valueOf(gameManager.getLength()));
-                    scoreLabel.setText(String.valueOf(gameManager.getScore()));
-
-                    if (wasGameRunning && !gameManager.isGameRunning()) {
-                        handleGameOver();
-                    }
-                })
-        );
-        uiUpdater.setCycleCount(Timeline.INDEFINITE);
-        uiUpdater.play();
     }
 
     /**
-     * Обрабатывает завершение игры: обновляет рекорд и показывает окно Game Over.
+     * Устанавливает модель игры и регистрирует контроллер как наблюдателя.
+     *
+     * @param model экземпляр GameManager для управления игровой логикой.
+     */
+    public void setModel(GameManager model) {
+        this.gameManager = model;
+        this.gameManager.addObserver(this);
+    }
+
+    /**
+     * Возвращает графический контекст холста для выполнения отрисовки.
+     *
+     * @return GraphicsContext2D используемого холста.
+     */
+    public GraphicsContext getGraphicsContext() {
+        return gameCanvas.getGraphicsContext2D();
+    }
+
+    /**
+     * Переключает состояние паузы в игре.
+     */
+    private void togglePause() {
+        if (gameManager == null || !gameManager.isGameRunning()) {
+            return;
+        }
+
+        if (timeline.getStatus() == Timeline.Status.RUNNING) {
+            timeline.pause();
+        } else {
+            timeline.play();
+        }
+        updatePauseButtonText();
+    }
+
+    /**
+     * Запускает новую игру, сбрасывает состояние модели и активирует таймер.
+     */
+    public void restartGameFromOverlay() {
+        gameOverOverlay.setVisible(false);
+        gameManager.startGame();
+        timeline.play();
+        wasGameRunning = true;
+        bestLabel.setText(String.valueOf(gameManager.getBestScore()));
+        pauseButton.setText("Пауза");
+    }
+
+    /**
+     * Вызывается при обновлении состояния модели.
+     * Обновляет текстовые метки интерфейса и обрабатывает ситуацию завершения игры.
+     *
+     * @param state текущее состояние игры.
+     */
+    @Override
+    public void notify(GameState state) {
+        lengthLabel.setText(String.valueOf(state.getLength()));
+        scoreLabel.setText(String.valueOf(state.getScore()));
+
+        if (state.isGameOver() && wasGameRunning) {
+            handleGameOver();
+        }
+    }
+
+    /**
+     * Останавливает игровой процесс и отображает окно завершения игры.
      */
     private void handleGameOver() {
+        timeline.stop();
         wasGameRunning = false;
         bestLabel.setText(String.valueOf(gameManager.getBestScore()));
         pauseButton.setText("Пауза");
@@ -87,18 +142,7 @@ public class SnakeController {
     }
 
     /**
-     * Перезапускает игру из окна Game Over.
-     */
-    public void restartGameFromOverlay() {
-        gameOverOverlay.setVisible(false);
-        gameManager.startGame();
-        wasGameRunning = true;
-        bestLabel.setText(String.valueOf(gameManager.getBestScore()));
-        pauseButton.setText("Пауза");
-    }
-
-    /**
-     * Обновляет текст кнопки паузы.
+     * Изменяет текст на кнопке паузы в зависимости от состояния таймера.
      */
     private void updatePauseButtonText() {
         if (pauseButton.getText().equals("Пауза")) {
@@ -109,10 +153,11 @@ public class SnakeController {
     }
 
     /**
-     * Настраивает обработку нажатий клавиш.
+     * Настраивает глобальный фильтр нажатий клавиш после прикрепления сцены.
      */
     private void setupKeysHandling() {
-        gameCanvas.sceneProperty().addListener((obs, oldScene, newScene) -> {
+        gameCanvas.sceneProperty().addListener((obs,
+                                                oldScene, newScene) -> {
             if (newScene != null && !keysInstalled) {
                 keysInstalled = true;
                 newScene.addEventFilter(KeyEvent.KEY_PRESSED, this::handleKeys);
@@ -121,11 +166,15 @@ public class SnakeController {
     }
 
     /**
-     * Обрабатывает нажатия клавиш стрелок для управления змейкой.
+     * Обрабатывает нажатия клавиш и передает команды управления в модель.
      *
-     * @param event событие клавиши
+     * @param event событие нажатия клавиши.
      */
     private void handleKeys(KeyEvent event) {
+        if (gameManager == null) {
+            return;
+        }
+
         Directions dir = switch (event.getCode()) {
             case UP -> Directions.UP;
             case DOWN -> Directions.DOWN;

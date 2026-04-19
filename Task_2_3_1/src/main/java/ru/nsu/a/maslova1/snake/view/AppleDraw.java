@@ -3,15 +3,12 @@ package ru.nsu.a.maslova1.snake.view;
 import java.util.ArrayList;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
-import ru.nsu.a.maslova1.snake.config.GameConfig;
 import ru.nsu.a.maslova1.snake.model.Point;
 
 /**
  * Отрисовка яблок на игровом поле.
  */
-public class AppleDraw {
-    private final int size = GameConfig.CELL_SIZE;
-    private final GraphicsContext brush;
+public class AppleDraw extends BaseDraw{
 
     /**
      * Создаёт отрисовщик яблок.
@@ -19,7 +16,7 @@ public class AppleDraw {
      * @param brush контекст для рисования
      */
     public AppleDraw(GraphicsContext brush) {
-        this.brush = brush;
+        super(brush);
     }
 
     /**
@@ -29,9 +26,13 @@ public class AppleDraw {
      * @param golden золотое яблоко (может быть null)
      */
     public void drawApple(ArrayList<Point> apples, Point golden) {
+        double size = getCellSize();
+        double offX = getOffsetX();
+        double offY = getOffsetY();
+
         for (Point fruit : apples) {
-            int x = fruit.getPointX() * size;
-            int y = fruit.getPointY() * size;
+            double x = offX + fruit.getPointX() * size;
+            double y = offY + fruit.getPointY() * size;
 
             brush.setFill(Color.MAROON);
             brush.fillOval(x, y, size, size);
@@ -44,8 +45,8 @@ public class AppleDraw {
         }
 
         if (golden != null) {
-            int x = golden.getPointX() * size;
-            int y = golden.getPointY() * size;
+            double x = offX + golden.getPointX() * size;
+            double y = offY + golden.getPointY() * size;
 
             brush.setFill(Color.DARKGOLDENROD);
             brush.fillOval(x, y, size, size);
