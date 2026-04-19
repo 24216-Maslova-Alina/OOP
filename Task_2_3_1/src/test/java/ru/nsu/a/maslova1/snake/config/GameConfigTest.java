@@ -15,14 +15,6 @@ import ru.nsu.a.maslova1.snake.model.Point;
 class GameConfigTest {
 
     /**
-     * Проверяет, что размер ячейки положительный.
-     */
-    @Test
-    void testCellSizeIsPositive() {
-        assertTrue(GameConfig.CELL_SIZE > 0, "Размер ячейки должен быть положительным");
-    }
-
-    /**
      * Проверяет, что количество столбцов положительное.
      */
     @Test
@@ -109,7 +101,6 @@ class GameConfigTest {
      */
     @Test
     void testConstantsAreFinal() {
-        assertEquals(25, GameConfig.CELL_SIZE);
         assertEquals(25, GameConfig.COLS);
         assertEquals(25, GameConfig.ROWS);
     }

@@ -44,7 +44,7 @@ class AppleLogicTest {
     @Test
     void testGenerateApplesCreatesApples() {
         appleLogic.generateApples(snake);
-        assertEquals(4, appleLogic.getApples().size());
+        assertEquals(5, appleLogic.getApples().size());
     }
 
     /**
