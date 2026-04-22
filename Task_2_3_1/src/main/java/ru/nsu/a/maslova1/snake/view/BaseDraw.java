@@ -19,7 +19,7 @@ public class BaseDraw {
      *
      * @param brush графический контекст для рисования
      */
-    public BaseDraw (GraphicsContext brush) {
+    public BaseDraw(GraphicsContext brush) {
         this.brush = brush;
     }
 
@@ -31,15 +31,15 @@ public class BaseDraw {
      *
      * @return длина стороны клетки в пикселях
      */
-    protected double getCellSize () {
-        double width = brush.getCanvas ().getWidth ();
-        double height = brush.getCanvas ().getHeight ();
+    protected double getCellSize() {
+        double width = brush.getCanvas().getWidth();
+        double height = brush.getCanvas().getHeight();
 
         // Если окно еще не прогрузилось, даем размер по умолчанию
-        if (width <= 0 || height <= 0)
+        if(width <= 0 || height <= 0)
             return 25.0;
 
-        return Math.min (width / GameConfig.COLS, height / GameConfig.ROWS);
+        return Math.min(width / GameConfig.COLS, height / GameConfig.ROWS);
     }
 
     /**
@@ -48,9 +48,9 @@ public class BaseDraw {
      *
      * @return отступ от левого края холста в пикселях
      */
-    protected double getOffsetX () {
-        double width = brush.getCanvas ().getWidth ();
-        return (width - getCellSize () * GameConfig.COLS) / 2;
+    protected double getOffsetX() {
+        double width = brush.getCanvas().getWidth();
+        return (width - getCellSize() * GameConfig.COLS) / 2;
     }
 
     /**
@@ -59,8 +59,8 @@ public class BaseDraw {
      *
      * @return отступ от верхнего края холста в пикселях
      */
-    protected double getOffsetY () {
-        double height = brush.getCanvas ().getHeight ();
-        return (height - getCellSize () * GameConfig.ROWS) / 2;
+    protected double getOffsetY() {
+        double height = brush.getCanvas().getHeight();
+        return (height - getCellSize() * GameConfig.ROWS) / 2;
     }
 }

@@ -48,29 +48,29 @@ public class SnakeController {
      * Инициализирует контроллер.
      */
     @FXML
-    public void initialize () {
-        if (gameOverOverlayController != null) {
-            gameOverOverlayController.setMainController (this);
+    public void initialize() {
+        if(gameOverOverlayController != null) {
+            gameOverOverlayController.setMainController(this);
         }
 
-        timeline = new Timeline (new KeyFrame (Duration.millis (150), e -> {
-            if (gameManager != null) {
-                gameManager.makeStep ();
+        timeline = new Timeline(new KeyFrame(Duration.millis(150), e -> {
+            if(gameManager != null) {
+                gameManager.makeStep();
             }
-            if (! gameManager.isGameRunning () && wasGameRunning) {
-                handleGameOver ();
+            if(! gameManager.isGameRunning() && wasGameRunning) {
+                handleGameOver();
             }
         }));
-        timeline.setCycleCount (Timeline.INDEFINITE);
+        timeline.setCycleCount(Timeline.INDEFINITE);
 
-        startButton.setOnAction (e -> restartGameFromOverlay ());
-        pauseButton.setOnAction (e -> togglePause ());
+        startButton.setOnAction(e -> restartGameFromOverlay());
+        pauseButton.setOnAction(e -> togglePause());
 
         //Canvas всегда будет такого же размера, как StackPane
-        gameCanvas.widthProperty ().bind (gamePane.widthProperty ());
-        gameCanvas.heightProperty ().bind (gamePane.heightProperty ());
+        gameCanvas.widthProperty().bind(gamePane.widthProperty());
+        gameCanvas.heightProperty().bind(gamePane.heightProperty());
 
-        setupKeysHandling ();
+        setupKeysHandling();
     }
 
     /**
@@ -78,7 +78,7 @@ public class SnakeController {
      *
      * @param model экземпляр GameManager для управления игровой логикой.
      */
-    public void setModel (GameManager model) {
+    public void setModel(GameManager model) {
         this.gameManager = model;
     }
 
@@ -87,73 +87,73 @@ public class SnakeController {
      *
      * @return GraphicsContext2D используемого холста.
      */
-    public GraphicsContext getGraphicsContext () {
-        return gameCanvas.getGraphicsContext2D ();
+    public GraphicsContext getGraphicsContext() {
+        return gameCanvas.getGraphicsContext2D();
     }
 
     /**
      * Переключает состояние паузы в игре.
      */
-    private void togglePause () {
-        if (gameManager == null || ! gameManager.isGameRunning ()) {
+    private void togglePause() {
+        if(gameManager == null || ! gameManager.isGameRunning()) {
             return;
         }
 
-        if (timeline.getStatus () == Timeline.Status.RUNNING) {
-            timeline.pause ();
+        if(timeline.getStatus() == Timeline.Status.RUNNING) {
+            timeline.pause();
         } else {
-            timeline.play ();
+            timeline.play();
         }
-        updatePauseButtonText ();
+        updatePauseButtonText();
     }
 
     /**
      * Запускает новую игру, сбрасывает состояние модели и активирует таймер.
      */
-    public void restartGameFromOverlay () {
-        gameOverOverlay.setVisible (false);
-        gameManager.startGame ();
-        timeline.play ();
+    public void restartGameFromOverlay() {
+        gameOverOverlay.setVisible(false);
+        gameManager.startGame();
+        timeline.play();
         wasGameRunning = true;
-        bestLabel.setText (String.valueOf (gameManager.getBestScore ()));
-        pauseButton.setText ("Пауза");
+        bestLabel.setText(String.valueOf(gameManager.getBestScore()));
+        pauseButton.setText("Пауза");
     }
 
     /**
      * Останавливает игровой процесс и отображает окно завершения игры.
      */
-    private void handleGameOver () {
-        timeline.stop ();
+    private void handleGameOver() {
+        timeline.stop();
         wasGameRunning = false;
-        bestLabel.setText (String.valueOf (gameManager.getBestScore ()));
-        pauseButton.setText ("Пауза");
+        bestLabel.setText(String.valueOf(gameManager.getBestScore()));
+        pauseButton.setText("Пауза");
 
-        if (gameOverOverlayController != null) {
-            gameOverOverlayController.setStats (gameManager.getScore (), gameManager.getLength ());
+        if(gameOverOverlayController != null) {
+            gameOverOverlayController.setStats(gameManager.getScore(), gameManager.getLength());
         }
-        gameOverOverlay.setVisible (true);
+        gameOverOverlay.setVisible(true);
     }
 
     /**
      * Изменяет текст на кнопке паузы в зависимости от состояния таймера.
      */
-    private void updatePauseButtonText () {
-        if (pauseButton.getText ().equals ("Пауза")) {
-            pauseButton.setText ("Продолжить");
+    private void updatePauseButtonText() {
+        if(pauseButton.getText().equals("Пауза")) {
+            pauseButton.setText("Продолжить");
         } else {
-            pauseButton.setText ("Пауза");
+            pauseButton.setText("Пауза");
         }
     }
 
     /**
      * Настраивает глобальный фильтр нажатий клавиш после прикрепления сцены.
      */
-    private void setupKeysHandling () {
-        gameCanvas.sceneProperty ().addListener ((obs,
-                                                  oldScene, newScene) -> {
-            if (newScene != null && ! keysInstalled) {
+    private void setupKeysHandling() {
+        gameCanvas.sceneProperty().addListener((obs,
+                                                oldScene, newScene) -> {
+            if(newScene != null && ! keysInstalled) {
                 keysInstalled = true;
-                newScene.addEventFilter (KeyEvent.KEY_PRESSED, this :: handleKeys);
+                newScene.addEventFilter(KeyEvent.KEY_PRESSED, this :: handleKeys);
             }
         });
     }
@@ -163,12 +163,12 @@ public class SnakeController {
      *
      * @param event событие нажатия клавиши.
      */
-    private void handleKeys (KeyEvent event) {
-        if (gameManager == null) {
+    private void handleKeys(KeyEvent event) {
+        if(gameManager == null) {
             return;
         }
 
-        Directions dir = switch (event.getCode ()) {
+        Directions dir = switch(event.getCode()) {
             case UP -> Directions.UP;
             case DOWN -> Directions.DOWN;
             case LEFT -> Directions.LEFT;
@@ -176,8 +176,8 @@ public class SnakeController {
             default -> null;
         };
 
-        if (dir != null) {
-            gameManager.setDirection (dir);
+        if(dir != null) {
+            gameManager.setDirection(dir);
         }
     }
 
@@ -186,7 +186,7 @@ public class SnakeController {
      *
      * @return лучший результат.
      */
-    public Label getScoreLabel () {
+    public Label getScoreLabel() {
         return scoreLabel;
     }
 
@@ -195,7 +195,7 @@ public class SnakeController {
      *
      * @return длина.
      */
-    public Label getLengthLabel () {
+    public Label getLengthLabel() {
         return lengthLabel;
     }
 }

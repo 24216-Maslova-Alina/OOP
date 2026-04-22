@@ -13,7 +13,7 @@ public class Point {
      * @param x координата X
      * @param y координата Y
      */
-    public Point (int x, int y) {
+    public Point(int x, int y) {
         this.pointX = x;
         this.pointY = y;
     }
@@ -26,12 +26,12 @@ public class Point {
      * @return true, если координаты совпадают
      */
     @Override
-    public boolean equals (Object obj) {
-        if (this == obj) {
+    public boolean equals(Object obj) {
+        if(this == obj) {
             return true;
         }
 
-        if (obj == null || getClass () != obj.getClass ()) {
+        if(obj == null || getClass() != obj.getClass()) {
             return false;
         }
 
@@ -44,7 +44,7 @@ public class Point {
      *
      * @return координата X
      */
-    public int getPointX () {
+    public int getPointX() {
         return pointX;
     }
 
@@ -53,7 +53,7 @@ public class Point {
      *
      * @return координата Y
      */
-    public int getPointY () {
+    public int getPointY() {
         return pointY;
     }
 }

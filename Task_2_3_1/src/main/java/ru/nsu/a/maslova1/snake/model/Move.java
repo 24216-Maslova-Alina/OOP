@@ -15,7 +15,7 @@ public class Move {
      *
      * @param eat обработчик поедания яблок
      */
-    public Move (Eat eat) {
+    public Move(Eat eat) {
         this.eat = eat;
     }
 
@@ -26,21 +26,21 @@ public class Move {
      * @param apple список яблок
      * @param logic логика яблок
      */
-    public void move (ArrayList<Point> snake, ArrayList<Point> apple, AppleLogic logic) {
-        if (dirNew != null && ! dirNew.isOpposite (dirCurrent)) {
+    public void move(ArrayList<Point> snake, ArrayList<Point> apple, AppleLogic logic) {
+        if(dirNew != null && ! dirNew.isOpposite(dirCurrent)) {
             dirCurrent = dirNew;
         }
 
-        Point head = snake.get (0);
+        Point head = snake.get(0);
 
-        Point newHead = new Point (
-                head.getPointX () + dirCurrent.getPointX (),
-                head.getPointY () + dirCurrent.getPointY ()
+        Point newHead = new Point(
+                head.getPointX() + dirCurrent.getPointX(),
+                head.getPointY() + dirCurrent.getPointY()
         );
 
-        snake.add (0, newHead);
-        if (! eat.collisionApple (newHead, apple, logic)) {
-            snake.remove (snake.size () - 1);
+        snake.add(0, newHead);
+        if(! eat.collisionApple(newHead, apple, logic)) {
+            snake.remove(snake.size() - 1);
         }
     }
 
@@ -49,7 +49,7 @@ public class Move {
      *
      * @param dir направление
      */
-    public void setDirCurrent (Directions dir) {
+    public void setDirCurrent(Directions dir) {
         this.dirCurrent = dir;
     }
 
@@ -58,7 +58,7 @@ public class Move {
      *
      * @param dir направление
      */
-    public void setDirNew (Directions dir) {
+    public void setDirNew(Directions dir) {
         this.dirNew = dir;
     }
 }

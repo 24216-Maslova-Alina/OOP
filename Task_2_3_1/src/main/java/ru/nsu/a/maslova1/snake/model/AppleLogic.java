@@ -11,12 +11,12 @@ import ru.nsu.a.maslova1.snake.config.GameConfig;
  */
 public class AppleLogic {
 
-    private final ArrayList<Point> apples = new ArrayList<> ();
+    private final ArrayList<Point> apples = new ArrayList<>();
     private Point goldApple = null;
     private final List<Point> walls = GameConfig.WALLS;
 
     private final int count = 5;
-    private final Random random = new Random ();
+    private final Random random = new Random();
     private final int goldFlag = 3;
 
     private final int cols = GameConfig.COLS;
@@ -32,25 +32,25 @@ public class AppleLogic {
      *
      * @return свободная клетка или null, если свободных нет
      */
-    private Point generateFreeCells (ArrayList<Point> snake) {
-        ArrayList<Point> freeCells = new ArrayList<> ();
+    private Point generateFreeCells(ArrayList<Point> snake) {
+        ArrayList<Point> freeCells = new ArrayList<>();
 
-        for (int x = 0; x < cols; x++) {
-            for (int y = 0; y < rows; y++) {
-                Point cell = new Point (x, y);
+        for(int x = 0; x < cols; x++) {
+            for(int y = 0; y < rows; y++) {
+                Point cell = new Point(x, y);
 
-                boolean isGolden = (goldApple != null && goldApple.equals (cell));
-                if (! snake.contains (cell) && ! apples.contains (cell)
-                        && ! walls.contains (cell) && ! isGolden) {
-                    freeCells.add (cell);
+                boolean isGolden = (goldApple != null && goldApple.equals(cell));
+                if(! snake.contains(cell) && ! apples.contains(cell)
+                        && ! walls.contains(cell) && ! isGolden) {
+                    freeCells.add(cell);
                 }
             }
         }
 
-        if (freeCells.isEmpty ()) {
+        if(freeCells.isEmpty()) {
             return null;
         }
-        return freeCells.get (random.nextInt (freeCells.size ()));
+        return freeCells.get(random.nextInt(freeCells.size()));
     }
 
     /**
@@ -58,19 +58,19 @@ public class AppleLogic {
      *
      * @param snake текущее положение змейки
      */
-    public void generateApples (ArrayList<Point> snake) {
-        while (apples.size () < count) {
-            Point p = generateFreeCells (snake);
-            if (p != null) {
-                apples.add (p);
+    public void generateApples(ArrayList<Point> snake) {
+        while(apples.size() < count) {
+            Point p = generateFreeCells(snake);
+            if(p != null) {
+                apples.add(p);
             }
         }
 
-        if (goldApple == null && random.nextInt (1000) < goldFlag) {
-            this.goldApple = generateFreeCells (snake);
+        if(goldApple == null && random.nextInt(1000) < goldFlag) {
+            this.goldApple = generateFreeCells(snake);
 
-            if (this.goldApple != null) {
-                this.goldAppleSpawnTime = System.currentTimeMillis ();
+            if(this.goldApple != null) {
+                this.goldAppleSpawnTime = System.currentTimeMillis();
             }
         }
     }
@@ -78,8 +78,8 @@ public class AppleLogic {
     /**
      * Сбрасывает все яблоки (очищает списки).
      */
-    public void reset () {
-        apples.clear ();
+    public void reset() {
+        apples.clear();
         this.goldApple = null;
     }
 
@@ -88,7 +88,7 @@ public class AppleLogic {
      *
      * @return список координат обычных яблок
      */
-    public ArrayList<Point> getApples () {
+    public ArrayList<Point> getApples() {
         return apples;
     }
 
@@ -97,24 +97,24 @@ public class AppleLogic {
      *
      * @return координаты золотого яблока или null, если его нет
      */
-    public Point getGoldApple () {
+    public Point getGoldApple() {
         return goldApple;
     }
 
     /**
      * Удаляет золотое яблоко с поля.
      */
-    public void removeGoldApple () {
+    public void removeGoldApple() {
         this.goldApple = null;
     }
 
     /**
      * Проверяет, не истекло ли время жизни золотого яблока, и удаляет его при необходимости.
      */
-    public void checkGoldAppleLifetime () {
-        if (goldApple != null) {
-            if (System.currentTimeMillis () - goldAppleSpawnTime > goldLifetime) {
-                removeGoldApple ();
+    public void checkGoldAppleLifetime() {
+        if(goldApple != null) {
+            if(System.currentTimeMillis() - goldAppleSpawnTime > goldLifetime) {
+                removeGoldApple();
             }
         }
     }

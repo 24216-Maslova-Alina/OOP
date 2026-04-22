@@ -10,5 +10,5 @@ public interface Observer {
      *
      * @param state объект, содержащий актуальные данные о состоянии игры.
      */
-    void notify (GameState state);
+    void notify(GameState state);
 }

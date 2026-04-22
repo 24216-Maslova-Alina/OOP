@@ -19,19 +19,19 @@ public class GameManager {
     private ArrayList<Point> snake;
     private boolean isGameRunning = false;
 
-    private final List<Observer> observers = new ArrayList<> ();
+    private final List<Observer> observers = new ArrayList<>();
 
     /**
      * Инициализирует компоненты игровой логики и пустой список змейки.
      */
-    public GameManager () {
-        this.snakeInit = new SnakeInit ();
-        this.appleLogic = new AppleLogic ();
-        this.eat = new Eat ();
-        this.move = new Move (eat);
-        this.collision = new Collision ();
-        this.statistic = new Statistic (eat);
-        this.snake = new ArrayList<> ();
+    public GameManager() {
+        this.snakeInit = new SnakeInit();
+        this.appleLogic = new AppleLogic();
+        this.eat = new Eat();
+        this.move = new Move(eat);
+        this.collision = new Collision();
+        this.statistic = new Statistic(eat);
+        this.snake = new ArrayList<>();
     }
 
     /**
@@ -39,46 +39,46 @@ public class GameManager {
      *
      * @param observer объект, реализующий интерфейс Observer.
      */
-    public void addObserver (Observer observer) {
-        observers.add (observer);
+    public void addObserver(Observer observer) {
+        observers.add(observer);
     }
 
     /**
      * Сбрасывает параметры и запускает новую игровую сессию.
      */
-    public void startGame () {
-        snake = snakeInit.initSnake ();
-        appleLogic.reset ();
-        eat.resetStore ();
+    public void startGame() {
+        snake = snakeInit.initSnake();
+        appleLogic.reset();
+        eat.resetStore();
         isGameRunning = true;
-        move.setDirCurrent (Directions.RIGHT);
+        move.setDirCurrent(Directions.RIGHT);
 
-        notifyObservers (false);
+        notifyObservers(false);
     }
 
     /**
      * Вычисляет изменения игрового мира за один шаг времени и проверяет столкновения.
      */
-    public void makeStep () {
-        if (! isGameRunning) {
+    public void makeStep() {
+        if(! isGameRunning) {
             return;
         }
 
-        appleLogic.checkGoldAppleLifetime ();
-        appleLogic.generateApples (snake);
-        move.move (snake, appleLogic.getApples (), appleLogic);
+        appleLogic.checkGoldAppleLifetime();
+        appleLogic.generateApples(snake);
+        move.move(snake, appleLogic.getApples(), appleLogic);
 
-        Point head = snake.get (0);
+        Point head = snake.get(0);
 
-        if (collision.collisionWall (GameConfig.WALLS, head)
-                || collision.collisionBorder (head, GameConfig.COLS, GameConfig.ROWS)
-                || collision.collisionTail (snake)) {
+        if(collision.collisionWall(GameConfig.WALLS, head)
+                || collision.collisionBorder(head, GameConfig.COLS, GameConfig.ROWS)
+                || collision.collisionTail(snake)) {
             isGameRunning = false;
-            notifyObservers (true);
+            notifyObservers(true);
             return;
         }
 
-        notifyObservers (false);
+        notifyObservers(false);
     }
 
     /**
@@ -86,18 +86,18 @@ public class GameManager {
      *
      * @param gameOver флаг, указывающий на окончание игры.
      */
-    private void notifyObservers (boolean gameOver) {
-        GameState state = new GameState (
+    private void notifyObservers(boolean gameOver) {
+        GameState state = new GameState(
                 snake,
-                appleLogic.getApples (),
-                appleLogic.getGoldApple (),
-                getScore (),
-                getLength (),
+                appleLogic.getApples(),
+                appleLogic.getGoldApple(),
+                getScore(),
+                getLength(),
                 gameOver
         );
 
-        for (Observer observer : observers) {
-            observer.notify (state);
+        for(Observer observer : observers) {
+            observer.notify(state);
         }
     }
 
@@ -106,35 +106,35 @@ public class GameManager {
      *
      * @param dir значение из перечисления Directions.
      */
-    public void setDirection (Directions dir) {
-        move.setDirNew (dir);
+    public void setDirection(Directions dir) {
+        move.setDirNew(dir);
     }
 
     /**
      * Возвращает текущее количество набранных очков.
      */
-    public int getScore () {
-        return eat.countingScore ();
+    public int getScore() {
+        return eat.countingScore();
     }
 
     /**
      * Возвращает текущее количество сегментов змейки.
      */
-    public int getLength () {
-        return snake.size ();
+    public int getLength() {
+        return snake.size();
     }
 
     /**
      * Возвращает лучший результат за все время.
      */
-    public int getBestScore () {
-        return statistic.getBestResult ();
+    public int getBestScore() {
+        return statistic.getBestResult();
     }
 
     /**
      * Проверяет, активен ли в данный момент игровой процесс.
      */
-    public boolean isGameRunning () {
+    public boolean isGameRunning() {
         return isGameRunning;
     }
 }
