@@ -42,13 +42,15 @@ public class SnakeDraw extends BaseDraw {
         double offX = getOffsetX(); // Получаем отступ X
         double offY = getOffsetY(); // Получаем отступ Y
 
-        for(int i = 0; i < snake.size(); i++) {
+        for (int i = 0;
+             i < snake.size();
+             i++) {
             Point p = snake.get(i);
 
             double x = offX + p.getPointX() * size;
             double y = offY + p.getPointY() * size;
 
-            if(i == 0) {
+            if (i == 0) {
                 brush.setFill(Color.web("#388E3C"));
                 brush.fillRoundRect(x - 1, y - 1, size + 2, size + 2, 12, 12);
 

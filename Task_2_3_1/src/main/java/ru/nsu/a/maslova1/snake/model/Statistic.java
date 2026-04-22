@@ -23,7 +23,7 @@ public class Statistic {
      */
     public int getBestResult() {
         int resultCurrent = eat.countingScore();
-        if(resultBest < resultCurrent) {
+        if (resultBest < resultCurrent) {
             resultBest = resultCurrent;
         }
         return resultBest;

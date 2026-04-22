@@ -18,14 +18,14 @@ public class Eat {
      * @return true, если яблоко съедено
      */
     public boolean collisionApple(Point head, ArrayList<Point> apple, AppleLogic logic) {
-        for(Point fruit : apple) {
-            if(head.equals(fruit)) {
+        for (Point fruit : apple) {
+            if (head.equals(fruit)) {
                 count++;
                 apple.remove(fruit);
                 return true;
             }
         }
-        if(head.equals(logic.getGoldApple())) {
+        if (head.equals(logic.getGoldApple())) {
             count += 3;
             logic.removeGoldApple();
             return true;

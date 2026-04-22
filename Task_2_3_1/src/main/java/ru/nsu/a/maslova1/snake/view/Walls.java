@@ -21,7 +21,7 @@ public class Walls extends BaseDraw {
         double offX = getOffsetX(); // Получаем отступ
         double offY = getOffsetY(); // Получаем отступ
 
-        for(var wall : GameConfig.WALLS) {
+        for (var wall : GameConfig.WALLS) {
             double x = offX + wall.getPointX() * size;
             double y = offY + wall.getPointY() * size;
 

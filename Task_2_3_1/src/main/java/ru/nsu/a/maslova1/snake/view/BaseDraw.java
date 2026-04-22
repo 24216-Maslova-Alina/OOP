@@ -36,8 +36,9 @@ public class BaseDraw {
         double height = brush.getCanvas().getHeight();
 
         // Если окно еще не прогрузилось, даем размер по умолчанию
-        if(width <= 0 || height <= 0)
+        if (width <= 0 || height <= 0) {
             return 25.0;
+        }
 
         return Math.min(width / GameConfig.COLS, height / GameConfig.ROWS);
     }

@@ -31,7 +31,7 @@ public class AppleDraw extends BaseDraw {
         double offX = getOffsetX();
         double offY = getOffsetY();
 
-        for(Point fruit : apples) {
+        for (Point fruit : apples) {
             double x = offX + fruit.getPointX() * size;
             double y = offY + fruit.getPointY() * size;
 
@@ -45,7 +45,7 @@ public class AppleDraw extends BaseDraw {
             brush.fillOval(x + 5, y + 5, size / 4.0, size / 4.0);
         }
 
-        if(golden != null) {
+        if (golden != null) {
             double x = offX + golden.getPointX() * size;
             double y = offY + golden.getPointY() * size;
 

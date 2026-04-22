@@ -17,10 +17,12 @@ public class Collision {
      */
     public boolean collisionTail(ArrayList<Point> snake) {
         Point head = snake.get(0);
-        for(int i = 1; i < snake.size(); i++) {
+        for (int i = 1;
+             i < snake.size();
+             i++) {
             Point p = snake.get(i);
 
-            if(p.equals(head)) {
+            if (p.equals(head)) {
                 return true;
             }
         }
@@ -51,8 +53,8 @@ public class Collision {
      * @return true, если голова столкнулась со стеной
      */
     public boolean collisionWall(List<Point> walls, Point head) {
-        for(Point w : walls) {
-            if(w.equals(head)) {
+        for (Point w : walls) {
+            if (w.equals(head)) {
                 return true;
             }
         }

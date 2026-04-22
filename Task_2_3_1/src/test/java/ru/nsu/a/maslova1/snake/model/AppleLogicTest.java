@@ -54,7 +54,7 @@ class AppleLogicTest {
     @Test
     void testApplesNotOnSnake() {
         appleLogic.generateApples(snake);
-        for(Point apple : appleLogic.getApples()) {
+        for (Point apple : appleLogic.getApples()) {
             assertFalse(snake.contains(apple));
         }
     }

@@ -60,7 +60,9 @@ class GameManagerTest {
     @Test
     void testGameOver() {
         gameManager.startGame();
-        for(int i = 0; i < 50 && gameManager.isGameRunning(); i++) {
+        for (int i = 0;
+             i < 50 && gameManager.isGameRunning();
+             i++) {
             gameManager.makeStep();
         }
         assertFalse(gameManager.isGameRunning());
@@ -72,7 +74,9 @@ class GameManagerTest {
     @Test
     void testRestart() {
         gameManager.startGame();
-        for(int i = 0; i < 50 && gameManager.isGameRunning(); i++) {
+        for (int i = 0;
+             i < 50 && gameManager.isGameRunning();
+             i++) {
             gameManager.makeStep();
         }
         gameManager.startGame();

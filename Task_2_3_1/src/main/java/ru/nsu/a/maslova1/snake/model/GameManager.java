@@ -60,7 +60,7 @@ public class GameManager {
      * Вычисляет изменения игрового мира за один шаг времени и проверяет столкновения.
      */
     public void makeStep() {
-        if(! isGameRunning) {
+        if (! isGameRunning) {
             return;
         }
 
@@ -70,7 +70,7 @@ public class GameManager {
 
         Point head = snake.get(0);
 
-        if(collision.collisionWall(GameConfig.WALLS, head)
+        if (collision.collisionWall(GameConfig.WALLS, head)
                 || collision.collisionBorder(head, GameConfig.COLS, GameConfig.ROWS)
                 || collision.collisionTail(snake)) {
             isGameRunning = false;
@@ -96,7 +96,7 @@ public class GameManager {
                 gameOver
         );
 
-        for(Observer observer : observers) {
+        for (Observer observer : observers) {
             observer.notify(state);
         }
     }

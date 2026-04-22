@@ -83,7 +83,7 @@ class GameConfigTest {
      */
     @Test
     void testAllWallsWithinBounds() {
-        for(Point wall : GameConfig.WALLS) {
+        for (Point wall : GameConfig.WALLS) {
             assertTrue(wall.getPointX() >= 0 && wall.getPointX() < GameConfig.COLS,
                     "Стена " + wall + " выходит за границы по X");
             assertTrue(wall.getPointY() >= 0 && wall.getPointY() < GameConfig.ROWS,

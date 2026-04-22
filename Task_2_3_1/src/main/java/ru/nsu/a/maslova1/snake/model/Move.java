@@ -27,7 +27,7 @@ public class Move {
      * @param logic логика яблок
      */
     public void move(ArrayList<Point> snake, ArrayList<Point> apple, AppleLogic logic) {
-        if(dirNew != null && ! dirNew.isOpposite(dirCurrent)) {
+        if (dirNew != null && ! dirNew.isOpposite(dirCurrent)) {
             dirCurrent = dirNew;
         }
 
@@ -39,7 +39,7 @@ public class Move {
         );
 
         snake.add(0, newHead);
-        if(! eat.collisionApple(newHead, apple, logic)) {
+        if (! eat.collisionApple(newHead, apple, logic)) {
             snake.remove(snake.size() - 1);
         }
     }

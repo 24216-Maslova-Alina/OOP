@@ -49,15 +49,15 @@ public class SnakeController {
      */
     @FXML
     public void initialize() {
-        if(gameOverOverlayController != null) {
+        if (gameOverOverlayController != null) {
             gameOverOverlayController.setMainController(this);
         }
 
         timeline = new Timeline(new KeyFrame(Duration.millis(150), e -> {
-            if(gameManager != null) {
+            if (gameManager != null) {
                 gameManager.makeStep();
             }
-            if(! gameManager.isGameRunning() && wasGameRunning) {
+            if (! gameManager.isGameRunning() && wasGameRunning) {
                 handleGameOver();
             }
         }));
@@ -95,11 +95,11 @@ public class SnakeController {
      * Переключает состояние паузы в игре.
      */
     private void togglePause() {
-        if(gameManager == null || ! gameManager.isGameRunning()) {
+        if (gameManager == null || ! gameManager.isGameRunning()) {
             return;
         }
 
-        if(timeline.getStatus() == Timeline.Status.RUNNING) {
+        if (timeline.getStatus() == Timeline.Status.RUNNING) {
             timeline.pause();
         } else {
             timeline.play();
@@ -128,7 +128,7 @@ public class SnakeController {
         bestLabel.setText(String.valueOf(gameManager.getBestScore()));
         pauseButton.setText("Пауза");
 
-        if(gameOverOverlayController != null) {
+        if (gameOverOverlayController != null) {
             gameOverOverlayController.setStats(gameManager.getScore(), gameManager.getLength());
         }
         gameOverOverlay.setVisible(true);
@@ -138,7 +138,7 @@ public class SnakeController {
      * Изменяет текст на кнопке паузы в зависимости от состояния таймера.
      */
     private void updatePauseButtonText() {
-        if(pauseButton.getText().equals("Пауза")) {
+        if (pauseButton.getText().equals("Пауза")) {
             pauseButton.setText("Продолжить");
         } else {
             pauseButton.setText("Пауза");
@@ -151,7 +151,7 @@ public class SnakeController {
     private void setupKeysHandling() {
         gameCanvas.sceneProperty().addListener((obs,
                                                 oldScene, newScene) -> {
-            if(newScene != null && ! keysInstalled) {
+            if (newScene != null && ! keysInstalled) {
                 keysInstalled = true;
                 newScene.addEventFilter(KeyEvent.KEY_PRESSED, this :: handleKeys);
             }
@@ -164,11 +164,11 @@ public class SnakeController {
      * @param event событие нажатия клавиши.
      */
     private void handleKeys(KeyEvent event) {
-        if(gameManager == null) {
+        if (gameManager == null) {
             return;
         }
 
-        Directions dir = switch(event.getCode()) {
+        Directions dir = switch (event.getCode()) {
             case UP -> Directions.UP;
             case DOWN -> Directions.DOWN;
             case LEFT -> Directions.LEFT;
@@ -176,7 +176,7 @@ public class SnakeController {
             default -> null;
         };
 
-        if(dir != null) {
+        if (dir != null) {
             gameManager.setDirection(dir);
         }
     }
