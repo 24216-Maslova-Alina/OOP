@@ -44,7 +44,7 @@ loadScripts(document, 'script');</script>
 <ul class="sub-nav-list">
 <li>Summary:&nbsp;</li>
 <li>Nested&nbsp;|&nbsp;</li>
-<li>Field&nbsp;|&nbsp;</li>
+<li><a href="#field-summary">Field</a>&nbsp;|&nbsp;</li>
 <li><a href="#constructor-summary">Constr</a>&nbsp;|&nbsp;</li>
 <li><a href="#method-summary">Method</a></li>
 </ul>
@@ -71,16 +71,27 @@ loadScripts(document, 'script');</script>
 <h1 title="Class SnakeDraw" class="title">Class SnakeDraw</h1>
 </div>
 <div class="inheritance" title="Inheritance Tree"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">java.lang.Object</a>
+<div class="inheritance"><a href="BaseDraw.html" title="class in ru.nsu.a.maslova1.snake.view">ru.nsu.a.maslova1.snake.view.BaseDraw</a>
 <div class="inheritance">ru.nsu.a.maslova1.snake.view.SnakeDraw</div>
+</div>
 </div>
 <section class="class-description" id="class-description">
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">SnakeDraw</span>
-<span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
+<span class="extends-implements">extends <a href="BaseDraw.html" title="class in ru.nsu.a.maslova1.snake.view">BaseDraw</a></span></div>
 <div class="block">Отрисовка змейки и игрового поля.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
+<!-- =========== FIELD SUMMARY =========== -->
+<li>
+<section class="field-summary" id="field-summary">
+<h2>Field Summary</h2>
+<div class="inherited-list">
+<h3 id="fields-inherited-from-class-ru.nsu.a.maslova1.snake.view.BaseDraw">Fields inherited from class&nbsp;ru.nsu.a.maslova1.snake.view.<a href="BaseDraw.html" title="class in ru.nsu.a.maslova1.snake.view">BaseDraw</a></h3>
+<code><a href="BaseDraw.html#brush">brush</a></code></div>
+</section>
+</li>
 <!-- ======== CONSTRUCTOR SUMMARY ======== -->
 <li>
 <section class="constructor-summary" id="constructor-summary">
@@ -90,9 +101,7 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(javafx.scene.canvas.GraphicsContext)" class="member-name-link">SnakeDraw</a><wbr>(javafx.scene.canvas.GraphicsContext&nbsp;brush)</code></div>
-<div class="col-last even-row-color">
-<div class="block">Создаёт отрисовщик змейки.</div>
-</div>
+<div class="col-last even-row-color">&nbsp;</div>
 </div>
 </section>
 </li>
@@ -110,16 +119,19 @@ loadScripts(document, 'script');</script>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#clearField()" class="member-name-link">clearField</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Очищает игровое поле, заливая фоновым цветом.</div>
+<div class="block">Очищает игровое поле, заливая фоновым цветом на весь экран, и рисует рамку по центру.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#drawSnake(java.util.ArrayList)" class="member-name-link">drawSnake</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/ArrayList.html" title="class or interface in java.util" class="external-link">ArrayList</a>&lt;<a href="../model/Point.html" title="class in ru.nsu.a.maslova1.snake.model">Point</a>&gt;&nbsp;snake)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Рисует змейку: голову с глазами и сегменты тела.</div>
+<div class="block">Рисует змейку с учетом центрирования.</div>
 </div>
 </div>
 </div>
 </div>
+<div class="inherited-list">
+<h3 id="methods-inherited-from-class-ru.nsu.a.maslova1.snake.view.BaseDraw">Methods inherited from class&nbsp;ru.nsu.a.maslova1.snake.view.<a href="BaseDraw.html" title="class in ru.nsu.a.maslova1.snake.view">BaseDraw</a></h3>
+<code><a href="BaseDraw.html#getCellSize()">getCellSize</a>, <a href="BaseDraw.html#getOffsetX()">getOffsetX</a>, <a href="BaseDraw.html#getOffsetY()">getOffsetY</a></code></div>
 <div class="inherited-list">
 <h3 id="methods-inherited-from-class-java.lang.Object">Methods inherited from class&nbsp;java.lang.<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></h3>
 <code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#clone()" title="class or interface in java.lang" class="external-link">clone</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#equals(java.lang.Object)" title="class or interface in java.lang" class="external-link">equals</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#finalize()" title="class or interface in java.lang" class="external-link">finalize</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#getClass()" title="class or interface in java.lang" class="external-link">getClass</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#hashCode()" title="class or interface in java.lang" class="external-link">hashCode</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#notify()" title="class or interface in java.lang" class="external-link">notify</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#notifyAll()" title="class or interface in java.lang" class="external-link">notifyAll</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#toString()" title="class or interface in java.lang" class="external-link">toString</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#wait()" title="class or interface in java.lang" class="external-link">wait</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#wait(long)" title="class or interface in java.lang" class="external-link">wait</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#wait(long,int)" title="class or interface in java.lang" class="external-link">wait</a></code></div>
@@ -138,11 +150,6 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="&lt;init&gt;(javafx.scene.canvas.GraphicsContext)">
 <h3>SnakeDraw</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">SnakeDraw</span><wbr><span class="parameters">(javafx.scene.canvas.GraphicsContext&nbsp;brush)</span></div>
-<div class="block">Создаёт отрисовщик змейки.</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>brush</code> - контекст для рисования</dd>
-</dl>
 </section>
 </li>
 </ul>
@@ -157,18 +164,14 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="clearField()">
 <h3>clearField</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">clearField</span>()</div>
-<div class="block">Очищает игровое поле, заливая фоновым цветом.</div>
+<div class="block">Очищает игровое поле, заливая фоновым цветом на весь экран, и рисует рамку по центру.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="drawSnake(java.util.ArrayList)">
 <h3>drawSnake</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">drawSnake</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/ArrayList.html" title="class or interface in java.util" class="external-link">ArrayList</a>&lt;<a href="../model/Point.html" title="class in ru.nsu.a.maslova1.snake.model">Point</a>&gt;&nbsp;snake)</span></div>
-<div class="block">Рисует змейку: голову с глазами и сегменты тела.</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>snake</code> - список точек змейки</dd>
-</dl>
+<div class="block">Рисует змейку с учетом центрирования.</div>
 </section>
 </li>
 </ul>
