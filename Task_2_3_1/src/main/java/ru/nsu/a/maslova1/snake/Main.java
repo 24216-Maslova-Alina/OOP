@@ -1,7 +1,6 @@
 package ru.nsu.a.maslova1.snake;
 
 import java.io.IOException;
-
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -26,7 +25,6 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Snake.fxml"));
-        Scene scene = new Scene(loader.load());
 
         SnakeController controller = loader.getController();
 
@@ -43,6 +41,8 @@ public class Main extends Application {
 
         primaryStage.setTitle("Змейка");
         primaryStage.setResizable(true);
+
+        Scene scene = new Scene(loader.load());
         primaryStage.setScene(scene);
         primaryStage.show();
     }

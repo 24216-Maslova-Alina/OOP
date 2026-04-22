@@ -3,7 +3,6 @@ package ru.nsu.a.maslova1.snake.model;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-
 import ru.nsu.a.maslova1.snake.config.GameConfig;
 
 /**

@@ -1,7 +1,6 @@
 package ru.nsu.a.maslova1.snake.config;
 
 import java.util.List;
-
 import ru.nsu.a.maslova1.snake.model.Point;
 
 /**

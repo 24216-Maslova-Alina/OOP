@@ -61,12 +61,12 @@ class GameConfigTest {
      */
     @Test
     void testWallsContainExpectedPoints() {
-        assertTrue(GameConfig.WALLS.contains(new Point(5, 5)), "Стена (5,5) должна " +
-                "присутствовать");
-        assertTrue(GameConfig.WALLS.contains(new Point(24, 5)), "Стена (24,5) должна " +
-                "присутствовать");
-        assertTrue(GameConfig.WALLS.contains(new Point(15, 10)), "Стена (15,10) должна " +
-                "присутствовать");
+        assertTrue(GameConfig.WALLS.contains(new Point(5, 5)), "Стена (5,5) должна "
+                + "присутствовать");
+        assertTrue(GameConfig.WALLS.contains(new Point(24, 5)), "Стена (24,5) должна "
+                + "присутствовать");
+        assertTrue(GameConfig.WALLS.contains(new Point(15, 10)), "Стена (15,10) должна "
+                + "присутствовать");
     }
 
     /**
@@ -74,8 +74,8 @@ class GameConfigTest {
      */
     @Test
     void testWallsDoNotContainCenter() {
-        assertFalse(GameConfig.WALLS.contains(new Point(12, 12)), "В центре поля не должно " +
-                "быть стены");
+        assertFalse(GameConfig.WALLS.contains(new Point(12, 12)), "В центре поля не должно "
+                + "быть стены");
     }
 
     /**
@@ -97,8 +97,8 @@ class GameConfigTest {
     @Test
     void testNoDuplicateWalls() {
         long distinctCount = GameConfig.WALLS.stream().distinct().count();
-        assertEquals(GameConfig.WALLS.size(), distinctCount, "В списке стен не должно быть " +
-                "дубликатов");
+        assertEquals(GameConfig.WALLS.size(), distinctCount, "В списке стен не должно быть "
+                + "дубликатов");
     }
 
     /**

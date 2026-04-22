@@ -23,8 +23,8 @@ public class GameState {
      * @param length     текущая длина змейки.
      * @param isGameOver флаг завершения игры.
      */
-    public GameState(ArrayList<Point> snake, ArrayList<Point> apples, Point goldApple, int score
-            , int length, boolean isGameOver) {
+    public GameState(ArrayList<Point> snake, ArrayList<Point> apples, Point goldApple, int score,
+                     int length, boolean isGameOver) {
         this.snake = snake;
         this.apples = apples;
         this.goldApple = goldApple;

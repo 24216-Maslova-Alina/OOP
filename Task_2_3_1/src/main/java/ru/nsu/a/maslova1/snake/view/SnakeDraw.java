@@ -1,7 +1,6 @@
 package ru.nsu.a.maslova1.snake.view;
 
 import java.util.ArrayList;
-
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import ru.nsu.a.maslova1.snake.config.GameConfig;

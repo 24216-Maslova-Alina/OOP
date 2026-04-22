@@ -153,7 +153,7 @@ public class SnakeController {
                                                 oldScene, newScene) -> {
             if (newScene != null && ! keysInstalled) {
                 keysInstalled = true;
-                newScene.addEventFilter(KeyEvent.KEY_PRESSED, this :: handleKeys);
+                newScene.addEventFilter(KeyEvent.KEY_PRESSED, this::handleKeys);
             }
         });
     }

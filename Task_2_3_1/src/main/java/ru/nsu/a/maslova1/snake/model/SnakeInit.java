@@ -1,7 +1,6 @@
 package ru.nsu.a.maslova1.snake.model;
 
 import java.util.ArrayList;
-
 import ru.nsu.a.maslova1.snake.config.GameConfig;
 
 /**
