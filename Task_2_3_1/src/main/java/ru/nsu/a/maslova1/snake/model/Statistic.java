@@ -12,7 +12,7 @@ public class Statistic {
      *
      * @param eat счётчик очков
      */
-    public Statistic(Eat eat) {
+    public Statistic (Eat eat) {
         this.eat = eat;
     }
 
@@ -21,8 +21,8 @@ public class Statistic {
      *
      * @return лучший счёт за игру
      */
-    public int getBestResult() {
-        int resultCurrent = eat.countingScore();
+    public int getBestResult () {
+        int resultCurrent = eat.countingScore ();
         if (resultBest < resultCurrent) {
             resultBest = resultCurrent;
         }

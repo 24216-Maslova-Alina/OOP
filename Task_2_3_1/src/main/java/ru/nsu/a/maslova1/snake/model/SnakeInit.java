@@ -1,6 +1,7 @@
 package ru.nsu.a.maslova1.snake.model;
 
 import java.util.ArrayList;
+
 import ru.nsu.a.maslova1.snake.config.GameConfig;
 
 /**
@@ -15,8 +16,8 @@ public class SnakeInit {
     /**
      * Создаёт объект инициализации змейки.
      */
-    public SnakeInit() {
-        this.snake = new ArrayList<>();
+    public SnakeInit () {
+        this.snake = new ArrayList<> ();
     }
 
     /**
@@ -24,14 +25,14 @@ public class SnakeInit {
      *
      * @return список точек змейки
      */
-    public ArrayList<Point> initSnake() {
-        ArrayList<Point> snake = new ArrayList<>();
+    public ArrayList<Point> initSnake () {
+        ArrayList<Point> snake = new ArrayList<> ();
 
-        Point head = new Point(cols / 2, rows / 2);
-        Point tail = new Point(cols / 2 - 1, rows / 2);
+        Point head = new Point (cols / 2, rows / 2);
+        Point tail = new Point (cols / 2 - 1, rows / 2);
 
-        snake.add(head);
-        snake.add(tail);
+        snake.add (head);
+        snake.add (tail);
 
         return snake;
     }
@@ -41,7 +42,7 @@ public class SnakeInit {
      *
      * @param snake список точек
      */
-    public void setSnake(ArrayList<Point> snake) {
+    public void setSnake (ArrayList<Point> snake) {
         this.snake = snake;
     }
 
@@ -50,14 +51,14 @@ public class SnakeInit {
      *
      * @return список точек змейки
      */
-    public ArrayList<Point> getSnake() {
+    public ArrayList<Point> getSnake () {
         return snake;
     }
 
     /**
      * Очищает список точек змейки.
      */
-    public void reset() {
-        snake.clear();
+    public void reset () {
+        snake.clear ();
     }
 }

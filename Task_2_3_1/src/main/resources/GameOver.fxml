@@ -6,7 +6,6 @@
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-
 <VBox alignment="CENTER" maxHeight="Infinity" maxWidth="Infinity"
       spacing="20.0"
       style="-fx-background-color: rgba(0, 0, 0, 0.7); -fx-background-radius: 20;"
@@ -15,10 +14,10 @@
     <children>
         <Label text="GAME OVER" textFill="#c91919">
             <font>
-                <Font name="System Bold Italic" size="64.0" />
+                <Font name="System Bold Italic" size="64.0"/>
             </font>
             <effect>
-                <DropShadow color="#000000" radius="5.0" />
+                <DropShadow color="#000000" radius="5.0"/>
             </effect>
         </Label>
 
@@ -26,12 +25,12 @@
             <children>
                 <Label fx:id="scoreLabel" text="Score: 0" textFill="WHITE">
                     <font>
-                        <Font name="System Bold" size="24.0" />
+                        <Font name="System Bold" size="24.0"/>
                     </font>
                 </Label>
                 <Label fx:id="lengthLabel" text="Length: 0" textFill="WHITE">
                     <font>
-                        <Font name="System Bold" size="24.0" />
+                        <Font name="System Bold" size="24.0"/>
                     </font>
                 </Label>
             </children>
@@ -41,14 +40,14 @@
                 prefHeight="50.0" prefWidth="200.0" text="RESTART"
                 style="-fx-background-color: #c91919; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 10;">
             <font>
-                <Font size="18.0" />
+                <Font size="18.0"/>
             </font>
             <VBox.margin>
-                <Insets top="20.0" />
+                <Insets top="20.0"/>
             </VBox.margin>
         </Button>
     </children>
     <padding>
-        <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+        <Insets bottom="30.0" left="30.0" right="30.0" top="30.0"/>
     </padding>
 </VBox>

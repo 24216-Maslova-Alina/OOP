@@ -1,7 +1,7 @@
 package ru.nsu.a.maslova1.snake.view;
 
-import javafx.scene.control.Label;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Label;
 import ru.nsu.a.maslova1.snake.model.GameState;
 import ru.nsu.a.maslova1.snake.model.Observer;
 
@@ -21,10 +21,10 @@ public class GameView implements Observer {
      *
      * @param brush объект GraphicsContext для рисования на Canvas.
      */
-    public GameView(GraphicsContext brush, Label scoreLabel, Label lengthLabel) {
-        this.snakeDraw = new SnakeDraw(brush);
-        this.appleDraw = new AppleDraw(brush);
-        this.walls = new Walls(brush);
+    public GameView (GraphicsContext brush, Label scoreLabel, Label lengthLabel) {
+        this.snakeDraw = new SnakeDraw (brush);
+        this.appleDraw = new AppleDraw (brush);
+        this.walls = new Walls (brush);
         this.scoreLabel = scoreLabel;
         this.lengthLabel = lengthLabel;
     }
@@ -35,13 +35,13 @@ public class GameView implements Observer {
      * @param state актуальный снимок состояния игры от модели.
      */
     @Override
-    public void notify(GameState state) {
-        snakeDraw.clearField();
-        snakeDraw.drawSnake(state.getSnake());
-        walls.drawWalls();
-        appleDraw.drawApple(state.getApples(), state.getGoldApple());
+    public void notify (GameState state) {
+        snakeDraw.clearField ();
+        snakeDraw.drawSnake (state.getSnake ());
+        walls.drawWalls ();
+        appleDraw.drawApple (state.getApples (), state.getGoldApple ());
 
-        scoreLabel.setText(String.valueOf(state.getScore()));
-        lengthLabel.setText(String.valueOf(state.getLength()));
+        scoreLabel.setText (String.valueOf (state.getScore ()));
+        lengthLabel.setText (String.valueOf (state.getLength ()));
     }
 }

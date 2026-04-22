@@ -1,13 +1,13 @@
 package ru.nsu.a.maslova1.snake;
 
 import java.io.IOException;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
-import ru.nsu.a.maslova1.snake.model.GameManager;
 import ru.nsu.a.maslova1.snake.controller.SnakeController;
+import ru.nsu.a.maslova1.snake.model.GameManager;
 import ru.nsu.a.maslova1.snake.view.GameView;
 
 /**
@@ -16,33 +16,35 @@ import ru.nsu.a.maslova1.snake.view.GameView;
 public class Main extends Application {
 
     /**
-     * Конфигурирует сцену, инициализирует модель, представление и контроллер, устанавливая связи между ними.
+     * Конфигурирует сцену, инициализирует модель, представление и контроллер, устанавливая связи
+     * между ними.
      *
      * @param primaryStage основной контейнер JavaFX для отображения окна приложения.
+     *
      * @throws IOException если файл разметки FXML не найден или поврежден.
      */
     @Override
-    public void start(Stage primaryStage) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Snake.fxml"));
-        Scene scene = new Scene(loader.load());
+    public void start (Stage primaryStage) throws IOException {
+        FXMLLoader loader = new FXMLLoader (getClass ().getResource ("/Snake.fxml"));
+        Scene scene = new Scene (loader.load ());
 
-        SnakeController controller = loader.getController();
+        SnakeController controller = loader.getController ();
 
-        GameManager model = new GameManager();
+        GameManager model = new GameManager ();
 
-        GameView view = new GameView(
-                controller.getGraphicsContext(),
-                controller.getScoreLabel(),
-                controller.getLengthLabel()
+        GameView view = new GameView (
+                controller.getGraphicsContext (),
+                controller.getScoreLabel (),
+                controller.getLengthLabel ()
         );
 
-        model.addObserver(view);
-        controller.setModel(model);
+        model.addObserver (view);
+        controller.setModel (model);
 
-        primaryStage.setTitle("Змейка");
-        primaryStage.setResizable(true);
-        primaryStage.setScene(scene);
-        primaryStage.show();
+        primaryStage.setTitle ("Змейка");
+        primaryStage.setResizable (true);
+        primaryStage.setScene (scene);
+        primaryStage.show ();
     }
 
     /**
@@ -50,7 +52,7 @@ public class Main extends Application {
      *
      * @param args аргументы командной строки.
      */
-    public static void main(String[] args) {
-        launch(args);
+    public static void main (String[] args) {
+        launch (args);
     }
 }

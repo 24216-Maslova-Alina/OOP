@@ -4,10 +4,10 @@ package ru.nsu.a.maslova1.snake.model;
  * Направления движения змейки.
  */
 public enum Directions {
-    UP(0, -1),
-    DOWN(0, 1),
-    LEFT(-1, 0),
-    RIGHT(1, 0);
+    UP (0, - 1),
+    DOWN (0, 1),
+    LEFT (- 1, 0),
+    RIGHT (1, 0);
 
     private int pointX;
     private int pointY;
@@ -18,7 +18,7 @@ public enum Directions {
      * @param x смещение по X
      * @param y смещение по Y
      */
-    Directions(int x, int y) {
+    Directions (int x, int y) {
         this.pointX = x;
         this.pointY = y;
     }
@@ -28,7 +28,7 @@ public enum Directions {
      *
      * @return смещение по X
      */
-    public int getPointX() {
+    public int getPointX () {
         return pointX;
     }
 
@@ -37,7 +37,7 @@ public enum Directions {
      *
      * @return смещение по Y
      */
-    public int getPointY() {
+    public int getPointY () {
         return pointY;
     }
 
@@ -45,9 +45,10 @@ public enum Directions {
      * Проверяет, является ли переданное направление противоположным текущему.
      *
      * @param other другое направление
+     *
      * @return true, если направления противоположны
      */
-    public boolean isOpposite(Directions other) {
+    public boolean isOpposite (Directions other) {
         return (this == DOWN && other == UP)
                 || (this == UP && other == DOWN)
                 || (this == LEFT && other == RIGHT)

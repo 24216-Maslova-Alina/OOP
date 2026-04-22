@@ -11,22 +11,23 @@ public class Eat {
     /**
      * Проверяет столкновение головы змейки с яблоками и обрабатывает поедание.
      *
-     * @param head координаты головы
+     * @param head  координаты головы
      * @param apple список обычных яблок
      * @param logic логика яблок для доступа к золотому яблоку
+     *
      * @return true, если яблоко съедено
      */
-    public boolean collisionApple(Point head, ArrayList<Point> apple, AppleLogic logic) {
+    public boolean collisionApple (Point head, ArrayList<Point> apple, AppleLogic logic) {
         for (Point fruit : apple) {
-            if (head.equals(fruit)) {
+            if (head.equals (fruit)) {
                 count++;
-                apple.remove(fruit);
+                apple.remove (fruit);
                 return true;
             }
         }
-        if (head.equals(logic.getGoldApple())) {
+        if (head.equals (logic.getGoldApple ())) {
             count += 3;
-            logic.removeGoldApple();
+            logic.removeGoldApple ();
             return true;
         }
         return false;
@@ -37,14 +38,14 @@ public class Eat {
      *
      * @return текущий счёт
      */
-    public int countingScore() {
+    public int countingScore () {
         return count;
     }
 
     /**
      * Сбрасывает счёт к начальному значению.
      */
-    public void resetStore() {
+    public void resetStore () {
         count = 2;
     }
 }

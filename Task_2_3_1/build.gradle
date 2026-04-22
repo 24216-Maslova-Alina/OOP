@@ -43,6 +43,18 @@ test {
 jacocoTestReport {
     reports {
         xml.required = true
+        html.required = true
+    }
+    afterEvaluate {
+        classDirectories.setFrom(files(classDirectories.files.collect {
+            fileTree(dir: it, exclude: [
+                    'ru/nsu/a/maslova1/snake/view/**',
+                    'ru/nsu/a/maslova1/controller/**',
+                    'ru/nsu/a/maslova1/snake/Main*',
+                    'ru/nsu/a/maslova1/snake/model/Observer*',
+                    'ru/nsu/a/maslova1/snake/model/GameState*'
+            ])
+        }))
     }
 }
 
