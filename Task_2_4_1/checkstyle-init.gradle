@@ -1,0 +1,13 @@
+allprojects {
+    apply plugin: 'checkstyle'
+
+    checkstyle {
+        toolVersion = '10.12.5'
+        // Берем путь из параметра, который передадим в командной строке
+        if (project.hasProperty('checkstyleConfigPath')) {
+            configFile = file(project.getProperty('checkstyleConfigPath'))
+        }
+        ignoreFailures = true
+        showViolations = false
+    }
+}
