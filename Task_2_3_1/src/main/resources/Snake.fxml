@@ -50,7 +50,7 @@
     </top>
 
     <center>
-        <StackPane fx:id="gamePane" style="-fx-background-color: #C8E6E0;"
+        <StackPane fx:id="gamePane" minWidth="0.0" minHeight="0.0" style="-fx-background-color: #C8E6E0;"
                    BorderPane.alignment="CENTER">
             <children>
                 <Canvas fx:id="gameCanvas" height="400.0" width="400.0"/>

@@ -26,6 +26,10 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Snake.fxml"));
 
+        // 1. ОБЯЗАТЕЛЬНО СНАЧАЛА вызываем load() - здесь читается FXML и создается контроллер
+        Scene scene = new Scene(loader.load());
+
+        // 2. Теперь контроллер уже существует, забираем его!
         SnakeController controller = loader.getController();
 
         GameManager model = new GameManager();
@@ -41,8 +45,6 @@ public class Main extends Application {
 
         primaryStage.setTitle("Змейка");
         primaryStage.setResizable(true);
-
-        Scene scene = new Scene(loader.load());
         primaryStage.setScene(scene);
         primaryStage.show();
     }
