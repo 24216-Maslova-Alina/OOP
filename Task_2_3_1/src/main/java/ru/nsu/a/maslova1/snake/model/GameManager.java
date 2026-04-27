@@ -136,4 +136,15 @@ public class GameManager {
     public boolean isGameRunning() {
         return isGameRunning;
     }
+
+    public GameState getCurrentState() {
+        return new GameState(
+                new ArrayList<>(snake),
+                appleLogic.getApples(),
+                appleLogic.getGoldApple(),
+                getScore(),
+                getLength(),
+                !isGameRunning
+        );
+    }
 }

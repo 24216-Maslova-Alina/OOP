@@ -2,6 +2,7 @@ package ru.nsu.a.maslova1.snake;
 
 import java.io.IOException;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -42,6 +43,18 @@ public class Main extends Application {
 
         model.addObserver(view);
         controller.setModel(model);
+
+        scene.widthProperty().addListener((observable, oldValue, newValue) -> {
+            Platform.runLater(() -> {
+                view.notify(model.getCurrentState());
+            });
+        });
+
+        scene.heightProperty().addListener((observable, oldValue, newValue) -> {
+            Platform.runLater(() -> {
+                view.notify(model.getCurrentState());
+            });
+        });
 
         primaryStage.setTitle("Змейка");
         primaryStage.setResizable(true);
