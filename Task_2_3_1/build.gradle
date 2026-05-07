@@ -1,0 +1,74 @@
+plugins {
+    id 'java'
+    id 'jacoco'
+    id 'application'
+    id 'org.openjfx.javafxplugin' version '0.1.0'
+}
+
+group = 'ru.nsu.a.maslova1.snake'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+javafx {
+    version = '21'
+    modules = ['javafx.controls', 'javafx.fxml', 'javafx.graphics', 'javafx.base']
+}
+
+dependencies {
+    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+test {
+    useJUnitPlatform()
+
+    // Настройки для headless тестирования (работает и локально, и в CI)
+    systemProperty 'java.awt.headless', 'true'
+    systemProperty 'testfx.robot', 'glass'
+    systemProperty 'testfx.headless', 'true'
+    systemProperty 'prism.order', 'sw'
+    systemProperty 'prism.text', 't2k'
+    systemProperty 'javafx.verbose', 'false'
+
+    // JVM аргументы для JavaFX
+    jvmArgs '--add-opens', 'javafx.graphics/com.sun.javafx.tk.quantum=ALL-UNNAMED',
+            '--add-opens', 'javafx.graphics/com.sun.glass.ui=ALL-UNNAMED',
+            '--add-opens', 'javafx.graphics/com.sun.javafx.application=ALL-UNNAMED'
+}
+
+jacocoTestReport {
+    reports {
+        xml.required = true
+        html.required = true
+    }
+    afterEvaluate {
+        classDirectories.setFrom(files(classDirectories.files.collect {
+            fileTree(dir: it, exclude: [
+                    'ru/nsu/a/maslova1/snake/view/**',
+                    'ru/nsu/a/maslova1/snake/controller/**',
+                    'ru/nsu/a/maslova1/snake/Main*',
+                    'ru/nsu/a/maslova1/snake/model/Observer*',
+                    'ru/nsu/a/maslova1/snake/model/GameState*'
+            ])
+        }))
+    }
+}
+
+application {
+    mainClass = 'ru.nsu.a.maslova1.snake.Main'
+}
+
+run {
+    // Параметры для macOS
+    jvmArgs = [
+            '--add-opens', 'javafx.graphics/com.sun.javafx.tk.quantum=ALL-UNNAMED',
+            '--add-opens', 'javafx.graphics/com.sun.glass.ui=ALL-UNNAMED',
+            '--add-opens', 'javafx.graphics/com.sun.javafx.application=ALL-UNNAMED',
+            '-Dprism.order=sw',
+            '-Dglass.gtk.ui=sw'
+    ]
+}
